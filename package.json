@@ -1,0 +1,29 @@
+{
+  "name": "bird-app-cleaner",
+  "version": "1.0.0",
+  "private": true,
+  "description": "bird-app-cleaner",
+  "author": "Benedicte Raae",
+  "keywords": [
+    "gatsby"
+  ],
+  "scripts": {
+    "develop": "gatsby develop",
+    "start": "gatsby develop",
+    "build": "gatsby build",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean"
+  },
+  "dependencies": {
+    "@mdx-js/mdx": "v1",
+    "@mdx-js/react": "v1",
+    "gatsby": "^4.20.0",
+    "gatsby-plugin-image": "2.20.0",
+    "gatsby-plugin-mdx": "3.20.0",
+    "gatsby-plugin-sharp": "4.20.0",
+    "gatsby-source-filesystem": "4.20.0",
+    "gatsby-transformer-sharp": "4.20.0",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0"
+  }
+}
