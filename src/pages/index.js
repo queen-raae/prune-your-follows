@@ -1,83 +1,73 @@
-import * as React from "react";
+import React, { useState } from "react";
+
+import { Box, Tabs, Tab, TabList, Typography, Container } from "@mui/joy";
+
+import Auth from "../components/auth";
 import PageHead from "../components/head";
 
-const links = [
-  {
-    text: "Tutorial",
-    url: "https://www.gatsbyjs.com/docs/tutorial/",
-    description:
-      "A great place to get started if you're new to web development. Designed to guide you through setting up your first Gatsby site.",
-    color: "#E95800",
-  },
-  {
-    text: "How to Guides",
-    url: "https://www.gatsbyjs.com/docs/how-to/",
-    description:
-      "Practical step-by-step guides to help you achieve a specific goal. Most useful when you're trying to get something done.",
-    color: "#1099A8",
-  },
-  {
-    text: "Reference Guides",
-    url: "https://www.gatsbyjs.com/docs/reference/",
-    description:
-      "Nitty-gritty technical descriptions of how Gatsby works. Most useful when you need detailed information about Gatsby's APIs.",
-    color: "#BC027F",
-  },
-  {
-    text: "Conceptual Guides",
-    url: "https://www.gatsbyjs.com/docs/conceptual/",
-    description:
-      "Big-picture explanations of higher-level Gatsby concepts. Most useful for building understanding of a particular topic.",
-    color: "#0D96F2",
-  },
-  {
-    text: "Plugin Library",
-    url: "https://www.gatsbyjs.com/plugins",
-    description:
-      "Add functionality and customize your Gatsby site or app with thousands of plugins built by our amazing developer community.",
-    color: "#8EB814",
-  },
-  {
-    text: "Build and Host",
-    url: "https://www.gatsbyjs.com/cloud",
-    badge: true,
-    description:
-      "Now you’re ready to show the world! Give your Gatsby site superpowers: Build and host on Gatsby Cloud. Get started for free!",
-    color: "#663399",
-  },
-];
+import useUser from "../hooks/useUser";
+import useFollowing, { SORT } from "../hooks/useFollowing";
+import usePopulateFollowing from "../hooks/usePopulateFollowing";
+import AccountCard from "../components/account-card";
+import useSiteMetadata from "../hooks/useSiteMetadata";
 
-const IndexPage = () => {
+const AppPage = () => {
+  usePopulateFollowing(); // Kickstart if needed
+
+  const [sort, setSort] = useState(SORT.INACTIVE);
+  const { data: user } = useUser();
+  const { data: following, isFetched } = useFollowing({ sort });
+  const siteMetadata = useSiteMetadata();
+
+  const siteTagline = siteMetadata?.tagline || "";
+  const username = user?.user_metadata.user_name || "";
+
+  const handleOnChange = (event, newValue) => {
+    setSort(newValue);
+  };
+
   return (
-    <main>
-      <h1>
-        Congratulations
-        <br />
-        <span>— you just made a Gatsby site! 🎉🎉🎉</span>
-      </h1>
-      <p>
-        Edit <code>src/pages/index.js</code> to see this page update in
-        real-time. 😎
-      </p>
-      <ul>
-        {links.map((link) => (
-          <li key={link.url}>
-            <span>
-              <a
-                href={`${link.url}?utm_source=starter&utm_medium=start-page&utm_campaign=minimal-starter`}
-              >
-                {link.text}
-              </a>
-              {link.badge && <span aria-label="New Badge">NEW!</span>}
-              <p>{link.description}</p>
-            </span>
-          </li>
+    <Container component="main" maxWidth="lg" sx={{ my: 7 }}>
+      <Box
+        component="header"
+        sx={{ display: "flex", alignItems: "center", my: 3, gap: 1.5 }}
+      >
+        <Typography level="h1">
+          👋🏻 {siteTagline} {user && `@${username}!`}
+        </Typography>
+        <Auth sx={{ ml: "auto" }} />
+      </Box>
+
+      <Tabs value={sort} onChange={handleOnChange} sx={{ my: 5 }}>
+        <TabList>
+          {Object.keys(SORT).map((key) => {
+            return (
+              <Tab key={key} value={SORT[key]} disabled={!isFetched}>
+                {SORT[key]}
+              </Tab>
+            );
+          })}
+        </TabList>
+      </Tabs>
+
+      <Box
+        sx={{
+          display: "grid",
+          gap: 3,
+          gridTemplateColumns: {
+            sm: "repeat(2, minmax(0, 1fr))",
+            md: "repeat(3, minmax(0, 1fr))",
+          },
+        }}
+      >
+        {(following || []).map((account, index) => (
+          <AccountCard key={account.id || index} {...account} />
         ))}
-      </ul>
-    </main>
+      </Box>
+    </Container>
   );
 };
 
-export default IndexPage;
+export default AppPage;
 
 export const Head = () => <PageHead />;

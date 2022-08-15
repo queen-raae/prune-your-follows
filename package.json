@@ -1,9 +1,10 @@
 {
-  "name": "bird-app-cleaner",
+  "name": "prune-your-follows",
   "version": "1.0.0",
   "private": true,
-  "description": "bird-app-cleaner",
-  "author": "Benedicte Raae",
+  "description": "Need to prune your Twitter follows?",
+  "author": "Queen Raae (queen.raae.codes)",
+  "homepage": "https://prune.raae.tech",
   "keywords": [
     "gatsby"
   ],
@@ -15,15 +16,27 @@
     "clean": "gatsby clean"
   },
   "dependencies": {
+    "@emotion/react": "11.10.0",
+    "@emotion/styled": "11.10.0",
     "@mdx-js/mdx": "v1",
     "@mdx-js/react": "v1",
+    "@mui/icons-material": "5.8.4",
+    "@mui/joy": "5.0.0-alpha.41",
+    "@mui/material": "5.10.1",
+    "@supabase/supabase-js": "2.0.0-rc.1",
+    "@tanstack/react-query": "4.1.0",
+    "@tanstack/react-query-devtools": "4.0.10",
+    "axios": "0.27.2",
+    "date-fns": "2.29.1",
     "gatsby": "^4.20.0",
     "gatsby-plugin-image": "2.20.0",
     "gatsby-plugin-mdx": "3.20.0",
     "gatsby-plugin-sharp": "4.20.0",
     "gatsby-source-filesystem": "4.20.0",
     "gatsby-transformer-sharp": "4.20.0",
+    "node-fetch": "3.2.10",
     "react": "^18.1.0",
-    "react-dom": "^18.1.0"
+    "react-dom": "^18.1.0",
+    "twitter-api-sdk": "1.1.0"
   }
 }

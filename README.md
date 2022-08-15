@@ -1,54 +1,24 @@
-<p align="center">
-  <a href="https://www.gatsbyjs.com/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter">
-    <img alt="Gatsby" src="https://www.gatsbyjs.com/Gatsby-Monogram.svg" width="60" />
-  </a>
-</p>
-<h1 align="center">
-  Gatsby minimal starter
-</h1>
+# Prune your follows
 
-## 🚀 Quick start
+After almost 15 years on Twitter I hit the 5000 follows limit, and found it hard to figure out what accounts to unfollow...
 
-1.  **Create a Gatsby site.**
+Enter [Prune your follows](https://prune.raae.tech/?utm_source=readme&utm_campaign=prune-your-follows), it lets you filter accounts by:
 
-    Use the Gatsby CLI to create a new site, specifying the minimal starter.
+- Inactive
+- Overactive
+- Unpopular
+- Overpopular
 
-    ```shell
-    # create a new Gatsby site using the minimal starter
-    npm init gatsby
-    ```
+It's also my entry to the Launch Week 5 Hackathon.
 
-2.  **Start developing.**
+&nbsp;
 
-    Navigate into your new site’s directory and start it up.
+## A message or two or three from Queen Raae 👑
 
-    ```shell
-    cd my-gatsby-site/
-    npm run develop
-    ```
+### 1-on-1 Emergency Gatsby Call
 
-3.  **Open the code and start customizing!**
+Are you stuck on a reef in the sharky waters around the Gatsby islands? Check out [1-on-1 Emergency Gatsby Call](https://queen.raae.codes/gatsby-emergency/?utm_source=readme&utm_campaign=prune-your-follows) with Queen Raae to get friendly advice you can put into action immediately from a seasoned Gatsby developer.
 
-    Your site is now running at http://localhost:8000!
+### Stay updated and get the most out of Gatsby
 
-    Edit `src/pages/index.js` to see your site update in real-time!
-
-4.  **Learn more**
-
-    - [Documentation](https://www.gatsbyjs.com/docs/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [Tutorials](https://www.gatsbyjs.com/tutorial/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [Guides](https://www.gatsbyjs.com/tutorial/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [API Reference](https://www.gatsbyjs.com/docs/api-reference/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [Plugin Library](https://www.gatsbyjs.com/plugins?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-    - [Cheat Sheet](https://www.gatsbyjs.com/docs/cheat-sheet/?utm_source=starter&utm_medium=readme&utm_campaign=minimal-starter)
-
-## 🚀 Quick start (Gatsby Cloud)
-
-Deploy this starter with one click on [Gatsby Cloud](https://www.gatsbyjs.com/cloud/):
-
-[<img src="https://www.gatsbyjs.com/deploynow.svg" alt="Deploy to Gatsby Cloud">](https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-minimal)
+Learn how to get the most out of Gatsby and **stay updated** on the app by [subscribing](https://queen.raae.codes/emails/?utm_source=readme&utm_campaign=prune-your-follows) to daily emails from Queen Raae and Cap'n Ola.

@@ -1,17 +1,9 @@
 import React from "react";
-import { useStaticQuery, graphql } from "gatsby";
+import useSiteMetadata from "../hooks/useSiteMetadata";
 
 const PageHead = ({ title }) => {
-  const data = useStaticQuery(graphql`
-    query {
-      site {
-        siteMetadata {
-          title
-        }
-      }
-    }
-  `);
-  const siteTitle = data?.site?.siteMetadata?.title;
+  const siteMetadata = useSiteMetadata();
+  const siteTitle = siteMetadata?.title;
   const pageTitle = title ? `${title} - ${siteTitle}` : siteTitle;
 
   return (
