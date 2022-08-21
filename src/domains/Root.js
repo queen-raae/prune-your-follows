@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { CssVarsProvider } from "@mui/joy/styles";
 import { supabase } from "./app/supabaseClient";
 
 import "focus-visible";
@@ -19,9 +18,7 @@ const Root = ({ children }) => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <CssVarsProvider>
-        {children} <ReactQueryDevtools initialIsOpen={false} />
-      </CssVarsProvider>
+      {children} <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
 };
