@@ -1,6 +1,6 @@
 import React from "react";
 
-const AccountCard = ({ sx, ...rest }) => {
+export function AccountCard({ sx, ...rest }) {
   const { username, name, description, profile_image_url } = rest;
   const { followers_count = "YYY", following_count = "ZZZ" } = rest;
   const { average_tweets_per_year = "Z", age = "X" } = rest;
@@ -11,7 +11,7 @@ const AccountCard = ({ sx, ...rest }) => {
       <div className="flex space-x-3 px-4 pt-5">
         <div className="flex-shrink-0">
           <img
-            className="h-10 w-10 rounded-full"
+            className="h-10 w-10 rounded-full border"
             src={profile_image_url}
             alt=""
           />
@@ -21,6 +21,7 @@ const AccountCard = ({ sx, ...rest }) => {
             href={`https://twitter.com/${username}`}
             className="focus:outline-none"
             target="_blank"
+            rel="noreferrer"
           >
             {/* Makes the while  box clickable */}
             <span className="absolute inset-0" aria-hidden="true" />
@@ -34,7 +35,7 @@ const AccountCard = ({ sx, ...rest }) => {
         </div>
       </div>
 
-      <p className="px-5 py-4 text-sm text-gray-900">{description}</p>
+      <p className="px-5 py-4 text-sm leading-5 text-gray-900">{description}</p>
 
       <div className="flex justify-between space-x-3 rounded-b-lg border-t bg-slate-100 py-3 px-4">
         <p className="text-xs leading-5 text-gray-500">
@@ -50,6 +51,4 @@ const AccountCard = ({ sx, ...rest }) => {
       </div>
     </div>
   );
-};
-
-export default AccountCard;
+}
