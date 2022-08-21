@@ -5,6 +5,7 @@ import { Faqs } from "../components/Faqs";
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
 import { Hero } from "../components/Hero";
+import { LoginButton } from "../components/LoginButton";
 import { Pricing } from "../components/Pricing";
 import { PrimaryFeatures } from "../components/PrimaryFeatures";
 import { SecondaryFeatures } from "../components/SecondaryFeatures";
@@ -16,7 +17,7 @@ export const Head = () => {
   const meta = useSiteMetadata();
   return (
     <>
-      <title>{meta?.site}</title>
+      <title>{meta?.title}</title>
       <meta name="description" content={meta?.description} />
     </>
   );
@@ -25,7 +26,9 @@ export const Head = () => {
 export default function Home() {
   return (
     <>
-      <Header />
+      <Header>
+        <LoginButton color="blue" />
+      </Header>
       <main>
         <Hero />
         <PrimaryFeatures />

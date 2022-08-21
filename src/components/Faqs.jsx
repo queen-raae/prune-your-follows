@@ -1,8 +1,8 @@
 import React from "react";
-import { GatsbyImage } from "gatsby-plugin-image";
+import { useStaticQuery, graphql } from "gatsby";
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
 
 import { Container } from "../components/Container";
-import backgroundImage from "../images/background-faqs.jpg";
 
 const faqs = [
   [
@@ -59,6 +59,17 @@ const faqs = [
 ];
 
 export function Faqs() {
+  const { file } = useStaticQuery(graphql`
+    query {
+      file(name: { eq: "background-faqs" }) {
+        childImageSharp {
+          gatsbyImageData(width: 1558, height: 946, layout: FIXED)
+        }
+      }
+    }
+  `);
+  const backgroundImage = getImage(file.childImageSharp);
+
   return (
     <section
       id="faq"
@@ -67,12 +78,10 @@ export function Faqs() {
     >
       <GatsbyImage
         className="absolute top-0 left-1/2 max-w-none translate-x-[-30%] -translate-y-1/4"
-        src={backgroundImage}
+        image={backgroundImage}
         alt=""
-        width={1558}
-        height={946}
-        unoptimized
       />
+
       <Container className="relative">
         <div className="mx-auto max-w-2xl lg:mx-0">
           <h2

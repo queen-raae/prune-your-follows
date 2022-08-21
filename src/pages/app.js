@@ -2,16 +2,25 @@ import React, { useState } from "react";
 
 import { Box, Tabs, Tab, TabList, Typography, Container } from "@mui/joy";
 
-import Auth from "../components/auth";
-import PageHead from "../components/head";
+import { LogoutButton } from "../components/LogoutButton";
 
 import useUser from "../hooks/useUser";
 import useFollowing, { SORT } from "../hooks/useFollowing";
 import usePopulateFollowing from "../hooks/usePopulateFollowing";
-import AccountCard from "../components/account-card";
+import AccountCard from "../components/AccountCard";
 import useSiteMetadata from "../hooks/useSiteMetadata";
 
-const AppPage = () => {
+export const Head = () => {
+  const meta = useSiteMetadata();
+  return (
+    <>
+      <title>{meta?.title}</title>
+      <meta name="description" content={meta?.description} />
+    </>
+  );
+};
+
+export default function App() {
   usePopulateFollowing(); // Kickstart if needed
 
   const [sort, setSort] = useState(SORT.INACTIVE);
@@ -35,7 +44,7 @@ const AppPage = () => {
         <Typography level="h1">
           👋🏻 {siteTagline} {user && `@${username}!`}
         </Typography>
-        <Auth sx={{ ml: "auto" }} />
+        <LogoutButton />
       </Box>
 
       <Tabs value={sort} onChange={handleOnChange} sx={{ my: 5 }}>
@@ -66,8 +75,4 @@ const AppPage = () => {
       </Box>
     </Container>
   );
-};
-
-export default AppPage;
-
-export const Head = () => <PageHead />;
+}

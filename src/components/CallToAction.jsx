@@ -1,12 +1,21 @@
 import React from "react";
+import { useStaticQuery, graphql } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { Button } from "../components/Button";
 import { Container } from "../components/Container";
 
 export function CallToAction() {
-  const data = "";
+  const { file } = useStaticQuery(graphql`
+    query {
+      file(name: { eq: "background-call-to-action" }) {
+        childImageSharp {
+          gatsbyImageData(width: 2347, height: 1244, layout: FIXED)
+        }
+      }
+    }
+  `);
+  const backgroundImage = getImage(file.childImageSharp);
 
-  const image = getImage(data);
   return (
     <section
       id="get-started-today"
@@ -14,11 +23,8 @@ export function CallToAction() {
     >
       <GatsbyImage
         className="absolute top-1/2 left-1/2 max-w-none -translate-x-1/2 -translate-y-1/2"
-        image={image}
+        image={backgroundImage}
         alt=""
-        width={2347}
-        height={1244}
-        unoptimized
       />
       <Container className="relative">
         <div className="mx-auto max-w-lg text-center">

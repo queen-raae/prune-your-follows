@@ -1,40 +1,34 @@
 import React from "react";
+import { navigate } from "gatsby";
 import { supabase } from "../utils/supabaseClient";
 
-import useUser from "../hooks/useUser";
-import { Button } from "@mui/joy";
+import { Button } from "./Button";
 
-const Auth = ({ sx, ...rest }) => {
+import useUser from "../hooks/useUser";
+
+export function LoginButton({ children, ...rest }) {
   const { data: user } = useUser();
+  const redirectTo = window.location.origin + "/app";
+  console.log({ redirectTo });
 
   const handleAuth = async () => {
     if (user) {
-      await supabase.auth.signOut();
+      navigate("app");
     } else {
       await supabase.auth.signInWithOAuth(
         {
           provider: "twitter",
         },
         {
-          redirectTo: window.location.origin,
+          redirectTo: redirectTo,
         }
       );
     }
   };
 
-  const buttonText = user ? "Sign out" : "Sign in with Twitter";
-
   return (
-    <Button
-      variant="soft"
-      size="md"
-      {...rest}
-      sx={{ ...sx }}
-      onClick={handleAuth}
-    >
-      {buttonText}
+    <Button {...rest} onClick={handleAuth}>
+      {children || "Go to app"}
     </Button>
   );
-};
-
-export default Auth;
+}
