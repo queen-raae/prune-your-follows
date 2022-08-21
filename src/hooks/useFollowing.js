@@ -17,10 +17,12 @@ export default function useFollowing({ sort = SORT.INACTIVE }) {
   return useQuery(
     ["following", user?.id, sort],
     async () => {
+      // Main query without sort
       const query = supabase
         .from("accounts")
         .select("*, follows!inner(*)")
         .eq("follows.user_id", user?.id)
+        .gte("follows.updated_at", profile.timestamp)
         .limit(50);
 
       switch (sort) {

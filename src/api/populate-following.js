@@ -146,6 +146,7 @@ const populateFollowing = async (req, res) => {
         twitterFollows.push({
           user_id: user.id,
           follows_twitter_id: account.id,
+          updated_at: formatISO(now),
         });
       });
 
@@ -160,7 +161,6 @@ const populateFollowing = async (req, res) => {
       if (usersError || followsError) {
         await updateProfile({
           user: user,
-          timestamp: formatISO(now),
           status: "ERROR",
         });
         throw createError(500, usersError || followsError);
