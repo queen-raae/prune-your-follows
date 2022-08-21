@@ -22,6 +22,7 @@ export default function useFollowing({ sort = SORT.INACTIVE }) {
         .from("accounts")
         .select("*, follows!inner(*)")
         .eq("follows.user_id", user?.id)
+        .gte("follows.updated_at", profile.timestamp)
         .limit(150);
 
       switch (sort) {
