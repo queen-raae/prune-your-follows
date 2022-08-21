@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
-import { supabase } from "../utils/supabaseClient";
+import { supabase } from "./supabaseClient";
 
 import useUser from "./useUser";
 

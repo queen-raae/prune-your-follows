@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { supabase } from "../utils/supabaseClient";
+import { supabase } from "./supabaseClient";
 import useProfile from "./useProfile";
 import useUser from "./useUser";
 
@@ -17,11 +17,12 @@ export default function useFollowing({ sort = SORT.INACTIVE }) {
   return useQuery(
     ["following", user?.id, sort],
     async () => {
+      // Main query without sort
       const query = supabase
         .from("accounts")
         .select("*, follows!inner(*)")
         .eq("follows.user_id", user?.id)
-        .limit(50);
+        .limit(150);
 
       switch (sort) {
         case SORT.INACTIVE:

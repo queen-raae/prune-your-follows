@@ -1,8 +1,19 @@
 import React from "react";
 import { Link } from "gatsby";
-import PageHead from "../components/head";
 
-const NotFoundPage = () => {
+import useSiteMetadata from "../domains/common/useSiteMetadata";
+
+export const Head = () => {
+  const meta = useSiteMetadata();
+  return (
+    <>
+      <title>{meta?.title}</title>
+      <meta name="description" content={meta?.description} />
+    </>
+  );
+};
+
+export default function NotFoundPage() {
   return (
     <main>
       <h1>Page not found</h1>
@@ -21,8 +32,4 @@ const NotFoundPage = () => {
       </p>
     </main>
   );
-};
-
-export default NotFoundPage;
-
-export const Head = () => <PageHead title={"404"} />;
+}
