@@ -2,13 +2,13 @@ import React, { useState } from "react";
 
 import { Box, Tabs, Tab, TabList, Typography, Container } from "@mui/joy";
 
-import { LogoutButton } from "../components/LogoutButton";
+import { LogoutButton } from "../domains/app/LogoutButton";
+import AccountCard from "../domains/app/AccountCard";
 
-import useUser from "../hooks/useUser";
-import useFollowing, { SORT } from "../hooks/useFollowing";
-import usePopulateFollowing from "../hooks/usePopulateFollowing";
-import AccountCard from "../components/AccountCard";
-import useSiteMetadata from "../hooks/useSiteMetadata";
+import useSiteMetadata from "../domains/common/useSiteMetadata";
+import useUser from "../domains/app/useUser";
+import useFollowing, { SORT } from "../domains/app/useFollowing";
+import usePopulateFollowing from "../domains/app/usePopulateFollowing";
 
 export const Head = () => {
   const meta = useSiteMetadata();

@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "gatsby";
 
-import { Container } from "../components/Container";
-import { Logo } from "../components/Logo";
-import { NavLink } from "../components/NavLink";
+import { Container } from "../common/Container";
+import { Logo } from "../common/Logo";
+import { NavLink } from "./NavLink";
 
 export function Footer() {
   return (

@@ -9,8 +9,8 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `images`,
-        path: `${__dirname}/src/images`,
+        name: `marketing-images`,
+        path: `${__dirname}/src/domains/marketing/images`,
       },
     },
     "gatsby-plugin-postcss",

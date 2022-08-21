@@ -1,8 +1,8 @@
 import React from "react";
 import { navigate } from "gatsby";
-import { supabase } from "../utils/supabaseClient";
+import { supabase } from "./supabaseClient";
 
-import { Button } from "./Button";
+import { Button } from "../common/Button";
 
 export function LogoutButton({ ...rest }) {
   const handleAuth = async () => {

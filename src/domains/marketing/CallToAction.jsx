@@ -1,8 +1,8 @@
 import React from "react";
 import { useStaticQuery, graphql } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
-import { Button } from "../components/Button";
-import { Container } from "../components/Container";
+import { Button } from "../common/Button";
+import { Container } from "../common/Container";
 
 export function CallToAction() {
   const { file } = useStaticQuery(graphql`

@@ -1,10 +1,9 @@
 import React from "react";
 import { navigate } from "gatsby";
-import { supabase } from "../utils/supabaseClient";
+import { supabase } from "./supabaseClient";
 
-import { Button } from "./Button";
-
-import useUser from "../hooks/useUser";
+import { Button } from "../common/Button";
+import useUser from "./useUser";
 
 export function LoginButton({ children, ...rest }) {
   const { data: user } = useUser();

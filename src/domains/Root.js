@@ -1,14 +1,13 @@
 import React, { useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { supabase } from "../utils/supabaseClient";
 import { CssVarsProvider } from "@mui/joy/styles";
+import { supabase } from "./app/supabaseClient";
 
-import 'focus-visible'
-import '../styles/global.css'
+import "focus-visible";
+import "./global.css";
 
 const queryClient = new QueryClient();
-
 
 const Root = ({ children }) => {
   useEffect(() => {

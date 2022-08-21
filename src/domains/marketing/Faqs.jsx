@@ -2,7 +2,7 @@ import React from "react";
 import { useStaticQuery, graphql } from "gatsby";
 import { GatsbyImage, getImage } from "gatsby-plugin-image";
 
-import { Container } from "../components/Container";
+import { Container } from "../common/Container";
 
 const faqs = [
   [

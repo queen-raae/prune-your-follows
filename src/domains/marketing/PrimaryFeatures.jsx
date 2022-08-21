@@ -4,7 +4,7 @@ import { GatsbyImage, getImage } from "gatsby-plugin-image";
 import { Tab } from "@headlessui/react";
 import clsx from "clsx";
 
-import { Container } from "../components/Container";
+import { Container } from "../common/Container";
 
 export function PrimaryFeatures() {
   let [tabOrientation, setTabOrientation] = useState("horizontal");
