@@ -9,7 +9,7 @@ export const populateTwitterFollowing = async () => {
   const result = await axios.get("api/populate-following", {
     params: { accessToken: data?.session?.access_token },
     validateStatus: function (status) {
-      return status < 300 || status === 429;
+      return status < 300 || status === 405 || status === 429;
     },
   });
 

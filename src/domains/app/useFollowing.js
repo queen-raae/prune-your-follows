@@ -22,7 +22,7 @@ export default function useFollowing({ sort = SORT.INACTIVE }) {
         .from("accounts")
         .select("*, follows!inner(*)")
         .eq("follows.user_id", user?.id)
-        .gte("follows.updated_at", profile.timestamp)
+        .gte("follows.updated_at", profile.last_fetched)
         .limit(150);
 
       switch (sort) {
@@ -48,7 +48,6 @@ export default function useFollowing({ sort = SORT.INACTIVE }) {
           break;
 
         default:
-          break;
       }
       const result = await query;
 
@@ -59,33 +58,8 @@ export default function useFollowing({ sort = SORT.INACTIVE }) {
       }
     },
     {
-      enabled: Boolean(user?.id) && profile?.status === "FETCHED",
+      enabled: Boolean(user?.id) && Boolean(profile?.last_fetched),
       select: (result) => result.data,
-      placeholderData: {
-        data: [
-          {},
-          {},
-          {},
-          {},
-          {},
-          {},
-          {},
-          {},
-          {},
-          {},
-          {},
-          {},
-          {},
-          {},
-          {},
-          {},
-          {},
-          {},
-          {},
-          {},
-          {},
-        ],
-      },
     }
   );
 }

@@ -16,7 +16,8 @@ export default async function handler(req, res) {
     }
   } catch (error) {
     const status = error.response?.status || error.statusCode || 500;
-    const message = error.response?.data?.message || error.message;
+    const message =
+      error.response?.data?.message || error.message || error.statusText;
 
     // Something went wrong, log it
     console.error(`${status} -`, message);
@@ -29,13 +30,88 @@ export default async function handler(req, res) {
 }
 
 const updateProfile = async ({ user, timestamp, status }) => {
+  console.log("Upsert profile", user.id, timestamp, status);
+
   const { error } = await supabase.from("profiles").upsert({
     user_id: user.id,
     timestamp: timestamp,
+    last_fetched: status === "FETCHED" ? timestamp : undefined,
     status: status,
   });
 
   if (error) throw createError(500, error);
+};
+
+const getProfile = async ({ user }) => {
+  console.log("Fetch profile", user.id);
+
+  const { data, error, status } = await supabase
+    .from("profiles")
+    .select()
+    .eq("user_id", user.id)
+    .single();
+
+  if (error && status !== 406) throw createError(500, error);
+
+  console.log("Fetched profile", data);
+
+  return data;
+};
+
+const updatePublicProfile = async ({ user }) => {
+  console.log("Upsert public profile", user.user_metadata.user_name);
+
+  const { error } = await supabase.from("public_profiles").upsert({
+    user_id: user.id,
+    avatar_url: user.user_metadata.avatar_url,
+    username: user.user_metadata.user_name,
+  });
+
+  if (error) {
+    console.warn("Could not upsert public profile", error.message);
+  }
+};
+
+const allowPopulate = async ({ user, now }) => {
+  const profile = await getProfile({ user });
+
+  const timestamp = new Date(profile?.timestamp);
+  const difference = differenceInMinutes(now, timestamp);
+
+  if (profile.status === "FETCHED" && difference < 5) {
+    throw createError(405, "It's been less than 5 minutes since last time");
+  } else if (profile.status === "RATE_LIMIT" && difference < 5) {
+    throw createError(405, "It's been less than 5 minutes since rate limit");
+  } else if (profile.status === "FETCHING") {
+    throw createError(405, "It's already fetching");
+  } else {
+    console.log("Do allow");
+  }
+};
+
+const fetchTwitterFollowing = async ({ user, nextToken }) => {
+  try {
+    const result = await twitter.users.usersIdFollowing(
+      user.user_metadata.sub,
+      {
+        max_results: 1000,
+        pagination_token: nextToken,
+        "user.fields": [
+          "id",
+          "created_at",
+          "description",
+          "url",
+          "location",
+          "profile_image_url",
+          "public_metrics",
+          "username",
+        ],
+      }
+    );
+    return result;
+  } catch (error) {
+    throw createError(error);
+  }
 };
 
 const populateFollowing = async (req, res) => {
@@ -48,41 +124,19 @@ const populateFollowing = async (req, res) => {
 
   if (validationError) throw createError(422, validationError);
 
+  const now = new Date();
+
+  const {
+    data: { user },
+    error: authError,
+  } = await supabase.auth.getUser(value.accessToken);
+
+  if (authError) throw createError(401, authError);
+
   try {
-    const {
-      data: { user },
-      error: authError,
-    } = await supabase.auth.getUser(value.accessToken);
+    await updatePublicProfile({ user });
 
-    if (authError) throw createError(401, authError);
-
-    console.log("Fetch profile for user", user.id);
-
-    const {
-      data: profile,
-      error: profileError,
-      status,
-    } = await supabase
-      .from("profiles")
-      .select()
-      .eq("user_id", user.id)
-      .single();
-
-    if (profileError && status !== 406) throw createError(500, profileError);
-
-    console.log("Last fetched following", profile?.fetched_following);
-
-    const now = new Date();
-    const timestamp = new Date(profile?.timestamp);
-
-    if (
-      profile.status === "FETCHED" &&
-      differenceInMinutes(now, timestamp) < 15
-    ) {
-      throw createError(429, "It's been less than 15 minutes since last time");
-    }
-
-    console.log("Update last fetched following", now);
+    await allowPopulate({ user, now });
 
     await updateProfile({
       user: user,
@@ -99,23 +153,10 @@ const populateFollowing = async (req, res) => {
     let nextToken = null;
 
     do {
-      const { data: accounts, meta } = await twitter.users.usersIdFollowing(
-        user.user_metadata.sub,
-        {
-          max_results: 1000,
-          pagination_token: nextToken,
-          "user.fields": [
-            "id",
-            "created_at",
-            "description",
-            "url",
-            "location",
-            "profile_image_url",
-            "public_metrics",
-            "username",
-          ],
-        }
-      );
+      const { data: accounts, meta } = await fetchTwitterFollowing({
+        user,
+        nextToken,
+      });
 
       console.log("Fetched followers:", accounts.length);
       console.log("Is more", Boolean(meta.next_token));
@@ -159,22 +200,33 @@ const populateFollowing = async (req, res) => {
         .upsert(twitterFollows);
 
       if (usersError || followsError) {
-        await updateProfile({
-          user: user,
-          status: "ERROR",
-        });
         throw createError(500, usersError || followsError);
-      } else {
-        await updateProfile({
-          user: user,
-          timestamp: formatISO(now),
-          status: "FETCHED",
-        });
       }
     } while (nextToken);
 
+    await updateProfile({
+      user: user,
+      timestamp: formatISO(now),
+      status: "FETCHED",
+    });
+
     res.send("ok");
   } catch (error) {
+    console.warn("Error:", error.status, error.statusText, error.message);
+    if (error.status === 429) {
+      await updateProfile({
+        user: user,
+        timestamp: formatISO(now),
+        status: "RATE_LIMIT",
+      });
+    } else if (error.status !== 405) {
+      await updateProfile({
+        user: user,
+        timestamp: formatISO(now),
+        status: "ERROR",
+      });
+    }
+
     throw error;
   }
 };

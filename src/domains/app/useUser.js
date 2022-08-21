@@ -7,6 +7,8 @@ export default function useUser() {
     async () => {
       const result = await supabase.auth.getSession();
 
+      // console.log(result.data.session?.user);
+
       if (result.error) {
         throw result.error;
       } else {
