@@ -11,7 +11,7 @@ export function Hero() {
     <Container className="pt-20 pb-24 text-center">
       <h1 className="mx-auto max-w-4xl font-display text-5xl font-bold tracking-tight text-slate-900 sm:text-7xl">
         Let's{" "}
-        <span className="relative whitespace-nowrap text-blue-600">
+        <span className="relative whitespace-nowrap text-indigo-600">
           <svg
             aria-hidden="true"
             viewBox="0 0 418 42"
