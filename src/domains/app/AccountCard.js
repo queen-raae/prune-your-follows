@@ -1,11 +1,4 @@
 import React from "react";
-import Avatar from "@mui/joy/Avatar";
-import Box from "@mui/joy/Box";
-import Card from "@mui/joy/Card";
-import IconButton from "@mui/joy/IconButton";
-import Typography from "@mui/joy/Typography";
-import CardOverflow from "@mui/joy/CardOverflow";
-import Open from "@mui/icons-material/OpenInNew";
 
 const AccountCard = ({ sx, ...rest }) => {
   const { username, name, description, profile_image_url } = rest;
@@ -14,91 +7,48 @@ const AccountCard = ({ sx, ...rest }) => {
   const isPlaceholder = !username;
 
   return (
-    <Card
-      variant={isPlaceholder ? "plain" : "outlined"}
-      sx={{ opacity: isPlaceholder ? 0.6 : 1, ...sx }}
-    >
-      <Box sx={{ display: "flex", alignItems: "center", pb: 2, gap: 1.5 }}>
-        <Avatar variant="soft" src={profile_image_url} />
-        <Box>
-          <Typography
-            fontWeight="lg"
-            level="body1"
-            component="h3"
-            lineHeight={1.2}
+    <div className="flex-space relative flex h-full flex-col justify-between  rounded-lg border border-gray-300 bg-white shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
+      <div className="flex space-x-3 px-4 pt-5">
+        <div className="flex-shrink-0">
+          <img
+            className="h-10 w-10 rounded-full"
+            src={profile_image_url}
+            alt=""
+          />
+        </div>
+        <div className="min-w-0 flex-1">
+          <a
+            href={`https://twitter.com/${username}`}
+            className="focus:outline-none"
+            target="_blank"
           >
-            {name}
-          </Typography>
-          {isPlaceholder ? (
-            <Typography lineHeight={1.2}>&nbsp;</Typography>
-          ) : (
-            <Typography lineHeight={1.2}>@{username}</Typography>
-          )}
-        </Box>
-        <IconButton
-          variant="plain"
-          color="neutral"
-          size="sm"
-          sx={{ ml: "auto" }}
-          component="a"
-          target="_blank"
-          href={`https://twitter.com/${username}`}
-          disabled={isPlaceholder}
-        >
-          <Open />
-        </IconButton>
-      </Box>
+            {/* Makes the while  box clickable */}
+            <span className="absolute inset-0" aria-hidden="true" />
+            <p className="text-sm font-medium leading-5 text-gray-900">
+              {name}
+            </p>
+            <p className="truncate text-sm leading-5 text-gray-500">
+              {isPlaceholder ? <>&nbsp;</> : `@${username}`}
+            </p>
+          </a>
+        </div>
+      </div>
 
-      {description && (
-        <Typography sx={{ px: 1, pb: 2, maxWidth: "100%" }}>
-          {description}
-        </Typography>
-      )}
+      <p className="px-5 py-4 text-sm text-gray-900">{description}</p>
 
-      <CardOverflow
-        variant="soft"
-        sx={{
-          display: "flex",
-          gap: 1.5,
-          py: 1.5,
-          px: "var(--Card-padding)",
-          borderTop: "1px solid",
-          borderColor: "neutral.outlinedBorder",
-          bgcolor: "background.level1",
-          mt: "auto",
-        }}
-      >
-        <Box>
-          <Typography
-            level="body3"
-            sx={{ fontWeight: "md", color: "text.secondary" }}
-          >
-            {followers_count} Followers
-          </Typography>
-          <Typography
-            level="body3"
-            sx={{ fontWeight: "md", color: "text.secondary" }}
-          >
-            {following_count} Following
-          </Typography>
-        </Box>
-        <Box sx={{ width: 2, bgcolor: "divider" }} />
-        <Box>
-          <Typography
-            level="body3"
-            sx={{ fontWeight: "md", color: "text.secondary" }}
-          >
-            Joined <strong>{age}</strong> years ago
-          </Typography>
-          <Typography
-            level="body3"
-            sx={{ fontWeight: "md", color: "text.secondary" }}
-          >
-            <strong>{average_tweets_per_year}</strong> tweets per year
-          </Typography>
-        </Box>
-      </CardOverflow>
-    </Card>
+      <div className="flex justify-between space-x-3 rounded-b-lg border-t bg-slate-100 py-3 px-4">
+        <p className="text-xs leading-5 text-gray-500">
+          <strong>{followers_count}</strong> Followers
+          <br />
+          <strong>{following_count}</strong> Following
+        </p>
+        <p className="text-right text-xs leading-5 text-gray-500">
+          Joined <strong>{age}</strong> years ago
+          <br />
+          <strong>{average_tweets_per_year}</strong> tweets per year
+        </p>
+      </div>
+    </div>
   );
 };
 
