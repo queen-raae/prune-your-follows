@@ -60,6 +60,34 @@ export default function useFollowing({ sort = SORT.INACTIVE }) {
     {
       enabled: Boolean(user?.id) && Boolean(profile?.last_fetched),
       select: (result) => result.data,
+      placeholderData: {
+        data: [
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+        ],
+      },
     }
   );
 }
