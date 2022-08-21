@@ -80,8 +80,8 @@ const allowPopulate = async ({ user, now }) => {
 
   if (profile.status === "FETCHED" && difference < 5) {
     throw createError(405, "It's been less than 5 minutes since last time");
-  } else if (profile.status === "RATE_LIMIT" && difference < 5) {
-    throw createError(405, "It's been less than 5 minutes since rate limit");
+  } else if (profile.status === "RATE_LIMIT" && difference < 15) {
+    throw createError(405, "It's been less than 15 minutes since rate limit");
   } else if (profile.status === "FETCHING") {
     throw createError(405, "It's already fetching");
   } else {
