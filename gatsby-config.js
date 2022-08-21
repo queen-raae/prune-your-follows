@@ -10,5 +10,18 @@ module.exports = {
     "gatsby-plugin-mdx",
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
+    {
+      resolve: `@raae/gatsby-plugin-fathom`,
+      options: {
+        site: "LFDKNTLD",
+        includedDomains: `prune.raae.tech`,
+      },
+    },
+    {
+      resolve: "@raae/gatsby-plugin-svg-emoji-favicon",
+      options: {
+        emoji: "⚔️",
+      },
+    },
   ],
 };

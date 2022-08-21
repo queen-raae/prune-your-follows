@@ -2494,6 +2494,16 @@
     schema-utils "^2.6.5"
     source-map "^0.7.3"
 
+"@raae/gatsby-plugin-fathom@0.0.4":
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@raae/gatsby-plugin-fathom/-/gatsby-plugin-fathom-0.0.4.tgz#8ba8c5fd077e47de33b85df63573eede94590f39"
+  integrity sha512-0VaaOANHr6aqIW0VlMyeqV6K22clJLETcDLwx3i/pD65HWuTcBt4k2AmspCJfmtaHOA5r3SgQVSrxQsjzVsqjQ==
+
+"@raae/gatsby-plugin-svg-emoji-favicon@0.1.5":
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/@raae/gatsby-plugin-svg-emoji-favicon/-/gatsby-plugin-svg-emoji-favicon-0.1.5.tgz#3c6e81fa126438804ecaf6787bbfb3e0ca133ff3"
+  integrity sha512-cqWt1EtvIqXzRrKLbmEZJDL211NLfFXSaPpnUy3/G6QYnFBXGw8SZ1sC/iNLXoweCdWLgwAjk0I7DZE3axQWMA==
+
 "@sideway/address@^4.1.3":
   version "4.1.4"
   resolved "https://registry.yarnpkg.com/@sideway/address/-/address-4.1.4.tgz#03dccebc6ea47fdc226f7d3d1ad512955d4783f0"
