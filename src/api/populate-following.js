@@ -2,8 +2,8 @@ import { differenceInMinutes, differenceInYears, formatISO } from "date-fns";
 import createError from "http-errors";
 import Joi from "joi";
 
-import { serviceSupabase as supabase } from "./utils/supabaseClient";
-import { twitter } from "./utils/twitterClient";
+import { serviceSupabase as supabase } from "../api-utils/supabaseClient";
+import { twitter } from "../api-utils/twitterClient";
 
 export default async function handler(req, res) {
   console.log(`${req.baseUrl} - ${req.method}`);
