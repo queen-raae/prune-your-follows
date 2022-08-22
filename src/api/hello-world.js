@@ -1,9 +1,6 @@
 import createError from "http-errors";
 
-import {
-  serviceSupabase,
-  supabase as nonServiceSupabase,
-} from "../api-utils/supabaseClient";
+import { serviceSupabase } from "../api-utils/supabaseClient";
 
 export default async function handler(req, res) {
   try {
