@@ -12,20 +12,20 @@ export default async function handler(req, res) {
         .select()
         .limit(10);
 
-      if (profilesResult.data) {
-        console.log("Got public profiles", profilesResult.data.length);
-      } else {
+      if (profilesResult.error) {
         console.warn("Error public profiles", profilesResult.error.message);
+      } else {
+        console.log("Got public profiles", profilesResult.data?.length);
       }
 
       const userResult = await serviceSupabase.auth.getUser(
         req.body.accessToken
       );
 
-      if (userResult.data) {
-        console.log("Got user", userResult.data);
-      } else {
+      if (userResult.error) {
         console.warn("Error user", userResult.error.message);
+      } else {
+        console.log("Got user", userResult.data);
       }
 
       res.json(profilesResult.data || profilesResult.error);
