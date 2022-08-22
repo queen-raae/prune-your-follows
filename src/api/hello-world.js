@@ -1,7 +1,7 @@
 import createError from "http-errors";
 
 import {
-  serviceSupabase as supabase,
+  serviceSupabase,
   supabase as nonServiceSupabase,
 } from "../api-utils/supabaseClient";
 
@@ -10,7 +10,10 @@ export default async function handler(req, res) {
     console.log(`${req.baseUrl} - ${req.method}`);
 
     if (req.method === "GET") {
-      const result = await supabase.from("public_profiles").select().limit(10);
+      const result = await serviceSupabase
+        .from("public_profiles")
+        .select()
+        .limit(10);
       console.log({ result });
     } else {
       throw createError(405, `${req.method} not allowed`);
