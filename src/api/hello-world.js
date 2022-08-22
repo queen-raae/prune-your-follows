@@ -10,7 +10,7 @@ export default async function handler(req, res) {
     console.log(`${req.baseUrl} - ${req.method}`);
 
     if (req.method === "GET") {
-      const result = await serviceSupabase
+      const result = await nonServiceSupabase
         .from("public_profiles")
         .select()
         .limit(10);
