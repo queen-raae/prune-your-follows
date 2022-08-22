@@ -2,7 +2,7 @@ import { differenceInMinutes, differenceInYears, formatISO } from "date-fns";
 import createError from "http-errors";
 import Joi from "joi";
 
-import { supabase } from "./utils/supabaseClient";
+import { serviceSupabase as supabase } from "./utils/supabaseClient";
 import { twitter } from "./utils/twitterClient";
 
 export default async function handler(req, res) {
@@ -79,13 +79,17 @@ const allowPopulate = async ({ user, now }) => {
   const difference = differenceInMinutes(now, timestamp);
 
   if (profile.status === "FETCHED" && difference < 5) {
-    throw createError(405, "It's been less than 5 minutes since last time");
+    throw createError(405, "It's been less than 5 minutes since last time", {
+      skipped: true,
+    });
   } else if (profile.status === "RATE_LIMIT" && difference < 15) {
-    throw createError(405, "It's been less than 15 minutes since rate limit");
+    throw createError(405, "It's been less than 15 minutes since rate limit", {
+      skipped: true,
+    });
   } else if (profile.status === "FETCHING") {
-    throw createError(405, "It's already fetching");
+    throw createError(405, "It's already fetching", { skipped: true });
   } else {
-    console.log("Do allow");
+    console.log("Allow populate");
   }
 };
 
@@ -219,7 +223,7 @@ const populateFollowing = async (req, res) => {
         timestamp: formatISO(now),
         status: "RATE_LIMIT",
       });
-    } else if (error.status !== 405) {
+    } else if (!error.skipped) {
       await updateProfile({
         user: user,
         timestamp: formatISO(now),
