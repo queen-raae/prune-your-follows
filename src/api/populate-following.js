@@ -7,9 +7,8 @@ import { twitter } from "../api-utils/twitterClient";
 
 export default async function handler(req, res) {
   console.log(`${req.baseUrl} - ${req.method}`);
-
   try {
-    if (req.method === "GET") {
+    if (req.method === "POST") {
       await populateFollowing(req, res);
     } else {
       throw createError(405, `${req.method} not allowed`);
@@ -121,17 +120,19 @@ const fetchTwitterFollowing = async ({ user, nextToken }) => {
 };
 
 const populateFollowing = async (req, res) => {
+  console.log("Enter populateFollowing");
   // 1. Validate the data coming in
   const schema = Joi.object({
     accessToken: Joi.string().required(),
   }).required();
 
-  const { value, error: validationError } = schema.validate(req.query);
+  const { value, error: validationError } = schema.validate(req.body);
 
   if (validationError) throw createError(422, validationError);
 
   const now = new Date();
 
+  console.log("Get user for access token");
   const {
     data: { user },
     error: authError,
