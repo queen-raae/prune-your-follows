@@ -75,14 +75,16 @@ const updatePublicProfile = async ({ user }) => {
 const allowPopulate = async ({ user, now }) => {
   const profile = await getProfile({ user });
 
+  const lastFetched = new Date(profile?.last_fetched);
+  const lastFetchedDifference = differenceInMinutes(now, lastFetched);
   const timestamp = new Date(profile?.timestamp);
-  const difference = differenceInMinutes(now, timestamp);
+  const lastTimestampDifference = differenceInMinutes(now, timestamp);
 
-  if (profile.status === "FETCHED" && difference < 5) {
+  if (profile.status === "FETCHED" && lastFetchedDifference < 5) {
     throw createError(405, "It's been less than 5 minutes since last time", {
       skipped: true,
     });
-  } else if (profile.status === "RATE_LIMIT" && difference < 15) {
+  } else if (profile.status === "RATE_LIMIT" && lastTimestampDifference < 15) {
     throw createError(405, "It's been less than 15 minutes since rate limit", {
       skipped: true,
     });

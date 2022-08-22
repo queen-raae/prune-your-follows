@@ -9,7 +9,9 @@ import useFollowing, { SORT } from "./useFollowing";
 
 export function AccountTabs() {
   const [sort, setSort] = useState(SORT.INACTIVE);
-  const { data: following } = useFollowing({ sort: sort });
+  const { data: following } = useFollowing({
+    sort: sort,
+  });
 
   const handleOnChange = (index) => {
     const key = Object.keys(SORT)[index];
