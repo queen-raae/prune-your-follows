@@ -10,11 +10,12 @@ export default async function handler(req, res) {
     console.log(`${req.baseUrl} - ${req.method}`);
 
     if (req.method === "GET") {
-      const result = await nonServiceSupabase
+      const result = await serviceSupabase
         .from("public_profiles")
         .select()
         .limit(10);
       console.log({ result });
+      req.json(result.data || result.error);
     } else {
       throw createError(405, `${req.method} not allowed`);
     }

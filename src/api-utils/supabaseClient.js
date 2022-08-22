@@ -7,7 +7,7 @@ const supabaseServiceKey = process.env.SUPABASE_SERVICE_KEY;
 
 console.log({
   supabaseAnonKey,
-  supabaseServiceKey: supabaseServiceKey?.substring(1, 4),
+  supabaseServiceKey: supabaseServiceKey?.substring(1, 10),
 });
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
