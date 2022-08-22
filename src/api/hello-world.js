@@ -9,13 +9,29 @@ export default async function handler(req, res) {
   try {
     console.log(`${req.baseUrl} - ${req.method}`);
 
-    if (req.method === "GET") {
-      const result = await serviceSupabase
+    if (req.method === "POST") {
+      const profilesResult = await serviceSupabase
         .from("public_profiles")
         .select()
         .limit(10);
-      console.log({ result });
-      req.json(result.data || result.error);
+
+      if (profilesResult.data) {
+        console.log("Got public profiles", profilesResult.data.length);
+      } else {
+        console.warn("Error public profiles", profilesResult.error.message);
+      }
+
+      const userResult = await serviceSupabase.auth.getUser(
+        req.body.accessToken
+      );
+
+      if (userResult.data) {
+        console.log("Got user", userResult.data);
+      } else {
+        console.warn("Error user", userResult.error.message);
+      }
+
+      res.json(profilesResult.data || profilesResult.error);
     } else {
       throw createError(405, `${req.method} not allowed`);
     }
