@@ -31,12 +31,15 @@ export default async function handler(req, res) {
 const updateProfile = async ({ user, timestamp, status }) => {
   console.log("Upsert profile", user.id, timestamp, status);
 
-  const { error } = await supabase.from("profiles").upsert({
-    user_id: user.id,
-    timestamp: timestamp,
-    last_fetched: status === "FETCHED" ? timestamp : undefined,
-    status: status,
-  });
+  const { error } = await supabase.from("profiles").upsert(
+    {
+      user_id: user.id,
+      timestamp: timestamp,
+      last_fetched: status === "FETCHED" ? timestamp : undefined,
+      status: status,
+    },
+    { minimal: true }
+  );
 
   if (error) throw createError(500, error);
 };
@@ -60,11 +63,14 @@ const getProfile = async ({ user }) => {
 const updatePublicProfile = async ({ user }) => {
   console.log("Upsert public profile", user.user_metadata.user_name);
 
-  const { error } = await supabase.from("public_profiles").upsert({
-    user_id: user.id,
-    avatar_url: user.user_metadata.avatar_url,
-    username: user.user_metadata.user_name,
-  });
+  const { error } = await supabase.from("public_profiles").upsert(
+    {
+      user_id: user.id,
+      avatar_url: user.user_metadata.avatar_url,
+      username: user.user_metadata.user_name,
+    },
+    { minimal: true }
+  );
 
   if (error) {
     console.warn("Could not upsert public profile", error.message);
@@ -133,10 +139,9 @@ const populateFollowing = async (req, res) => {
   const now = new Date();
 
   console.log("Get user for access token");
-  const {
-    data: { user },
-    error: authError,
-  } = await supabase.auth.getUser(value.accessToken);
+  const { user, error: authError } = await supabase.auth.api.getUser(
+    value.accessToken
+  );
 
   if (authError) throw createError(401, authError);
 
@@ -200,11 +205,11 @@ const populateFollowing = async (req, res) => {
 
       const { error: usersError } = await supabase
         .from("accounts")
-        .upsert(accounts);
+        .upsert(accounts, { minimal: true });
 
       const { error: followsError } = await supabase
         .from("follows")
-        .upsert(twitterFollows);
+        .upsert(twitterFollows, { minimal: true });
 
       if (usersError || followsError) {
         throw createError(500, usersError || followsError);

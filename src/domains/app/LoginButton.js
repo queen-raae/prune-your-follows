@@ -14,7 +14,7 @@ export function LoginButton({ children, ...rest }) {
     if (user) {
       navigate("app");
     } else {
-      await supabase.auth.signInWithOAuth(
+      await supabase.auth.signIn(
         {
           provider: "twitter",
         },

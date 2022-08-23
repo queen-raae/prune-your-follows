@@ -5,10 +5,13 @@ import { supabase } from "./supabaseClient";
 import useUser from "./useUser";
 
 export const populateTwitterFollowing = async () => {
-  const { data } = await supabase.auth.getSession();
+  const session = supabase.auth.session();
+
+  // console.log("populateTwitterFollowing session", session);
+
   const result = await axios.post(
     "/api/populate-following",
-    { accessToken: data?.session?.access_token },
+    { accessToken: session.access_token },
     {
       validateStatus: function (status) {
         return status < 300 || status === 405 || status === 429;
