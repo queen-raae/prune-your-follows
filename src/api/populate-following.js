@@ -231,12 +231,14 @@ const populateFollowing = async (req, res) => {
         user: user,
         timestamp: formatISO(now),
         status: "RATE_LIMIT",
+        message: error.message || error.statusText || "",
       });
     } else if (!error.skipped) {
       await updateProfile({
         user: user,
         timestamp: formatISO(now),
         status: "ERROR",
+        message: error.message || error.statusText || "",
       });
     }
 
