@@ -1,8 +1,9 @@
 module.exports = {
   siteMetadata: {
     title: `Prune your follows`,
-    description: `Need to prune who you follow on Twitter? Look no further!`,
-    tagline: `Let's prune your follows ⚔️`,
+    tagline: `Let's prune your follows!`,
+    description: `Find Twitter accounts to unfollow and make room for new follows.`,
+    url: "https://prune.raae.tech",
   },
   plugins: [
     "gatsby-plugin-postcss",

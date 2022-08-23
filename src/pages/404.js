@@ -7,7 +7,7 @@ export const Head = () => {
   const meta = useSiteMetadata();
   return (
     <>
-      <title>{meta?.title}</title>
+      <title>{meta?.title} - 404</title>
       <meta name="description" content={meta?.description} />
     </>
   );
