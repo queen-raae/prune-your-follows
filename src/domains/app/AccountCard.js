@@ -50,7 +50,7 @@ export function AccountCard({ sx, ...rest }) {
         <p className="text-right text-xs leading-5 text-gray-500">
           Joined <strong>{age}</strong> years ago
           <br />
-          <strong>{average_tweets_per_year}</strong> tweets per year
+          Average <strong>{average_tweets_per_year}</strong> tweets per year
         </p>
       </div>
     </div>
