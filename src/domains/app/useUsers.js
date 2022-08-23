@@ -11,6 +11,7 @@ export default function useUsers() {
       if (result.error) {
         throw result.error;
       } else {
+        // console.log({ users: result.data });
         return result;
       }
     },
