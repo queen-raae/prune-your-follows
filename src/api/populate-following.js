@@ -82,11 +82,12 @@ const allowPopulate = async ({ user, now }) => {
 
   const lastFetched = new Date(profile?.last_fetched);
   const lastFetchedDifference = differenceInMinutes(now, lastFetched);
+
   const timestamp = new Date(profile?.timestamp);
   const lastTimestampDifference = differenceInMinutes(now, timestamp);
 
-  if (profile.status === "FETCHED" && lastFetchedDifference < 5) {
-    throw createError(405, "It's been less than 5 minutes since last time", {
+  if (profile.status === "FETCHED" && lastFetchedDifference < 10) {
+    throw createError(405, "It's been less than 10 minutes since last time", {
       skipped: true,
     });
   } else if (profile.status === "RATE_LIMIT" && lastTimestampDifference < 15) {
