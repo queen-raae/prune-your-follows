@@ -9,7 +9,7 @@ export function LoginButton({ children, ...rest }) {
   const { data: user } = useUser();
 
   const handleAuth = async () => {
-    const redirectTo = window.location.origin + "/app";
+    const redirectTo = window.location.origin + "/app/";
 
     if (user) {
       navigate("app");

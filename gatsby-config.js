@@ -5,6 +5,7 @@ module.exports = {
     description: `Find Twitter accounts to unfollow and make room for new follows.`,
     url: "https://prune.raae.tech",
   },
+  trailingSlash: "always",
   plugins: [
     "gatsby-plugin-postcss",
     "gatsby-plugin-image",
