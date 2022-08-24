@@ -11,7 +11,7 @@ export function Footer() {
         <p className="text-sm text-slate-500">
           Made by{" "}
           <a
-            href="https://queen.raae.codes"
+            href="https://queen.raae.codes/emails/?utm_source=app&utm_campaign=prune-your-follows"
             className="underline"
             target="_blank"
             rel="noreferrer"
