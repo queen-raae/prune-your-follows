@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "gatsby";
 
-import useSiteMetadata from "../domains/common/useSiteMetadata";
+import useSiteMetadata from "../data/useSiteMetadata";
 
 export const Head = () => {
   const meta = useSiteMetadata();

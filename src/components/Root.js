@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { supabase } from "./app/supabaseClient";
+import { supabase } from "../data/supabaseClient";
 
 import "focus-visible";
-import "./global.css";
+import "./root.css";
 
 const queryClient = new QueryClient();
 

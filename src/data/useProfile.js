@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { supabase } from "./supabaseClient";
+import { supabase } from "../data/supabaseClient";
 import useUser from "./useUser";
 
 export default function useProfile() {

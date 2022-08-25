@@ -1,9 +1,10 @@
 import React from "react";
 import { navigate } from "gatsby";
-import { supabase } from "./supabaseClient";
 
-import { Button } from "../common/Button";
-import useUser from "./useUser";
+import { supabase } from "../data/supabaseClient";
+import useUser from "../data/useUser";
+
+import { Button } from "./Button";
 
 export function LoginButton({ children, ...rest }) {
   const { data: user } = useUser();

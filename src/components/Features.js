@@ -1,7 +1,8 @@
 import React from "react";
 
-import { SORT } from "../app/useFollowing";
-import { Container } from "../common/Container";
+import { SORT } from "../data/useFollowing";
+
+import { Container } from "./Container";
 
 export function Features() {
   return (

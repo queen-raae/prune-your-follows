@@ -1,16 +1,15 @@
 import React from "react";
 
-import { LogoutButton } from "../domains/app/LogoutButton";
+import useSiteMetadata from "../data/useSiteMetadata";
+import usePopulateFollowing from "../data/usePopulateFollowing";
+import useProfile from "../data/useProfile";
 
-import useSiteMetadata from "../domains/common/useSiteMetadata";
-import usePopulateFollowing from "../domains/app/usePopulateFollowing";
-import useProfile from "../domains/app/useProfile";
-
-import { Header } from "../domains/common/Header";
-import { AccountTabs } from "../domains/app/AccountTabs";
-import { Hero } from "../domains/app/Hero";
-import { Footer } from "../domains/common/Footer";
-import { FetchingOverlay } from "../domains/app/FetchingOverlay";
+import { LogoutButton } from "../components/LogoutButton";
+import { Header } from "../components/Header";
+import { AccountTabs } from "../components/AccountTabs";
+import { AppHero } from "../components/AppHero";
+import { Footer } from "../components/Footer";
+import { FetchingOverlay } from "../components/FetchingOverlay";
 
 export const Head = () => {
   const meta = useSiteMetadata();
@@ -33,7 +32,7 @@ export default function App() {
         <LogoutButton color="white" />
       </Header>
       <main>
-        <Hero />
+        <AppHero />
         <AccountTabs />
       </main>
       <Footer />

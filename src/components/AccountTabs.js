@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { Tab } from "@headlessui/react";
 import clsx from "clsx";
 
-import { Container } from "../common/Container";
-import { AccountCard } from "./AccountCard";
+import useFollowing, { SORT } from "../data/useFollowing";
 
-import useFollowing, { SORT } from "./useFollowing";
+import { Container } from "./Container";
+import { AccountCard } from "./AccountCard";
 
 export function AccountTabs() {
   const [sort, setSort] = useState(SORT.INACTIVE);

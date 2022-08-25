@@ -1,5 +1,6 @@
 import React from "react";
-import useUsers from "../app/useUsers";
+
+import useUsers from "../data/useUsers";
 
 export function Avatars() {
   const { data: users } = useUsers();

@@ -1,9 +1,10 @@
 import React from "react";
 
-import { Container } from "../common/Container";
-import useUser from "./useUser";
+import useUser from "../data/useUser";
 
-export function Hero() {
+import { Container } from "./Container";
+
+export function AppHero() {
   const { data: user } = useUser();
   const username = user?.user_metadata.user_name || "";
 
