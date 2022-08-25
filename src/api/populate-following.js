@@ -144,6 +144,10 @@ const populateFollowing = async (req, res) => {
     value.accessToken
   );
 
+  if (authError) {
+    console.warn("authError", authError);
+  }
+
   if (authError) throw createError(401, authError);
 
   try {

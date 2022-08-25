@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { supabase } from "../data/supabaseClient";
+import { supabase } from "./supabaseClient";
 
 export default function useUser() {
   return useQuery(["user"], async () => {
