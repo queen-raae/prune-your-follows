@@ -1,17 +1,28 @@
 import React from "react";
-import useUsers from "../app/useUsers";
+import { useStaticQuery, graphql } from "gatsby";
 
 export function Avatars() {
-  const { data: users } = useUsers();
+  const data = useStaticQuery(graphql`
+    query {
+      allAvatar {
+        nodes {
+          username
+          avatarUrl
+        }
+      }
+    }
+  `);
+
+  console.log(data);
 
   return (
     <div className="flex justify-center -space-x-1 overflow-hidden">
-      {users.map((user, index) => {
+      {data.allAvatar.nodes.map((user) => {
         return (
           <img
-            key={user.username || index}
+            key={user.username}
             className="inline-block h-8 w-8 rounded-full ring-2 ring-white"
-            src={user.avatar_url}
+            src={user.avatarUrl}
             alt={user.username}
           />
         );
