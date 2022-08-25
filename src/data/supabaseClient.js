@@ -1,4 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
+import fetch from "node-fetch";
 
 const supabaseUrl = process.env.GATSBY_PUBLIC_SUPABASE_URL;
 const supabaseAnonKey = process.env.GATSBY_PUBLIC_SUPABASE_ANON_KEY;
@@ -11,4 +12,6 @@ console.log({
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
-export const serviceSupabase = createClient(supabaseUrl, supabaseServiceKey);
+export const serviceSupabase = createClient(supabaseUrl, supabaseServiceKey, {
+  fetch: (...args) => fetch(...args),
+});
