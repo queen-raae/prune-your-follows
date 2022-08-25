@@ -5,7 +5,7 @@ export default function useUser() {
   return useQuery(["user"], async () => {
     const session = supabase.auth.session();
 
-    // console.log("useUser", session.user);
+    console.log("useUser", session);
 
     return session?.user;
   });
