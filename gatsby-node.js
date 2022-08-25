@@ -1,25 +1,23 @@
 const { createClient } = require("@supabase/supabase-js");
-const { reporter } = require("gatsby-cli/lib/reporter/reporter");
 
-const supabase = createClient(
-  "https://islqgwsslkxjcaiehclw.supabase.co",
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlzbHFnd3NzbGt4amNhaWVoY2x3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2NjAzMjc4MTksImV4cCI6MTk3NTkwMzgxOX0.ZnKcbjJ2SFycpWIRcXY0A9d4owIyQtszxFwYGs_xRU4"
-);
+const supabaseUrl = process.env.GATSBY_PUBLIC_SUPABASE_URL;
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_KEY;
 
-const createAvatars = async (gatsbyUtils) => {
+const serviceSupabase = createClient(supabaseUrl, supabaseServiceKey);
+
+const createUserAvatarNodes = async (gatsbyUtils) => {
   // Create a single supabase client for interacting with your database
-  const { actions, createNodeId, createContentDigest } = gatsbyUtils;
+  const { actions, createNodeId, createContentDigest, reporter } = gatsbyUtils;
   const { createNode } = actions;
 
-  const { data, error } = await supabase
+  const { data, error } = await serviceSupabase
     .from("public_profiles")
-    .select()
+    .select("username, avatar_url")
     .limit(10);
 
-  console.log(data);
-
   if (error) {
-    reporter.warn(error);
+    // If not we'll have errors later in the Avatars component
+    reporter.panic(`Source user avatar problem: ${error.message}`);
   } else {
     data.forEach((item) => {
       createNode({
@@ -27,8 +25,7 @@ const createAvatars = async (gatsbyUtils) => {
         avatarUrl: item.avatar_url,
         username: item.username,
         internal: {
-          type: "Avatar",
-          content: JSON.stringify(item),
+          type: "UserAvatar",
           contentDigest: createContentDigest(item),
         },
       });
@@ -39,7 +36,7 @@ const createAvatars = async (gatsbyUtils) => {
 exports.sourceNodes = async (gatsbyUtils) => {
   const { reporter } = gatsbyUtils;
 
-  reporter.info("Sourcing nodes - START");
-  await createAvatars(gatsbyUtils);
-  reporter.info("Sourcing nodes - DONE");
+  reporter.verbose("Sourcing user avatars - START");
+  await createUserAvatarNodes(gatsbyUtils);
+  reporter.verbose("Sourcing user avatars - DONE");
 };
