@@ -63,7 +63,7 @@ const getProfile = async ({ user }) => {
 const updatePublicProfile = async ({ user }) => {
   console.log("Upsert public profile", user.user_metadata.user_name);
 
-  const { error } = await supabase.from("public_profiles").upsert(
+  const { error } = await supabase.from("avatars").upsert(
     {
       user_id: user.id,
       avatar_url: user.user_metadata.avatar_url,

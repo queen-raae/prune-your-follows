@@ -11,9 +11,9 @@ const createUserAvatarNodes = async (gatsbyUtils) => {
   const { createNode } = actions;
 
   const { data, error } = await serviceSupabase
-    .from("public_profiles")
+    .from("avatars")
     .select("username, avatar_url")
-    .limit(10);
+    .limit(20);
 
   if (error) {
     // If not we'll have errors later in the Avatars component
