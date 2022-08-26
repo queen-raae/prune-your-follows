@@ -10,7 +10,7 @@ export function Features() {
       aria-label="Features for finding accounts to unfollow"
       className="relative overflow-hidden bg-gradient-to-r from-blue-500 to-indigo-500 pt-20 pb-28 sm:py-32"
     >
-      <Container className="py-16 px-4 sm:px-6 lg:grid lg:grid-cols-5 lg:gap-x-24 lg:py-24 lg:px-8">
+      <Container className="py-0 px-4 sm:px-6 lg:grid lg:grid-cols-5 lg:gap-x-24 lg:py-24 lg:px-8">
         <div className="mt-12 lg:col-span-2 lg:mt-0">
           <p className="max-w-2xl text-3xl font-bold tracking-tight text-white">
             Find Twitter accounts to unfollow with our ready-made categories

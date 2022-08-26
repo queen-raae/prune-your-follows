@@ -29,7 +29,7 @@ export function Hero() {
       <div className="mt-10 flex justify-center gap-x-6">
         <LoginButton>Sign in with Twitter</LoginButton>
       </div>
-      <div className="mt-36 lg:mt-44">
+      <div className="mt-20 lg:mt-44">
         <p className="mb-4 font-display text-base text-slate-900">
           Trusted by these amazing folks so far
         </p>
