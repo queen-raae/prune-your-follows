@@ -30,10 +30,11 @@ export function Hero() {
         <LoginButton>Sign in with Twitter</LoginButton>
       </div>
       <div className="mt-20 lg:mt-44">
-        <p className="mb-4 font-display text-base text-slate-900">
-          Trusted by these amazing folks so far
-        </p>
-        <Avatars />
+        <Avatars>
+          <p className="mb-4 font-display text-base text-slate-900">
+            Trusted by these amazing folks so far
+          </p>
+        </Avatars>
       </div>
     </Container>
   );

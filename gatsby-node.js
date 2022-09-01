@@ -10,15 +10,12 @@ const createUserAvatarNodes = async (gatsbyUtils) => {
   const { actions, createNodeId, createContentDigest, reporter } = gatsbyUtils;
   const { createNode } = actions;
 
-  const { data, error } = await serviceSupabase
+  const { data } = await serviceSupabase
     .from("avatars")
     .select("username, avatar_url")
     .limit(20);
 
-  if (error) {
-    // If not we'll have errors later in the Avatars component
-    reporter.panic(`Source user avatar problem: ${error.message}`);
-  } else {
+  if (data) {
     data.forEach((item) => {
       createNode({
         id: createNodeId(item.username),
@@ -39,4 +36,15 @@ exports.sourceNodes = async (gatsbyUtils) => {
   reporter.verbose("Sourcing user avatars - START");
   await createUserAvatarNodes(gatsbyUtils);
   reporter.verbose("Sourcing user avatars - DONE");
+};
+
+exports.createSchemaCustomization = ({ actions }) => {
+  const { createTypes } = actions;
+  const typeDefs = `
+    type UserAvatar implements Node {
+      username: String!
+      avatarUrl: String!
+    }
+  `;
+  createTypes(typeDefs);
 };
