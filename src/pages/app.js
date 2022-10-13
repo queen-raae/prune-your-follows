@@ -11,6 +11,7 @@ import { AccountTabs } from "../domains/app/AccountTabs";
 import { Hero } from "../domains/app/Hero";
 import { Footer } from "../domains/common/Footer";
 import { FetchingOverlay } from "../domains/app/FetchingOverlay";
+import { Hopscotch } from "../domains/app/Hopscotch";
 
 export const Head = () => {
   const meta = useSiteMetadata();
@@ -28,6 +29,7 @@ export default function App() {
 
   return (
     <>
+      <Hopscotch />
       <FetchingOverlay open={Boolean(profile && !profile.last_fetched)} />
       <Header>
         <LogoutButton color="white" />

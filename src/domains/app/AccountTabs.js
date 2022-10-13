@@ -24,6 +24,7 @@ export function AccountTabs() {
   return (
     <section className="bg-slate-100">
       <Tab.Group
+        id="tabs"
         onChange={handleOnChange}
         selectedIndex={selectedIndex}
         className="bg-white"
@@ -52,7 +53,7 @@ export function AccountTabs() {
       <Container>
         <ul className="grid grid-cols-1 gap-6 pt-8 pb-16 sm:grid-cols-2 lg:grid-cols-3">
           {(following || []).map((account, index) => (
-            <li key={account.id || index}>
+            <li className="account" key={account.id || index}>
               <AccountCard {...account} />
             </li>
           ))}
