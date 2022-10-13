@@ -4,10 +4,10 @@ import useProfile from "./useProfile";
 import useUser from "./useUser";
 
 export const SORT = {
-  INACTIVE: "Inactive",
-  OVERACTIVE: "Overactive",
-  UNPOPULAR: "Unpopular",
   OVERPOPULAR: "Overpopular",
+  OVERACTIVE: "Overactive",
+  INACTIVE: "Inactive",
+  UNPOPULAR: "Unpopular",
 };
 
 export default function useFollowing({ sort = SORT.INACTIVE }) {

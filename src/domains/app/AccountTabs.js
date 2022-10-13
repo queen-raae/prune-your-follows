@@ -8,18 +8,26 @@ import { AccountCard } from "./AccountCard";
 import useFollowing, { SORT } from "./useFollowing";
 
 export function AccountTabs() {
-  const [sort, setSort] = useState(SORT.INACTIVE);
+  const [sort, setSort] = useState(SORT.OVERPOPULAR);
   const { data: following } = useFollowing({
     sort: sort,
+  });
+  const selectedIndex = Object.keys(SORT).findIndex((key) => {
+    return SORT[key] === sort;
   });
 
   const handleOnChange = (index) => {
     const key = Object.keys(SORT)[index];
     setSort(SORT[key]);
   };
+
   return (
     <section className="bg-slate-100">
-      <Tab.Group onChange={handleOnChange} className=" bg-white">
+      <Tab.Group
+        onChange={handleOnChange}
+        selectedIndex={selectedIndex}
+        className="bg-white"
+      >
         <Tab.List>
           <Container>
             {Object.keys(SORT).map((key) => (
