@@ -8,14 +8,26 @@ export default async function handler(req, res) {
   const session = await unstable_getServerSession(req, res, authConfig);
   const token = await getToken({ req });
 
-  const twitter = new Client(token.accessToken);
-  const me = await twitter.users.findMyUser();
+  console.log("token", token);
+
+  const data = {};
+
+  try {
+    const twitter = new Client(token.twitterAccessToken);
+    const { data: me } = await twitter.users.findMyUser();
+    data.me = me;
+    const { data: users } = await twitter.users.usersIdFollowing(me.id);
+    data.users = users;
+  } catch (error) {
+    console.warn(error);
+  }
 
   if (session) {
     res.send({
       content:
         "This is protected content. You can access this content because you are signed in.",
-      ...me,
+      profile: token.twitterProfile,
+      data: data,
     });
   } else {
     res.send({
