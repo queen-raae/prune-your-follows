@@ -1,27 +1,21 @@
 import React from "react";
 import { navigate } from "gatsby";
-import { supabase } from "./supabaseClient";
+import { signIn, useSession } from "next-auth/react";
 
 import { Button } from "../common/Button";
-import useUser from "./useUser";
 
 export function LoginButton({ children, ...rest }) {
-  const { data: user } = useUser();
+  const { data: session } = useSession();
 
-  const handleAuth = async () => {
+  console.log(session);
+
+  const handleAuth = () => {
     const redirectTo = window.location.origin + "/app/";
 
-    if (user) {
+    if (session?.user) {
       navigate("app");
     } else {
-      await supabase.auth.signIn(
-        {
-          provider: "twitter",
-        },
-        {
-          redirectTo: redirectTo,
-        }
-      );
+      signIn("twitter", { callbackUrl: redirectTo });
     }
   };
 

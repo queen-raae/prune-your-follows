@@ -1,11 +1,14 @@
 import React from "react";
+import { useSession } from "next-auth/react";
 
 import { Container } from "../common/Container";
-import useUser from "./useUser";
 
 export function Hero() {
-  const { data: user } = useUser();
-  const username = user?.user_metadata.user_name || "";
+  const { data: session } = useSession();
+  const username = session?.user?.username;
+  const followingCount = session?.user?.public_metrics?.following_count;
+
+  console.log(session);
 
   return (
     <Container className="pt-20 pb-24 text-center">
@@ -23,7 +26,7 @@ export function Hero() {
           <span className="relative">prune</span>
         </span>
         <br />
-        your follows @{username}!
+        your {followingCount} follows @{username}!
       </h1>
       <p className="mx-auto mt-6 max-w-2xl text-lg leading-6 tracking-tight text-slate-700">
         Find Twitter accounts to unfollow and make room for new follows. At this

@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { supabase } from "./app/supabaseClient";
+import { SessionProvider } from "next-auth/react";
 
 import "focus-visible";
 import "./global.css";
@@ -17,9 +18,11 @@ const Root = ({ children }) => {
   }, []);
 
   return (
-    <QueryClientProvider client={queryClient}>
-      {children} <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
+    <SessionProvider>
+      <QueryClientProvider client={queryClient}>
+        {children} <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
+    </SessionProvider>
   );
 };
 
