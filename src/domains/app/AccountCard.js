@@ -12,7 +12,7 @@ export function AccountCard({ sx, ...rest }) {
       years_on_twitter: "Y",
     },
   } = rest;
-  const { description, profile_image_url } = meta;
+  const { description, profile_image_url, location } = meta;
   const { followers_count, following_count } = public_metrics;
   const { average_tweets_per_year, years_on_twitter } = calculated_metrics;
   const isPlaceholder = !username;
@@ -43,7 +43,7 @@ export function AccountCard({ sx, ...rest }) {
               {name}
             </p>
             <p className="truncate text-sm leading-5 text-gray-500">
-              {isPlaceholder ? <>&nbsp;</> : `@${username}`}
+              {isPlaceholder ? <>&nbsp;</> : `@${username}`} / {location}
             </p>
           </a>
         </div>

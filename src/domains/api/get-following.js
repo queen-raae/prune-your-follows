@@ -7,28 +7,29 @@ export default async function ({ followerId, sort, search }) {
 
   if (sort === "Inactive") {
     return await xata.db.accounts
-      // .filter({ followed_by: followerId })
+      .filter({ followed_by: followerId })
       .sort("calculated_metrics.average_tweets_per_year", "asc")
       .sort("calculated_metrics.years_on_twitter", "desc")
       .getPaginated(params);
   } else if (sort === "Overactive") {
     return await xata.db.accounts
-      // .filter({ followed_by: followerId })
+      .filter({ followed_by: followerId })
       .sort("calculated_metrics.average_tweets_per_year", "desc")
       .sort("calculated_metrics.years_on_twitter", "asc")
       .getPaginated(params);
   } else if (sort === "Unpopular") {
     return await xata.db.accounts
-      // .filter({ followed_by: followerId })
+      .filter({ followed_by: followerId })
       .sort("public_metrics.followers_count", "asc")
       .getPaginated(params);
   } else if (sort === "Overpopular") {
     return await xata.db.accounts
-      // .filter({ followed_by: followerId })
+      .filter({ followed_by: followerId })
       .sort("public_metrics.followers_count", "desc")
       .getPaginated(params);
   } else if (search) {
-    return await xata.search.all(search, {
+    console.log("SEARCH", search, followerId);
+    const result = await xata.search.all(search, {
       tables: [
         {
           table: "accounts",
@@ -38,13 +39,15 @@ export default async function ({ followerId, sort, search }) {
             { column: "meta.location" },
             { column: "meta.description" },
           ],
-          // filter: { followed_by: followerId },
+          filter: { followed_by: followerId },
         },
       ],
 
-      fuzziness: 0,
+      fuzziness: 1,
       prefix: "phrase",
     });
+    console.log({ result });
+    return result;
   } else {
     return { records: [] };
   }
