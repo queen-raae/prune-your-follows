@@ -80,10 +80,6 @@ declare const tables: readonly [
       {
         readonly name: "followed_by";
         readonly type: "string";
-      },
-      {
-        readonly name: "test";
-        readonly type: "int";
       }
     ];
   }

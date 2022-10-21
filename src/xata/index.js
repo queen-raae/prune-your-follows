@@ -38,7 +38,6 @@ const tables = [
         ],
       },
       { name: "followed_by", type: "string" },
-      { name: "test", type: "int" },
     ],
   },
 ];
