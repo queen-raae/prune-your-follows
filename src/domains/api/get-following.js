@@ -1,3 +1,4 @@
+import { result } from "lodash";
 import { getXataClient } from "../xata";
 
 const xata = getXataClient();
@@ -29,7 +30,7 @@ export default async function ({ followerId, sort, search }) {
       .getPaginated(params);
   } else if (search) {
     console.log("SEARCH", search, followerId);
-    const result = await xata.search.all(search, {
+    const results = await xata.search.all(search, {
       tables: [
         {
           table: "accounts",
@@ -42,12 +43,17 @@ export default async function ({ followerId, sort, search }) {
           filter: { followed_by: followerId },
         },
       ],
-
+      highlight: { enabled: true },
       fuzziness: 1,
       prefix: "phrase",
     });
-    console.log({ result });
-    return result;
+
+    return results.map((result) => {
+      return {
+        ...result,
+        searchInfo: result.record.getMetadata(),
+      };
+    });
   } else {
     return { records: [] };
   }

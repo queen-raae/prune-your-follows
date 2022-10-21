@@ -1,3 +1,4 @@
+import { defaults, mapValues, result } from "lodash";
 import React, { useState } from "react";
 import { Container } from "../common/Container";
 import { AccountCard } from "./AccountCard";
@@ -28,11 +29,16 @@ const Search = () => {
       </div>
 
       <ul className="grid grid-cols-1 gap-6 pt-8 pb-16 sm:grid-cols-2 lg:grid-cols-3">
-        {(following || []).map((result, index) => (
-          <li key={result.record.id || index}>
-            <AccountCard {...result.record} />
-          </li>
-        ))}
+        {(following || []).map((result, index) => {
+          return (
+            <li key={result.record.id || index}>
+              <AccountCard
+                {...result.record}
+                highlight={result.searchInfo?.highlight}
+              />
+            </li>
+          );
+        })}
       </ul>
     </Container>
   );

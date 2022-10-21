@@ -41,6 +41,7 @@
     "gatsby-plugin-sharp": "4.20.0",
     "gatsby-source-filesystem": "4.21.1",
     "gatsby-transformer-sharp": "4.20.0",
+    "html-react-parser": "3.0.4",
     "lodash": "4.17.21",
     "next-auth": "4.14.0",
     "node-fetch": "3.2.10",
