@@ -1,4 +1,3 @@
-import { result } from "lodash";
 import { getXataClient } from "../xata";
 
 const xata = getXataClient();

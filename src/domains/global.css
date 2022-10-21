@@ -2,8 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-#___gatsby, #gatsby-focus-wrapper {
+#___gatsby,
+#gatsby-focus-wrapper {
   height: 100%;
 }
 
-
+em {
+  @apply bg-amber-300;
+  @apply text-slate-900;
+}

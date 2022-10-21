@@ -9,7 +9,8 @@ const display = (...props) => {
     .reduce((acc, item) => {
       return acc || item;
     }, "");
-  return parse(theString || "");
+
+  return theString ? parse(theString) : "";
 };
 
 export function AccountCard({ sx, highlight, ...account }) {
@@ -29,6 +30,19 @@ export function AccountCard({ sx, highlight, ...account }) {
     highlight?.meta?.description?.[0],
     account.meta?.description
   );
+
+  console.log({
+    displayUsername,
+    test: highlight?.username?.[0] || account.username,
+    test1: highlight?.username?.[0],
+    test2: account.username,
+  });
+
+  console.log({
+    displayName,
+    test1: highlight?.name?.[0],
+    test2: account.name,
+  });
 
   const displayFollowingCount = display(
     account.public_metrics?.following_count,
@@ -55,11 +69,15 @@ export function AccountCard({ sx, highlight, ...account }) {
           <ExternalLinkIcon className="absolute top-3 right-3 h-6 w-6 text-gray-500" />
         )}
         <div className="flex-shrink-0">
-          <img
-            className="h-10 w-10 rounded-full border"
-            src={avatarImageUrl}
-            alt={avatarImageAlt}
-          />
+          {twitterUrl ? (
+            <img
+              className="h-10 w-10 rounded-full border"
+              src={avatarImageUrl}
+              alt={avatarImageAlt}
+            />
+          ) : (
+            <div className="h-10 w-10 rounded-full border" />
+          )}
         </div>
         <div className="pl-3 pr-5">
           <a
@@ -71,10 +89,9 @@ export function AccountCard({ sx, highlight, ...account }) {
             {/* Makes the whole box clickable */}
             <span className="absolute inset-0" aria-hidden="true" />
             <p className="text-sm font-medium leading-5 text-gray-900">
-              {displayName}
+              {displayName ? <>{displayName}</> : <>&nbsp;</>}
             </p>
             <p className="truncate text-sm leading-5 text-gray-500">
-              {!displayUsername && <>&nbsp;</>}
               {displayUsername && <>@{displayUsername}</>}
               {displayLocation && <> - {displayLocation}</>}
             </p>

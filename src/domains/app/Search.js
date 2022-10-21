@@ -8,8 +8,6 @@ const Search = () => {
   const [term, setTerm] = useState("");
   const { data: following, isLoading } = useSearch({ search: term });
 
-  console.log({ following });
-
   const handleChange = (event) => {
     setTerm(event.target.value);
   };
