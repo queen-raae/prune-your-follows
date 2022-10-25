@@ -7,6 +7,7 @@ const xata = getXataClient();
 export default async function ({ twitterAccessToken, followerId }) {
   let nextToken = null;
   let followingCount = 0;
+  const timestamp = new Date();
 
   do {
     const { data: following, meta } = await fetchTwitterFollowing({
@@ -19,19 +20,19 @@ export default async function ({ twitterAccessToken, followerId }) {
     followingCount += following.length;
 
     const accounts = following.map((user) => {
-      const account = transformTwitterUserToAccount(user);
+      const account = transformTwitterUserToAccount({ user, timestamp });
       account.followed_by = followerId;
       return account;
     });
 
-    const accountsRecords = await xata.db.accounts.createOrUpdate(accounts);
+    const accountsRecords = await xata.db.accounts.createOrReplace(accounts);
     console.log("Following account records updated:", accountsRecords.length);
   } while (nextToken);
 
   console.log("Imported following", followingCount);
 }
 
-export const transformTwitterUserToAccount = (user) => {
+export const transformTwitterUserToAccount = ({ user, timestamp }) => {
   const yearsOnTwitter = differenceInYears(
     new Date(),
     new Date(user.created_at)
@@ -44,6 +45,7 @@ export const transformTwitterUserToAccount = (user) => {
     id: user.id,
     username: user.username,
     name: user.name,
+    timestamp: timestamp,
     meta: {
       created_at: user.created_at,
       description: user.description,

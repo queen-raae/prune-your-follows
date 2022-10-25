@@ -32,7 +32,7 @@ export const fetchTwitterFollowing = async ({
   const twitter = new Client(accessToken);
 
   const result = await twitter.users.usersIdFollowing(userId, {
-    max_results: 50,
+    max_results: 1000,
     pagination_token: nextToken,
     "user.fields": USER_FIELDS,
   });
