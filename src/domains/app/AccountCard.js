@@ -69,7 +69,7 @@ export function AccountCard({ sx, highlight, ...account }) {
           <ExternalLinkIcon className="absolute top-3 right-3 h-6 w-6 text-gray-500" />
         )}
         <div className="flex-shrink-0">
-          {twitterUrl ? (
+          {avatarImageUrl ? (
             <img
               className="h-10 w-10 rounded-full border"
               src={avatarImageUrl}

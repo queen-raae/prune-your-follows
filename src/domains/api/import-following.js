@@ -1,33 +1,84 @@
-import { differenceInYears } from "date-fns";
+import createError from "http-errors";
+import { add, differenceInYears, parseISO } from "date-fns";
 import { getXataClient } from "../xata";
-import { fetchTwitterFollowing } from "./twitter";
+import { fetchMyUser, fetchTwitterFollowing } from "./twitter";
 
 const xata = getXataClient();
 
-export default async function ({ twitterAccessToken, followerId }) {
+export default async function (req) {
+  const { twitterAccessToken } = req.body;
+
+  const { data: follower, error } = await fetchMyUser({
+    accessToken: twitterAccessToken,
+  });
+
+  if (error) {
+    throw createError.InternalServerError(error);
+  }
+
+  console.log(`Import following for: ${follower.username}`);
+
+  const meta = await xata.db.meta.read({
+    id: follower.id,
+  });
+
+  const now = new Date();
+  const next = parseISO(meta?.next);
+
+  if (next && now <= next) {
+    throw createError.TooManyRequests(`Try again at ${meta?.next}`);
+  }
+
+  console.log(`${follower.username}: ${JSON.stringify(meta)}`);
+
   let nextToken = null;
   let followingCount = 0;
-  const timestamp = new Date();
 
   do {
-    const { data: following, meta } = await fetchTwitterFollowing({
-      userId: followerId,
+    const {
+      data: following,
+      meta,
+      error,
+    } = await fetchTwitterFollowing({
+      userId: follower.id,
       accessToken: twitterAccessToken,
       nextToken: nextToken,
     });
 
-    nextToken = meta.next_token;
-    followingCount += following.length;
+    if (error?.statusCode === 429) {
+      console.log(
+        `Twitter 429 for ${follower.username}: Try again in 15 minutes`
+      );
+      await xata.db.meta.createOrUpdate({
+        id: follower.id,
+        next: add(now, { minutes: 15 }),
+      });
+    } else if (error) {
+      console.log(`Twitter error ${error.statusCode} for ${follower.username}`);
+      await xata.db.meta.createOrUpdate({
+        id: follower.id,
+        next: now,
+      });
+    } else {
+      nextToken = meta.next_token;
+      followingCount += following.length;
 
-    const accounts = following.map((user) => {
-      const account = transformTwitterUserToAccount({ user, timestamp });
-      account.followed_by = followerId;
-      return account;
-    });
+      const accounts = following.map((user) => {
+        const account = transformTwitterUserToAccount({ user, timestamp: now });
+        account.followed_by = follower.id;
+        return account;
+      });
 
-    const accountsRecords = await xata.db.accounts.createOrReplace(accounts);
-    console.log("Following account records updated:", accountsRecords.length);
+      const accountsRecords = await xata.db.accounts.createOrReplace(accounts);
+      console.log("Following account records updated:", accountsRecords.length);
+    }
   } while (nextToken);
+
+  await xata.db.meta.createOrUpdate({
+    id: follower.id,
+    last: now,
+    next: add(now, { minutes: 5 }),
+  });
 
   console.log("Imported following", followingCount);
 }

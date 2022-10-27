@@ -1,5 +1,4 @@
 import createError from "http-errors";
-import { getToken } from "next-auth/jwt";
 
 import { getFollowing, importFollowing } from "../domains/api";
 
@@ -7,22 +6,10 @@ export default async function handler(req, res) {
   console.log(`${req.baseUrl} - ${req.method}`);
 
   try {
-    const token = await getToken({ req });
-
-    if (!token) throw new createError.Unauthorized();
-
     if (req.method === "POST") {
-      await importFollowing({
-        twitterAccessToken: token.twitterAccessToken,
-        followerId: token.sub,
-      });
-      res.send("ok");
+      res.send(await importFollowing(req));
     } else if (req.method === "GET") {
-      const result = await getFollowing({
-        followerId: token.sub,
-        ...req.query,
-      });
-      res.send(result);
+      res.send(await getFollowing(req));
     } else {
       throw createError(405, `${req.method} not allowed`);
     }

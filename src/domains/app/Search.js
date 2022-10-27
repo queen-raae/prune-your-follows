@@ -6,7 +6,7 @@ import useSearch from "./useSearch";
 
 const Search = () => {
   const [term, setTerm] = useState("");
-  const { data: following, isLoading } = useSearch({ search: term });
+  const { data: following } = useSearch({ search: term });
 
   const handleChange = (event) => {
     setTerm(event.target.value);

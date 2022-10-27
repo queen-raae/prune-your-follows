@@ -38,6 +38,14 @@ const tables = [
         ],
       },
       { name: "followed_by", type: "string" },
+      { name: "timestamp", type: "datetime" },
+    ],
+  },
+  {
+    name: "meta",
+    columns: [
+      { name: "last", type: "datetime" },
+      { name: "next", type: "datetime" },
     ],
   },
 ];

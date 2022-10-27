@@ -13,15 +13,19 @@ const USER_FIELDS = [
 ];
 
 export const fetchMyUser = async ({ accessToken }) => {
-  const twitter = new Client(accessToken);
+  try {
+    const twitter = new Client(accessToken);
 
-  const result = await twitter.users.findMyUser({
-    "user.fields": USER_FIELDS,
-  });
+    const result = await twitter.users.findMyUser({
+      "user.fields": USER_FIELDS,
+    });
 
-  console.log("Fetched My User", result.data.id, result.data.username);
+    console.log("Fetched My User", result.data.id, result.data.username);
 
-  return result;
+    return result;
+  } catch (error) {
+    return { error };
+  }
 };
 
 export const fetchTwitterFollowing = async ({
@@ -29,16 +33,20 @@ export const fetchTwitterFollowing = async ({
   accessToken,
   nextToken,
 }) => {
-  const twitter = new Client(accessToken);
+  try {
+    const twitter = new Client(accessToken);
 
-  const result = await twitter.users.usersIdFollowing(userId, {
-    max_results: 1000,
-    pagination_token: nextToken,
-    "user.fields": USER_FIELDS,
-  });
+    const result = await twitter.users.usersIdFollowing(userId, {
+      max_results: 1000,
+      pagination_token: nextToken,
+      "user.fields": USER_FIELDS,
+    });
 
-  console.log("Fetched Followers:", result.data.length);
-  console.log("Is more", Boolean(result.meta.next_token));
+    console.log("Fetched Followers:", result.data.length);
+    console.log("Is more", Boolean(result.meta.next_token));
 
-  return result;
+    return result;
+  } catch (error) {
+    return { error };
+  }
 };

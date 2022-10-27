@@ -1,30 +1,43 @@
 import { getXataClient } from "../xata";
 
+import { getToken } from "next-auth/jwt";
 const xata = getXataClient();
 
-export default async function ({ followerId, sort, search }) {
+export default async function (req) {
+  const token = await getToken({ req });
+
+  if (!token) throw new createError.Unauthorized();
+
+  const followerId = token.sub;
+  const { sort, search } = req.query;
+
+  if (!sort && !search) return [];
+
+  const meta = await xata.db.meta.read({ id: followerId });
+
+  const filter = { followed_by: followerId, timestamp: { $ge: meta?.last } };
   const params = { pagination: { size: 50 } };
 
   if (sort === "Inactive") {
     return await xata.db.accounts
-      .filter({ followed_by: followerId })
+      .filter(filter)
       .sort("calculated_metrics.average_tweets_per_year", "asc")
       .sort("calculated_metrics.years_on_twitter", "desc")
       .getPaginated(params);
   } else if (sort === "Overactive") {
     return await xata.db.accounts
-      .filter({ followed_by: followerId })
+      .filter(filter)
       .sort("calculated_metrics.average_tweets_per_year", "desc")
       .sort("calculated_metrics.years_on_twitter", "asc")
       .getPaginated(params);
   } else if (sort === "Unpopular") {
     return await xata.db.accounts
-      .filter({ followed_by: followerId })
+      .filter(filter)
       .sort("public_metrics.followers_count", "asc")
       .getPaginated(params);
   } else if (sort === "Overpopular") {
     return await xata.db.accounts
-      .filter({ followed_by: followerId })
+      .filter(filter)
       .sort("public_metrics.followers_count", "desc")
       .getPaginated(params);
   } else if (search) {
@@ -39,7 +52,7 @@ export default async function ({ followerId, sort, search }) {
             { column: "meta.location" },
             { column: "meta.description" },
           ],
-          filter: { followed_by: followerId },
+          filter: filter,
         },
       ],
       highlight: { enabled: true },
