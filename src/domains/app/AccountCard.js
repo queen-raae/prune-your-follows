@@ -78,15 +78,16 @@ export function AccountCard({ sx, highlight, ...account }) {
           )}
         </div>
         <div className="pl-3 pr-5">
-          <p className="text-sm font-medium leading-5 text-gray-900">
+          <p className="text-sm font-medium leading-5">
             {displayName && (
               <a
                 href={twitterUrl}
-                className="underline"
+                className="group inline-flex items-center text-gray-700 hover:text-gray-900"
                 target="_blank"
                 rel="noreferrer"
               >
                 {displayName}{" "}
+                <ExternalLinkIcon className="ml-1 h-3 opacity-50 transition group-hover:opacity-100" />
               </a>
             )}
           </p>
