@@ -12,7 +12,7 @@ export const authConfig = {
       version: "2.0",
       authorization: {
         params: {
-          scope: "users.read tweet.read follows.read",
+          scope: "users.read tweet.read follows.read follows.write",
         },
       },
     }),
