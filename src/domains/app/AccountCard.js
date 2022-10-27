@@ -1,6 +1,7 @@
 import React from "react";
 import parse from "html-react-parser";
 import { ExternalLinkIcon } from "@heroicons/react/outline";
+import UnfollowButton from "./UnfollowButton";
 
 const display = (...props) => {
   const theString = props
@@ -63,11 +64,8 @@ export function AccountCard({ sx, highlight, ...account }) {
   );
 
   return (
-    <div className="flex-space relative flex h-full flex-col rounded-lg border border-gray-300 bg-white shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
+    <div className="flex-space flex h-full flex-col rounded-lg border border-gray-300 bg-white shadow-sm">
       <div className="flex px-4 pt-5">
-        {twitterUrl && (
-          <ExternalLinkIcon className="absolute top-3 right-3 h-6 w-6 text-gray-500" />
-        )}
         <div className="flex-shrink-0">
           {avatarImageUrl ? (
             <img
@@ -80,22 +78,22 @@ export function AccountCard({ sx, highlight, ...account }) {
           )}
         </div>
         <div className="pl-3 pr-5">
-          <a
-            href={twitterUrl}
-            className="focus:outline-none"
-            target="_blank"
-            rel="noreferrer"
-          >
-            {/* Makes the whole box clickable */}
-            <span className="absolute inset-0" aria-hidden="true" />
-            <p className="text-sm font-medium leading-5 text-gray-900">
-              {displayName ? <>{displayName}</> : <>&nbsp;</>}
-            </p>
-            <p className="truncate text-sm leading-5 text-gray-500">
-              {displayUsername && <>@{displayUsername}</>}
-              {displayLocation && <> - {displayLocation}</>}
-            </p>
-          </a>
+          <p className="text-sm font-medium leading-5 text-gray-900">
+            {displayName && (
+              <a
+                href={twitterUrl}
+                className="underline"
+                target="_blank"
+                rel="noreferrer"
+              >
+                {displayName}{" "}
+              </a>
+            )}
+          </p>
+          <p className="truncate text-sm leading-5 text-gray-500">
+            {displayUsername && <>@{displayUsername}</>}
+            {displayLocation && <> - {displayLocation}</>}
+          </p>
         </div>
       </div>
 
@@ -103,7 +101,7 @@ export function AccountCard({ sx, highlight, ...account }) {
         {displayDescription}
       </p>
 
-      <div className="mt-auto flex justify-between space-x-3 rounded-b-lg border-t bg-slate-100 py-3 px-4">
+      <div className="mt-auto flex justify-between space-x-3 border-t bg-slate-100 py-3 px-4">
         <p className="text-xs leading-5 text-gray-500">
           <strong>{displayFollowerCount}</strong> Followers
           <br />
@@ -114,6 +112,15 @@ export function AccountCard({ sx, highlight, ...account }) {
           <br />
           Average <strong>{displayAverageTweetsPerYear}</strong> tweets per year
         </p>
+      </div>
+
+      <div className="flex border-t">
+        <UnfollowButton
+          className="relative z-10 ml-auto w-1/2 rounded-br-lg border-l p-3 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          accountId={account.id}
+        >
+          Unfollow
+        </UnfollowButton>
       </div>
     </div>
   );
