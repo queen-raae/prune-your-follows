@@ -1,18 +1,8 @@
 import { getXataClient } from "../xata";
 
-import { getToken } from "next-auth/jwt";
 const xata = getXataClient();
 
-export default async function (req) {
-  const token = await getToken({ req });
-
-  if (!token) throw new createError.Unauthorized();
-
-  const followerId = token.sub;
-  const { sort, search } = req.query;
-
-  if (!sort && !search) return [];
-
+export default async function ({ followerId, sort, search }) {
   const meta = await xata.db.meta.read({ id: followerId });
 
   const filter = { followed_by: followerId, timestamp: { $ge: meta?.last } };

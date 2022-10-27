@@ -5,9 +5,7 @@ import { fetchMyUser, fetchTwitterFollowing } from "./twitter";
 
 const xata = getXataClient();
 
-export default async function (req) {
-  const { twitterAccessToken } = req.body;
-
+export default async function ({ twitterAccessToken }) {
   const { data: follower, error } = await fetchMyUser({
     accessToken: twitterAccessToken,
   });
@@ -81,6 +79,7 @@ export default async function (req) {
   });
 
   console.log("Imported following", followingCount);
+  return "ok";
 }
 
 export const transformTwitterUserToAccount = ({ user, timestamp }) => {

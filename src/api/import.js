@@ -1,33 +1,24 @@
 import createError from "http-errors";
 import Joi from "joi";
-import { getToken } from "next-auth/jwt";
 
-import { getFollowing, postFollowing } from "../domains/api";
+import { importFollowing } from "../domains/api";
 
 export default async function handler(req, res) {
   console.log(`${req.baseUrl} - ${req.method}`);
 
-  const token = await getToken({ req });
-
-  if (!token) throw new createError.Unauthorized();
-
   try {
     if (req.method === "POST") {
-      res.send(await postFollowing(req));
-    } else if (req.method === "GET") {
       const schema = Joi.object({
-        sort: Joi.string(),
-        search: Joi.string(),
-      })
-        .or("sort", "search")
-        .required();
+        twitterAccessToken: Joi.string().required(),
+      }).required();
 
-      const { value, error: validationError } = schema.validate(req.query);
+      const { value, error: validationError } = schema.validate(req.body);
 
       if (validationError) {
         throw createError(422, validationError);
       }
-      res.send(await getFollowing({ ...value, followerId: token.sub }));
+
+      res.send(await importFollowing(value));
     } else {
       throw createError(405, `${req.method} not allowed`);
     }

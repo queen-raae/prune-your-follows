@@ -23,7 +23,7 @@ export const authConfig = {
         token.twitterAccessToken = account.access_token;
 
         axios.post(
-          process.env.NEXTAUTH_URL + "/api/following",
+          process.env.NEXTAUTH_URL + "/api/import",
           {
             twitterAccessToken: account.access_token,
           },
