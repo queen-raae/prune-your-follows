@@ -1,3 +1,4 @@
+import axios from "axios";
 import NextAuth from "next-auth";
 import TwitterProvider from "next-auth/providers/twitter";
 import { Client } from "twitter-api-sdk";
@@ -20,6 +21,15 @@ export const authConfig = {
     async jwt({ token, account, profile }) {
       if (account) {
         token.twitterAccessToken = account.access_token;
+
+        axios.post(
+          process.env.NEXTAUTH_URL + "/api/following",
+          {
+            twitterAccessToken: account.access_token,
+          },
+          //All statuses are valid, we are just kicking this off
+          { validateStatus: (status) => !!status }
+        );
       }
 
       if (profile) {

@@ -5,9 +5,8 @@ import { LogoutButton } from "../domains/app/LogoutButton";
 import useSiteMetadata from "../domains/common/useSiteMetadata";
 
 import { Header } from "../domains/common/Header";
-import { AccountTabs } from "../domains/app/AccountTabs";
-import { Hero } from "../domains/app/Hero";
 import { Footer } from "../domains/common/Footer";
+import Search from "../domains/app/Search";
 
 export const Head = () => {
   const meta = useSiteMetadata();
@@ -26,8 +25,7 @@ export default function App() {
         <LogoutButton color="white" />
       </Header>
       <main>
-        <Hero />
-        <AccountTabs />
+        <Search />
       </main>
       <Footer />
     </>

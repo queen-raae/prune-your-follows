@@ -1,12 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import { supabase } from "./supabaseClient";
+import { useSession } from "next-auth/react";
 
 export default function useUser() {
-  return useQuery(["user"], async () => {
-    const session = supabase.auth.session();
+  const { data: session } = useSession();
+  const user = session?.user;
 
-    // console.log("useUser", session.user);
-
-    return session?.user;
+  return useQuery(["user", user?.id], async () => {
+    return user;
   });
 }
