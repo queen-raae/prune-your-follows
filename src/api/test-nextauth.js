@@ -8,8 +8,6 @@ export default async function handler(req, res) {
   const session = await unstable_getServerSession(req, res, authConfig);
   const token = await getToken({ req });
 
-  console.log("token", token);
-
   const data = {};
 
   try {
