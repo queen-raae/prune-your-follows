@@ -22,7 +22,7 @@ export default function useFollowing({ sort = SORT.INACTIVE }) {
       return data;
     },
     {
-      enabled: Boolean(user?.id),
+      enabled: Boolean(user?.enableQueries),
       select: (result) => result.records,
       placeholderData: {
         records: [

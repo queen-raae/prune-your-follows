@@ -7,6 +7,7 @@ import useSiteMetadata from "../domains/common/useSiteMetadata";
 import { Header } from "../domains/common/Header";
 import { Footer } from "../domains/common/Footer";
 import Search from "../domains/app/Search";
+import { Hero } from "../domains/app/Hero";
 
 export const Head = () => {
   const meta = useSiteMetadata();
@@ -25,6 +26,7 @@ export default function App() {
         <LogoutButton color="white" />
       </Header>
       <main>
+        <Hero />
         <Search />
       </main>
       <Footer />
