@@ -39,6 +39,7 @@ const tables = [
       },
       { name: "followed_by", type: "string" },
       { name: "timestamp", type: "datetime" },
+      { name: "unfollowed", type: "bool" },
     ],
   },
   {

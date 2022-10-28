@@ -1,6 +1,7 @@
 import React from "react";
 import parse from "html-react-parser";
 import { ExternalLinkIcon } from "@heroicons/react/outline";
+import clsx from "clsx";
 
 const display = (...props) => {
   const theString = props
@@ -13,7 +14,8 @@ const display = (...props) => {
   return theString ? parse(theString) : "";
 };
 
-export function AccountCard({ sx, highlight, ...account }) {
+export function AccountCardLayout(props) {
+  const { highlight, status, onUnfollow, ...account } = props;
   const twitterUrl = account.username
     ? `https://twitter.com/${account.username}`
     : "";
@@ -30,19 +32,6 @@ export function AccountCard({ sx, highlight, ...account }) {
     highlight?.meta?.description?.[0],
     account.meta?.description
   );
-
-  console.log({
-    displayUsername,
-    test: highlight?.username?.[0] || account.username,
-    test1: highlight?.username?.[0],
-    test2: account.username,
-  });
-
-  console.log({
-    displayName,
-    test1: highlight?.name?.[0],
-    test2: account.name,
-  });
 
   const displayFollowingCount = display(
     account.public_metrics?.following_count,
@@ -63,11 +52,13 @@ export function AccountCard({ sx, highlight, ...account }) {
   );
 
   return (
-    <div className="flex-space relative flex h-full flex-col rounded-lg border border-gray-300 bg-white shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
+    <div
+      className={clsx(
+        "flex-space transistion flex h-full flex-col rounded-lg border border-gray-300 bg-white shadow-sm",
+        status !== "idle" && "opacity-75"
+      )}
+    >
       <div className="flex px-4 pt-5">
-        {twitterUrl && (
-          <ExternalLinkIcon className="absolute top-3 right-3 h-6 w-6 text-gray-500" />
-        )}
         <div className="flex-shrink-0">
           {avatarImageUrl ? (
             <img
@@ -80,22 +71,23 @@ export function AccountCard({ sx, highlight, ...account }) {
           )}
         </div>
         <div className="pl-3 pr-5">
-          <a
-            href={twitterUrl}
-            className="focus:outline-none"
-            target="_blank"
-            rel="noreferrer"
-          >
-            {/* Makes the whole box clickable */}
-            <span className="absolute inset-0" aria-hidden="true" />
-            <p className="text-sm font-medium leading-5 text-gray-900">
-              {displayName ? <>{displayName}</> : <>&nbsp;</>}
-            </p>
-            <p className="truncate text-sm leading-5 text-gray-500">
-              {displayUsername && <>@{displayUsername}</>}
-              {displayLocation && <> - {displayLocation}</>}
-            </p>
-          </a>
+          <p className="text-sm font-medium leading-5">
+            {displayName && (
+              <a
+                href={twitterUrl}
+                className="group inline-flex items-center text-gray-700 hover:text-gray-900"
+                target="_blank"
+                rel="noreferrer"
+              >
+                {displayName}{" "}
+                <ExternalLinkIcon className="ml-1 h-3 opacity-50 transition group-hover:opacity-100" />
+              </a>
+            )}
+          </p>
+          <p className="truncate text-sm leading-5 text-gray-500">
+            {displayUsername && <>@{displayUsername}</>}
+            {displayLocation && <> - {displayLocation}</>}
+          </p>
         </div>
       </div>
 
@@ -103,7 +95,7 @@ export function AccountCard({ sx, highlight, ...account }) {
         {displayDescription}
       </p>
 
-      <div className="mt-auto flex justify-between space-x-3 rounded-b-lg border-t bg-slate-100 py-3 px-4">
+      <div className="mt-auto flex justify-between space-x-3 border-t bg-slate-100 py-3 px-4">
         <p className="text-xs leading-5 text-gray-500">
           <strong>{displayFollowerCount}</strong> Followers
           <br />
@@ -114,6 +106,24 @@ export function AccountCard({ sx, highlight, ...account }) {
           <br />
           Average <strong>{displayAverageTweetsPerYear}</strong> tweets per year
         </p>
+      </div>
+
+      <div className="flex border-t">
+        <button
+          disabled={status !== "idle" && status !== "error"}
+          className={clsx(
+            "relative z-10 ml-auto w-1/2 rounded-br-lg border-l p-3",
+            "text-sm font-medium text-gray-700",
+            "focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500",
+            "hover:bg-gray-50 disabled:bg-transparent"
+          )}
+          onClick={onUnfollow}
+        >
+          {status === "idle" && "Unfollow"}
+          {status === "loading" && "Unfollow"}
+          {status === "success" && "Unfollowed"}
+          {status === "error" && "Unfollow"}
+        </button>
       </div>
     </div>
   );

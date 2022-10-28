@@ -13,7 +13,23 @@ export default async function handler(req, res) {
 
   try {
     if (req.method === "POST") {
-      res.send(await postFollowing(req));
+      const schema = Joi.object({
+        accountId: Joi.string().required(),
+      });
+
+      const { value, error: validationError } = schema.validate(req.body);
+
+      if (validationError) {
+        throw createError.validationError(validationError);
+      }
+
+      res.send(
+        await postFollowing({
+          ...value,
+          twitterAccessToken: token.twitterAccessToken,
+          followerId: token.sub,
+        })
+      );
     } else if (req.method === "GET") {
       const schema = Joi.object({
         sort: Joi.string(),
@@ -25,7 +41,7 @@ export default async function handler(req, res) {
       const { value, error: validationError } = schema.validate(req.query);
 
       if (validationError) {
-        throw createError(422, validationError);
+        throw createError.validationError(validationError);
       }
       res.send(await getFollowing({ ...value, followerId: token.sub }));
     } else {

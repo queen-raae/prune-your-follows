@@ -5,7 +5,11 @@ const xata = getXataClient();
 export default async function ({ followerId, sort, search }) {
   const meta = await xata.db.meta.read({ id: followerId });
 
-  const filter = { followed_by: followerId, timestamp: { $ge: meta?.last } };
+  const filter = {
+    followed_by: followerId,
+    timestamp: { $ge: meta?.last },
+    $notExists: "unfollowed",
+  };
   const params = { pagination: { size: 50 } };
 
   if (sort === "Inactive") {

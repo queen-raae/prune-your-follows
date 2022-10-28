@@ -84,6 +84,10 @@ declare const tables: readonly [
       {
         readonly name: "timestamp";
         readonly type: "datetime";
+      },
+      {
+        readonly name: "unfollowed";
+        readonly type: "bool";
       }
     ];
   },

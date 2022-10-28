@@ -50,3 +50,22 @@ export const fetchTwitterFollowing = async ({
     return { error };
   }
 };
+
+export const unfollowUser = async ({
+  targetUserId,
+  sourceUserId,
+  accessToken,
+}) => {
+  const twitter = new Client(accessToken);
+  try {
+    const unfollowUser = await twitter.users.usersIdUnfollow(
+      //The ID of the user that is requesting to unfollow the target user
+      sourceUserId,
+      //The ID of the user that the source user is requesting to unfollow
+      targetUserId
+    );
+    return unfollowUser;
+  } catch (error) {
+    return { error };
+  }
+};
