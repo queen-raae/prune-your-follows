@@ -18,7 +18,16 @@ export function Footer() {
           >
             Queen Raae
           </a>{" "}
-          for the Supabase Launch Week 5 Hackaton | Support on{" "}
+          power by{" "}
+          <a
+            className="underline"
+            href="https://xata.io"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Xata
+          </a>{" "}
+          | Support on{" "}
           <a
             className="underline"
             href="https://github.com/queen-raae/prune-your-follows/discussions/categories/support"

@@ -1,12 +1,41 @@
+import axios from "axios";
+import { navigate } from "gatsby";
 import { useQuery } from "@tanstack/react-query";
-import { supabase } from "./supabaseClient";
+import { useSession } from "next-auth/react";
 
 export default function useUser() {
-  return useQuery(["user"], async () => {
-    const session = supabase.auth.session();
-
-    // console.log("useUser", session.user);
-
-    return session?.user;
+  const { data: session } = useSession({
+    required: true,
+    onUnauthenticated: () => {
+      navigate("/");
+    },
   });
+
+  const user = session?.user;
+
+  return useQuery(
+    ["user", user?.id],
+    async () => {
+      const { data } = await axios.get("/api/meta");
+      return data;
+    },
+    {
+      enabled: Boolean(user?.id),
+      placeholderData: {},
+      select: (data) => {
+        return {
+          ...user,
+          initializing: data?.id && !data?.last,
+          enableQueries: data?.id && data?.last,
+        };
+      },
+      refetchInterval: (data) => {
+        if (data?.enableQueries) {
+          return false;
+        } else {
+          return 1000;
+        }
+      },
+    }
+  );
 }

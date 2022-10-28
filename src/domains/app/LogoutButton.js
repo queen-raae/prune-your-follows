@@ -1,13 +1,12 @@
 import React from "react";
-import { navigate } from "gatsby";
-import { supabase } from "./supabaseClient";
+import { signOut } from "next-auth/react";
 
 import { Button } from "../common/Button";
 
 export function LogoutButton({ ...rest }) {
-  const handleAuth = async () => {
-    await supabase.auth.signOut();
-    navigate("/");
+  const handleAuth = () => {
+    const redirectTo = window.location.origin;
+    signOut({ callbackUrl: redirectTo });
   };
 
   return (

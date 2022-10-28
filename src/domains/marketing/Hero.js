@@ -29,13 +29,12 @@ export function Hero() {
       <div className="mt-10 flex justify-center gap-x-6">
         <LoginButton>Sign in with Twitter</LoginButton>
       </div>
-      <div className="mt-20 lg:mt-44">
-        <Avatars>
-          <p className="mb-4 font-display text-base text-slate-900">
-            Trusted by these amazing folks so far
-          </p>
-        </Avatars>
-      </div>
+
+      <Avatars>
+        <p className="mb-4 mt-20 font-display text-base text-slate-900 lg:mt-44">
+          Trusted by these amazing folks so far
+        </p>
+      </Avatars>
     </Container>
   );
 }

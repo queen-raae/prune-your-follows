@@ -1,0 +1,8 @@
+{
+  "databaseURL": "https://Queen-Raae-Workspace-edpk3k.eu-west-1.xata.sh/db/Prune-your-Follows",
+  "codegen": {
+    "output": "./src/domains/xata/index.js",
+    "moduleType": "esm",
+    "declarations": true
+  }
+}
