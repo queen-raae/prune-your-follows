@@ -76,25 +76,35 @@ declare const tables: readonly [
             readonly type: "int";
           }
         ];
+      },
+      {
+        readonly name: "followed_by";
+        readonly type: "string";
+      },
+      {
+        readonly name: "timestamp";
+        readonly type: "datetime";
+      },
+      {
+        readonly name: "unfollowed";
+        readonly type: "datetime";
+      },
+      {
+        readonly name: "hidden";
+        readonly type: "datetime";
       }
     ];
   },
   {
-    readonly name: "follows";
+    readonly name: "meta";
     readonly columns: readonly [
       {
-        readonly name: "account";
-        readonly type: "link";
-        readonly link: {
-          readonly table: "accounts";
-        };
+        readonly name: "last";
+        readonly type: "datetime";
       },
       {
-        readonly name: "follows_account";
-        readonly type: "link";
-        readonly link: {
-          readonly table: "accounts";
-        };
+        readonly name: "next";
+        readonly type: "datetime";
       }
     ];
   }
@@ -103,11 +113,11 @@ export declare type SchemaTables = typeof tables;
 export declare type InferredTypes = SchemaInference<SchemaTables>;
 export declare type Accounts = InferredTypes["accounts"];
 export declare type AccountsRecord = Accounts & XataRecord;
-export declare type Follows = InferredTypes["follows"];
-export declare type FollowsRecord = Follows & XataRecord;
+export declare type Meta = InferredTypes["meta"];
+export declare type MetaRecord = Meta & XataRecord;
 export declare type DatabaseSchema = {
   accounts: AccountsRecord;
-  follows: FollowsRecord;
+  meta: MetaRecord;
 };
 declare const DatabaseClient: any;
 export declare class XataClient extends DatabaseClient<DatabaseSchema> {

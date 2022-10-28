@@ -37,13 +37,17 @@ const tables = [
           { name: "years_on_twitter", type: "int" },
         ],
       },
+      { name: "followed_by", type: "string" },
+      { name: "timestamp", type: "datetime" },
+      { name: "unfollowed", type: "datetime" },
+      { name: "hidden", type: "datetime" },
     ],
   },
   {
-    name: "follows",
+    name: "meta",
     columns: [
-      { name: "account", type: "link", link: { table: "accounts" } },
-      { name: "follows_account", type: "link", link: { table: "accounts" } },
+      { name: "last", type: "datetime" },
+      { name: "next", type: "datetime" },
     ],
   },
 ];
@@ -51,7 +55,7 @@ const tables = [
 const DatabaseClient = buildClient();
 const defaultOptions = {
   databaseURL:
-    "https://Queen-Raae-Workspace-edpk3k.xata.sh/db/Prune-your-Follows",
+    "https://Queen-Raae-Workspace-edpk3k.eu-west-1.xata.sh/db/Prune-your-Follows",
 };
 /** @typedef { import('./types').DatabaseSchema } DatabaseSchema */
 /** @extends DatabaseClient<DatabaseSchema> */
