@@ -15,19 +15,20 @@ export default async function handler(req, res) {
     if (req.method === "POST") {
       const schema = Joi.object({
         accountId: Joi.string().required(),
+        action: Joi.string().valid("hide", "unhide", "unfollow").required(),
       });
 
       const { value, error: validationError } = schema.validate(req.body);
 
       if (validationError) {
-        throw createError.validationError(validationError);
+        throw createError.UnprocessableEntity(validationError);
       }
 
       res.send(
         await postFollowing({
           ...value,
           twitterAccessToken: token.twitterAccessToken,
-          followerId: token.sub,
+          userId: token.sub,
         })
       );
     } else if (req.method === "GET") {
@@ -41,7 +42,7 @@ export default async function handler(req, res) {
       const { value, error: validationError } = schema.validate(req.query);
 
       if (validationError) {
-        throw createError.validationError(validationError);
+        throw createError.UnprocessableEntity(validationError);
       }
       res.send(await getFollowing({ ...value, followerId: token.sub }));
     } else {

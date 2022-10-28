@@ -15,7 +15,8 @@ const display = (...props) => {
 };
 
 export function AccountCardLayout(props) {
-  const { highlight, status, onUnfollow, ...account } = props;
+  const { as, highlight, onUnfollow, onHide, ...account } = props;
+
   const twitterUrl = account.username
     ? `https://twitter.com/${account.username}`
     : "";
@@ -51,11 +52,13 @@ export function AccountCardLayout(props) {
     "X"
   );
 
+  const Component = as || "div";
+
   return (
-    <div
+    <Component
       className={clsx(
-        "flex-space transistion flex h-full flex-col rounded-lg border border-gray-300 bg-white shadow-sm",
-        status !== "idle" && "opacity-75"
+        "flex-space transistion flex h-full flex-col",
+        "rounded-lg border border-gray-300 bg-white shadow-sm"
       )}
     >
       <div className="flex px-4 pt-5">
@@ -95,7 +98,12 @@ export function AccountCardLayout(props) {
         {displayDescription}
       </p>
 
-      <div className="mt-auto flex justify-between space-x-3 border-t bg-slate-100 py-3 px-4">
+      <div
+        className={clsx(
+          "mt-auto flex justify-between space-x-3 border-t bg-slate-100 py-3 px-4",
+          !account.id && "rounded-b-lg"
+        )}
+      >
         <p className="text-xs leading-5 text-gray-500">
           <strong>{displayFollowerCount}</strong> Followers
           <br />
@@ -108,23 +116,33 @@ export function AccountCardLayout(props) {
         </p>
       </div>
 
-      <div className="flex border-t">
-        <button
-          disabled={status !== "idle" && status !== "error"}
-          className={clsx(
-            "relative z-10 ml-auto w-1/2 rounded-br-lg border-l p-3",
-            "text-sm font-medium text-gray-700",
-            "focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500",
-            "hover:bg-gray-50 disabled:bg-transparent"
-          )}
-          onClick={onUnfollow}
-        >
-          {status === "idle" && "Unfollow"}
-          {status === "loading" && "Unfollow"}
-          {status === "success" && "Unfollowed"}
-          {status === "error" && "Unfollow"}
-        </button>
-      </div>
-    </div>
+      {account.id && (
+        <div className="flex border-t">
+          <button
+            className={clsx(
+              "relative z-10 ml-auto w-1/2 rounded-bl-lg p-3",
+              "text-sm font-medium text-gray-700",
+              "focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500",
+              "hover:bg-gray-50 disabled:bg-transparent disabled:text-gray-300"
+            )}
+            onClick={onHide}
+          >
+            Hide
+          </button>
+
+          <button
+            className={clsx(
+              "relative z-10 ml-auto w-1/2 rounded-br-lg border-l p-3",
+              "text-sm font-medium text-indigo-700",
+              "focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500",
+              "hover:bg-gray-50"
+            )}
+            onClick={onUnfollow}
+          >
+            Unfollow
+          </button>
+        </div>
+      )}
+    </Component>
   );
 }

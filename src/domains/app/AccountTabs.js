@@ -52,9 +52,7 @@ export function AccountTabs() {
       <Container>
         <ul className="grid grid-cols-1 gap-6 pt-8 pb-16 sm:grid-cols-2 lg:grid-cols-3">
           {(following || []).map((account, index) => (
-            <li key={account.id || index}>
-              <AccountCard {...account} />
-            </li>
+            <AccountCard as="li" key={account.id || index} {...account} />
           ))}
         </ul>
       </Container>
