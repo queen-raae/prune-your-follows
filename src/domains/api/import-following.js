@@ -23,11 +23,16 @@ export default async function ({ twitterAccessToken }) {
   const now = new Date();
   const next = parseISO(meta?.next);
 
-  if (next && now <= next) {
+  if (now <= next) {
     throw createError.TooManyRequests(`Try again at ${meta?.next}`);
   }
 
-  console.log(`${follower.username}: ${JSON.stringify(meta)}`);
+  // Block imports for the next 5 minutes
+  await xata.db.meta.createOrUpdate({
+    id: follower.id,
+    last: now,
+    next: add(now, { minutes: 5 }),
+  });
 
   let nextToken = null;
   let followingCount = 0;
@@ -71,12 +76,6 @@ export default async function ({ twitterAccessToken }) {
       console.log("Following account records updated:", accountsRecords.length);
     }
   } while (nextToken);
-
-  await xata.db.meta.createOrUpdate({
-    id: follower.id,
-    last: now,
-    next: add(now, { minutes: 5 }),
-  });
 
   console.log("Imported following", followingCount);
   return "ok";

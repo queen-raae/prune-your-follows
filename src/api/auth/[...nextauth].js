@@ -1,7 +1,6 @@
 import axios from "axios";
 import NextAuth from "next-auth";
 import TwitterProvider from "next-auth/providers/twitter";
-import { Client } from "twitter-api-sdk";
 
 export const authConfig = {
   // Configure one or more authentication providers

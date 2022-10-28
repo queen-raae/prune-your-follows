@@ -25,12 +25,12 @@ export default function useUser() {
       select: (data) => {
         return {
           ...user,
-          initializing: data.id && !data.last,
-          enableQueries: data.id && data.last,
+          initializing: data?.id && !data?.last,
+          enableQueries: data?.id && data?.last,
         };
       },
-      refetchInterval: ({ enableQueries }) => {
-        if (enableQueries) {
+      refetchInterval: (data) => {
+        if (data?.enableQueries) {
           return false;
         } else {
           return 1000;
