@@ -1,3 +1,4 @@
+import "../domains/fetch-polyfill";
 import createError from "http-errors";
 import Joi from "joi";
 import { getToken } from "next-auth/jwt";

@@ -1,3 +1,4 @@
+import "../domains/fetch-polyfill";
 import { getXataClient } from "../domains/xata";
 
 const xata = getXataClient();

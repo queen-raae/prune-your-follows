@@ -1,3 +1,5 @@
+import "../domains/fetch-polyfill";
+
 import { getToken } from "next-auth/jwt";
 import { unstable_getServerSession } from "next-auth/next";
 import { authConfig } from "./auth/[...nextauth]";
