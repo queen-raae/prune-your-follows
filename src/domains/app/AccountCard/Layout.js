@@ -1,7 +1,8 @@
 import React from "react";
 import parse from "html-react-parser";
-import { ExternalLinkIcon } from "@heroicons/react/20/solid";
 import clsx from "clsx";
+
+import { ArrowTopRightOnSquareIcon as ExternalLinkIcon } from "@heroicons/react/20/solid";
 
 const display = (...props) => {
   const theString = props
