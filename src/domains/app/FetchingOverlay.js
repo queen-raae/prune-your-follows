@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { DownloadIcon as Icon } from "@heroicons/react/outline";
+import { DownloadIcon as Icon } from "@heroicons/react/20/solid";
 
 export function FetchingOverlay({ open }) {
   return (

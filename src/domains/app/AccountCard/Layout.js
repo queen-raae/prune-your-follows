@@ -1,6 +1,6 @@
 import React from "react";
 import parse from "html-react-parser";
-import { ExternalLinkIcon } from "@heroicons/react/outline";
+import { ExternalLinkIcon } from "@heroicons/react/20/solid";
 import clsx from "clsx";
 
 const display = (...props) => {
