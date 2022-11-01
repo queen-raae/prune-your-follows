@@ -9,7 +9,9 @@ Enter [Prune your follows](https://prune.raae.tech/?utm_source=readme&utm_campai
 - Unpopular
 - Overpopular
 
-It's also my entry to the Launch Week 5 Hackathon.
+Powered by [Xata](https://xata.io/?utm_source=readme&utm_campaign=prune-your-follow) - The serverless, branchable, scalable, consistent, highly available, and searchable database service focused on the developer experience.
+
+
 
 &nbsp;
 
