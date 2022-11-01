@@ -15,14 +15,14 @@ export const Head = () => {
 };
 
 export default function App(props) {
-  const { location } = props;
+  const { term, location } = props;
   return (
     <>
       <AppLayout
-        header={<SearchForm autoFocus={location.state?.searchAutoFocus} />}
-      >
-        HOME
-      </AppLayout>
+        header={
+          <SearchForm term={term} autoFocus={location.state?.searchAutoFocus} />
+        }
+      ></AppLayout>
     </>
   );
 }
