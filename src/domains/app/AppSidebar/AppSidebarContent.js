@@ -13,28 +13,29 @@ export function AppSidebarContent({ navigation, filters }) {
         <nav className="px-2">
           <div className="space-y-1">
             {navigation.map((item) => (
-              <a
+              <Link
                 key={item.name}
-                href={item.href}
-                className={clsx(
-                  item.current
-                    ? "bg-gray-200 text-gray-900"
-                    : "text-gray-700 hover:bg-gray-50 hover:text-gray-900",
-                  "group flex items-center rounded-md px-2 py-2 text-sm font-medium"
-                )}
+                to={item.to}
+                getProps={({ isCurrent }) => {
+                  // the object returned here is passed to the
+                  // anchor element's props
+                  return {
+                    className: clsx(
+                      isCurrent
+                        ? "bg-gray-200 text-gray-900 [&>:first-child]:text-gray-500"
+                        : "text-gray-700 hover:bg-gray-50 hover:text-gray-900 [&>:first-child]:text-gray-400 [&>:first-child]hover:text-gray-500",
+                      "flex items-center rounded-md px-2 py-2 text-sm font-medium"
+                    ),
+                  };
+                }}
                 aria-current={item.current ? "page" : undefined}
               >
                 <item.icon
-                  className={clsx(
-                    item.current
-                      ? "text-gray-500"
-                      : "text-gray-400 group-hover:text-gray-500",
-                    "mr-3 h-6 w-6 flex-shrink-0"
-                  )}
+                  className="mr-3 h-6 w-6 flex-shrink-0"
                   aria-hidden="true"
                 />
                 {item.name}
-              </a>
+              </Link>
             ))}
           </div>
           <div className="mt-8">
@@ -49,21 +50,21 @@ export function AppSidebarContent({ navigation, filters }) {
               role="group"
               aria-labelledby="mobile-teams-headline"
             >
-              {filters.map((team) => (
-                <a
-                  key={team.name}
-                  href={team.href}
+              {filters.map((filter) => (
+                <Link
+                  key={filter.name}
+                  to={filter.to}
                   className="group flex items-center rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900"
                 >
                   <span
                     className={clsx(
-                      team.bgColorClass,
+                      filter.bgColorClass,
                       "mr-4 h-2.5 w-2.5 rounded-full"
                     )}
                     aria-hidden="true"
                   />
-                  <span className="truncate">{team.name}</span>
-                </a>
+                  <span className="truncate">{filter.name}</span>
+                </Link>
               ))}
             </div>
           </div>

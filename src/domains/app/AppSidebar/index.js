@@ -1,31 +1,33 @@
-import React, { Fragment } from "react";
-import clsx from "clsx";
-import { Dialog, Menu, Transition } from "@headlessui/react";
+import React from "react";
+
 import {
-  HomeIcon as FollowingIcon,
+  HomeIcon as HomeIcon,
   ArchiveBoxXMarkIcon as UnfollowedIcon,
   EyeSlashIcon as HiddenIcon,
-  XMarkIcon,
 } from "@heroicons/react/24/outline";
-import {
-  ChevronUpDownIcon,
-  MagnifyingGlassIcon,
-} from "@heroicons/react/20/solid";
 import { AppSidebarMobile } from "./AppSidebarMobile";
 import { AppSidebarDesktop } from "./AppSidebarDesktop";
 import { AppSidebarContent } from "./AppSidebarContent";
 
 const navigation = [
-  { name: "Following", href: "#", icon: FollowingIcon, current: true },
-  { name: "Unfollowed", href: "#", icon: UnfollowedIcon, current: false },
-  { name: "Hidden", href: "#", icon: HiddenIcon, current: false },
+  { name: "Home", to: "/app/", icon: HomeIcon },
+  {
+    name: "Unfollowed",
+    to: "/app/unfollowed/",
+    icon: UnfollowedIcon,
+  },
+  { name: "Hidden", to: "/app/hidden/", icon: HiddenIcon },
 ];
 
 const filters = [
-  { name: "Overpopular", href: "#", bgColorClass: "bg-green-500" },
-  { name: "Unpopular", href: "#", bgColorClass: "bg-indigo-500" },
-  { name: "Unactive", href: "#", bgColorClass: "bg-indigo-500" },
-  { name: "Overactive", href: "#", bgColorClass: "bg-yellow-500" },
+  {
+    name: "Overpopular",
+    to: "/app/overpopular/",
+    bgColorClass: "bg-green-500",
+  },
+  { name: "Unpopular", to: "/app/unpopular/", bgColorClass: "bg-indigo-500" },
+  { name: "Unactive", to: "/app/unactive", bgColorClass: "bg-indigo-500" },
+  { name: "Overactive", to: "/app/overactive", bgColorClass: "bg-yellow-500" },
 ];
 
 export function AppSidebar({ sidebarOpen, setSidebarOpen }) {
