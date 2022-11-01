@@ -2,16 +2,23 @@
 
 After almost 15 years on Twitter I hit the 5000 follows limit, and found it hard to figure out what accounts to unfollow...
 
-Enter [Prune your follows](https://prune.raae.tech/?utm_source=readme&utm_campaign=prune-your-follows), it lets you filter accounts by:
+Enter Prune your follows, it lets you filter accounts by:
 
 - Inactive
 - Overactive
 - Unpopular
 - Overpopular
 
+and fuzzy search:
+
+- username
+- name
+- description
+- location
+
+Still a work in progress, will soon be launched at pruneyourfollows.com.
+
 Powered by [Xata](https://xata.io/?utm_source=readme&utm_campaign=prune-your-follow) - The serverless, branchable, scalable, consistent, highly available, and searchable database service focused on the developer experience.
-
-
 
 &nbsp;
 
