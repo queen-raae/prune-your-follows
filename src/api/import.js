@@ -1,3 +1,4 @@
+import "../domains/api/fetch-polyfill";
 import createError from "http-errors";
 import Joi from "joi";
 
