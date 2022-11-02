@@ -1,7 +1,7 @@
 import React from "react";
 
 import {
-  HomeIcon as HomeIcon,
+  HomeIcon,
   ArchiveBoxXMarkIcon as UnfollowedIcon,
   EyeSlashIcon as HiddenIcon,
 } from "@heroicons/react/24/outline";

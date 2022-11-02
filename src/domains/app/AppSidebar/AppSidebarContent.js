@@ -82,6 +82,7 @@ export function AppSidebarContent({ navigation, filters, user }) {
           <a
             href="https://xata.io"
             target="_blank"
+            rel="noreferrer"
             className="group mt-8 block px-3 text-sm font-medium text-gray-500"
           >
             Powered by{" "}

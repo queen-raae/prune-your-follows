@@ -25,7 +25,7 @@ export default function useUser() {
       select: (data) => {
         return {
           ...user,
-          initializing: Boolean(user?.id && data && !data.last),
+          initializing: Boolean(user?.id && data.next && !data.last),
           enableQueries: Boolean(user?.id && data?.last),
         };
       },

@@ -6,7 +6,6 @@ export function SearchResults({ term }) {
   const {
     data: accounts,
     isSuccess,
-    status,
     isLoading,
     isError,
   } = useSearch({ search: term });
