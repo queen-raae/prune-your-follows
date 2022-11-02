@@ -58,7 +58,7 @@ export function AccountCardLayout(props) {
   return (
     <Component
       className={clsx(
-        "flex-space transistion flex h-full flex-col",
+        "transistion flex flex-col",
         "rounded-lg border border-gray-300 bg-white shadow-sm"
       )}
     >
