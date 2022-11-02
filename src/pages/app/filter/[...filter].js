@@ -24,9 +24,7 @@ export default function App(props) {
   return (
     <>
       <AppLayout header={<FilterHeader filter={filter} />}>
-        <div className="p-8">
-          <FilterResults filter={filter} />
-        </div>
+        <FilterResults filter={filter} />
       </AppLayout>
     </>
   );

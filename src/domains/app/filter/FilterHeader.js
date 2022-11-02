@@ -4,8 +4,8 @@ import { ArrowLongRightIcon } from "@heroicons/react/20/solid";
 export function FilterHeader({ filter, as = "div", ...props }) {
   const Component = as;
   return (
-    <Component {...props} className="group flex h-16 items-center pl-3">
-      <h2 className="text-md inline pl-8 font-bold">{filter.name}</h2>
+    <Component {...props} className="group flex items-center">
+      <h2 className="text-md inline font-bold">{filter.name}</h2>
       <p className="inline-block pl-2 align-baseline opacity-80">
         {filter.description}
         {props.to && (

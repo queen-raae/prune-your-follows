@@ -88,7 +88,7 @@ export function AccountCardLayout(props) {
               </a>
             )}
           </p>
-          <p className="truncate text-sm leading-5 text-gray-500">
+          <p className="text-sm leading-5 text-gray-500">
             {displayUsername && <>@{displayUsername}</>}
             {displayLocation && <> - {displayLocation}</>}
           </p>

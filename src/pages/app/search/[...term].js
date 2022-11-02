@@ -23,9 +23,7 @@ export default function App(props) {
           <SearchForm term={term} autoFocus={location.state?.searchAutoFocus} />
         }
       >
-        <div className="p-8">
-          <SearchResults term={term} />
-        </div>
+        <SearchResults term={term} />
       </AppLayout>
     </>
   );

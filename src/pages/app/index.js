@@ -25,17 +25,14 @@ export default function App(props) {
       >
         {FILTERS.map((filter) => {
           return (
-            <section>
-              <Link>
-                <FilterHeader
-                  as={Link}
-                  to={filter.to}
-                  filter={filter}
-                  viewMore={true}
-                />
-              </Link>
+            <section className="mb-8 [&>:first-child]:mb-6">
+              <FilterHeader as={Link} to={filter.to} filter={filter} />
 
-              <FilterResults className="px-8" filter={filter} variant="row" />
+              <FilterResults
+                filter={filter}
+                variant="row"
+                className="px4 -mx-4 lg:-mx-8 lg:px-8"
+              />
             </section>
           );
         })}

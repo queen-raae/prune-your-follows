@@ -9,7 +9,7 @@ export function AppSidebarContent({ navigation, filters }) {
       <div className="flex h-16 flex-shrink-0 items-center border-b px-4">
         <Logo as={Link} to="/app" />
       </div>
-      <div className="mt-5 h-0 flex-1 overflow-y-auto">
+      <div className="mt-6 h-0 flex-1 overflow-y-auto pr-3">
         <nav className="px-2">
           <div className="space-y-1">
             {navigation.map((item) => (
