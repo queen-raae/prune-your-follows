@@ -20,11 +20,23 @@ export function AccountCard(props) {
 
   if (!isIdle) return null;
 
+  const disabled = !props.id;
+
   return (
     <AccountCardLayout
       {...props}
-      onUnfollow={() => mutate({ accountId: props.id, action: "unfollow" })}
-      onHide={() => mutate({ accountId: props.id, action: "hide" })}
+      actions={[
+        {
+          label: "Hide",
+          onClick: () => mutate({ accountId: props.id, action: "hide" }),
+          disabled: disabled,
+        },
+        {
+          label: "Unfollow",
+          onClick: () => mutate({ accountId: props.id, action: "unfollow" }),
+          disabled: disabled,
+        },
+      ]}
     />
   );
 }

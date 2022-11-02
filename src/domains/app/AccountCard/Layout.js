@@ -16,7 +16,7 @@ const display = (...props) => {
 };
 
 export function AccountCardLayout(props) {
-  const { as, highlight, onUnfollow, onHide, ...account } = props;
+  const { as, highlight, onUnfollow, onHide, actions, ...account } = props;
 
   const twitterUrl = account.username
     ? `https://twitter.com/${account.username}`
@@ -94,15 +94,12 @@ export function AccountCardLayout(props) {
           </p>
         </div>
       </div>
-
       <p className="px-5 py-4 text-sm leading-5 text-gray-900">
         {displayDescription}
       </p>
-
       <div
         className={clsx(
-          "mt-auto flex justify-between space-x-3 border-t bg-slate-100 py-3 px-4",
-          !account.id && "rounded-b-lg"
+          "mt-auto flex justify-between space-x-3 border-t bg-slate-100 py-3 px-4"
         )}
       >
         <p className="text-xs leading-5 text-gray-500">
@@ -117,33 +114,24 @@ export function AccountCardLayout(props) {
         </p>
       </div>
 
-      {account.id && (
-        <div className="flex border-t">
-          <button
-            className={clsx(
-              "relative z-10 ml-auto w-1/2 rounded-bl-lg p-3",
-              "text-sm font-medium text-gray-700",
-              "focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500",
-              "hover:bg-gray-50 disabled:bg-transparent disabled:text-gray-300"
-            )}
-            onClick={onHide}
-          >
-            Hide
-          </button>
-
-          <button
-            className={clsx(
-              "relative z-10 ml-auto w-1/2 rounded-br-lg border-l p-3",
-              "text-sm font-medium text-indigo-700",
-              "focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500",
-              "hover:bg-gray-50"
-            )}
-            onClick={onUnfollow}
-          >
-            Unfollow
-          </button>
-        </div>
-      )}
+      <div className="flex border-t [&>:last-child]:border-0">
+        {actions.map((action) => {
+          return (
+            <button
+              className={clsx(
+                "relative z-10 ml-auto w-1/2 border-r p-3",
+                "text-sm font-medium text-gray-700",
+                "focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500",
+                "hover:bg-gray-50 disabled:bg-transparent disabled:text-gray-300",
+                action.primary && "text-indigo-800"
+              )}
+              {...action}
+            >
+              {action.label}
+            </button>
+          );
+        })}
+      </div>
     </Component>
   );
 }
