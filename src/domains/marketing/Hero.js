@@ -26,8 +26,9 @@ export function Hero() {
       <p className="mx-auto mt-6 max-w-2xl px-16 text-lg leading-6 tracking-tight text-slate-700">
         Find Twitter accounts to unfollow and make room for new follows.
       </p>
-      <div className="mt-10 flex justify-center gap-x-6">
+      <div className="mt-10 justify-center space-y-6">
         <LoginButton>Sign in with Twitter</LoginButton>
+        <p>In Beta, expect bugs 🐞</p>
       </div>
 
       <Avatars>
