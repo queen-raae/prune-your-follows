@@ -11,8 +11,6 @@ export function SearchResults({ term }) {
     isError,
   } = useSearch({ search: term });
 
-  console.log(status, isLoading);
-
   if (isSuccess && accounts.length === 0) {
     return <>No result</>;
   } else if (isLoading) {

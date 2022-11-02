@@ -11,8 +11,6 @@ export function AppLayout({ header, children }) {
   const { data: user } = useUser();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  console.log(user);
-
   return (
     <>
       <FetchingOverlay open={user.initializing} />

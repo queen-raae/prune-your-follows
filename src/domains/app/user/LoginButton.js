@@ -7,8 +7,6 @@ import { Button } from "../../common/Button";
 export function LoginButton({ children, ...rest }) {
   const { data: session } = useSession();
 
-  console.log(session);
-
   const handleAuth = () => {
     const redirectTo = window.location.origin + "/app/";
 
