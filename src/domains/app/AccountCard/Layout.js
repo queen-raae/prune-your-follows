@@ -115,9 +115,10 @@ export function AccountCardLayout(props) {
       </div>
 
       <div className="flex border-t [&>:last-child]:border-0">
-        {actions.map((action) => {
+        {actions.map((action, index) => {
           return (
             <button
+              key={(action, index)}
               className={clsx(
                 "relative z-10 ml-auto w-1/2 border-r p-3",
                 "text-sm font-medium text-gray-700",

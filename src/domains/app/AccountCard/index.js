@@ -13,7 +13,7 @@ export function AccountCard(props) {
     },
     {
       onSuccess: () => {
-        queryClient.invalidateQueries(["following"]);
+        queryClient.invalidateQueries(["accounts"]);
       },
     }
   );
