@@ -25,7 +25,7 @@ export default function App(props) {
       >
         {FILTERS.map((filter) => {
           return (
-            <section className="mb-8 [&>:first-child]:mb-6">
+            <section className="mb-8 [&>:first-child]:mb-6" key={filter.key}>
               <FilterHeader as={Link} to={filter.to} filter={filter} />
 
               <FilterResults

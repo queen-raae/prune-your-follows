@@ -95,7 +95,7 @@ export function AccountCardLayout(props) {
         </div>
       </div>
       <p className="px-5 py-4 text-sm leading-5 text-gray-900">
-        {displayDescription}
+        {displayDescription || <>&nbsp;</>}
       </p>
       <div
         className={clsx(
@@ -123,7 +123,7 @@ export function AccountCardLayout(props) {
                 "text-sm font-medium text-gray-700",
                 "focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500",
                 "hover:bg-gray-50 disabled:bg-transparent disabled:text-gray-300",
-                action.primary && "text-indigo-800"
+                "last:text-indigo-600"
               )}
               {...action}
             >

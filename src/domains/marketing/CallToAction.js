@@ -1,6 +1,6 @@
 import React from "react";
 import { LoginButton } from "../app/user";
-import { Container } from "../common/Container";
+import { Container } from "./Container";
 
 export function CallToAction() {
   return (

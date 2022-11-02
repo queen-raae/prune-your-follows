@@ -1,12 +1,12 @@
 import React from "react";
 
-import { Footer } from "../domains/common/Footer";
-import { Header } from "../domains/common/Header";
+import { Footer } from "../domains/marketing/Footer";
+import { Header } from "../domains/marketing/Header";
 import { Hero } from "../domains/marketing/Hero";
 import { Features } from "../domains/marketing/Features";
 import { CallToAction } from "../domains/marketing/CallToAction";
-import { LoginButton } from "../domains/app/user";
 
+import { LoginButton } from "../domains/app/user";
 import useSiteMetadata from "../domains/common/useSiteMetadata";
 
 export const Head = () => {

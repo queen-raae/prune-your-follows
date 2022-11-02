@@ -1,7 +1,4 @@
-import React, { Fragment } from "react";
-import { Link } from "gatsby";
-import clsx from "clsx";
-import { Logo } from "../../common/Logo";
+import React from "react";
 
 export function AppSidebarDesktop({ children }) {
   return (

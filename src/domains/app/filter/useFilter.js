@@ -7,25 +7,25 @@ export const FILTERS = [
     name: "Overpopular",
     key: "OVERPOPULAR",
     to: "/app/filter/overpopular/",
-    description: "The most popular accounts you follow",
+    description: "Your follows with the most number of followers",
   },
   {
     name: "Unpopular",
     key: "UNPOPULAR",
     to: "/app/filter/unpopular/",
-    description: "The least popular accounts you follow",
+    description: "Your follows with the least number of followers",
   },
   {
     name: "Unactive",
     key: "INACTIVE",
     to: "/app/filter/unactive/",
-    description: "The least active accounts you follow",
+    description: "Your follows with the lowest number of tweets per year",
   },
   {
     name: "Overactive",
     key: "OVERACTIVE",
     to: "/app/filter/overactive/",
-    description: "The most active accounts you follow",
+    description: "Your follows with the highest number of tweets per year",
   },
 ];
 
