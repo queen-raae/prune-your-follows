@@ -1,9 +1,9 @@
 import React from "react";
 
 import { FILTERS } from "../app/filter/useFilter";
-import { Container } from "../common/Container";
+import { Container } from "./Container";
 
-export function Features() {
+export function Features({ features = FILTERS }) {
   return (
     <section
       id="features"
@@ -37,22 +37,3 @@ export function Features() {
     </section>
   );
 }
-
-const features = [
-  {
-    name: FILTERS.INACTIVE,
-    description: "Your follows with the lowest number of tweets per year",
-  },
-  {
-    name: FILTERS.OVERACTIVE,
-    description: "Your follows with the highest number of tweets per year",
-  },
-  {
-    name: FILTERS.UNPOPULAR,
-    description: "Your follows with the least number of followers",
-  },
-  {
-    name: FILTERS.OVERPOPULAR,
-    description: "Your follows with the most number of followers",
-  },
-];

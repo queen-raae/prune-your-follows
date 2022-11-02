@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Container } from "../common/Container";
+import { Container } from "./Container";
 import { LoginButton } from "../app/user";
 import { Avatars } from "./Avatars";
 
