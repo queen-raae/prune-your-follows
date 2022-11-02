@@ -1,9 +1,9 @@
 import React from "react";
 
-import { FILTERS } from "../app/filter/useFilter";
+import { FOLLOWS_FILTERS } from "../app/filter/useFilter";
 import { Container } from "./Container";
 
-export function Features({ features = FILTERS }) {
+export function Features({ features = FOLLOWS_FILTERS }) {
   return (
     <section
       id="features"

@@ -4,7 +4,11 @@ import { Link } from "gatsby";
 import useSiteMetadata from "../../domains/common/useSiteMetadata";
 import { AppLayout } from "../../domains/app/AppLayout";
 import { SearchForm } from "../../domains/app/search";
-import { FilterHeader, FilterResults, FILTERS } from "../../domains/app/filter";
+import {
+  FilterHeader,
+  FilterResults,
+  FOLLOWS_FILTERS,
+} from "../../domains/app/filter";
 
 export const Head = () => {
   const meta = useSiteMetadata();
@@ -23,7 +27,7 @@ export default function App(props) {
       <AppLayout
         header={<SearchForm autoFocus={location.state?.searchAutoFocus} />}
       >
-        {FILTERS.map((filter) => {
+        {FOLLOWS_FILTERS.map((filter) => {
           return (
             <section className="mb-8 [&>:first-child]:mb-6" key={filter.key}>
               <FilterHeader as={Link} to={filter.to} filter={filter} />
