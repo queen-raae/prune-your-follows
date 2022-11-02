@@ -6,7 +6,7 @@ export default function useSearch({ search }) {
   const { data: user } = useUser();
 
   return useQuery(
-    ["search", user?.id, search],
+    ["accounts", user?.id, "search", search],
     async () => {
       const { data } = await axios.get("/api/accounts", {
         params: { search: search },

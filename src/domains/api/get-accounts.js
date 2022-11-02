@@ -8,8 +8,7 @@ export default async function ({ followerId, filter: filterKey, search }) {
   const filter = {
     followed_by: followerId,
     timestamp: { $ge: meta?.last },
-    $notExists: "unfollowed",
-    $notExists: "hidden",
+    $all: [{ $notExists: "unfollowed" }, { $notExists: "hidden" }],
   };
   const params = { pagination: { size: 50 } };
 

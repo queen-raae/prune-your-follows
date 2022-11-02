@@ -39,7 +39,7 @@ export default function useFilter({ filter = FILTERS[0] }) {
   const { data: user } = useUser();
 
   return useQuery(
-    ["following", user?.id, filter.key],
+    ["accounts", user?.id, "filter", filter.key],
     async () => {
       const { data } = await axios.get("/api/accounts", {
         params: { filter: filter.key },
