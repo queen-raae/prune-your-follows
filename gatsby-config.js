@@ -29,5 +29,15 @@ module.exports = {
         emoji: "⚔️",
       },
     },
+    `gatsby-plugin-image`,
+    `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`, // Needed for dynamic images
+    {
+      resolve: `gatsby-plugin-remote-images`,
+      options: {
+        nodeType: "UserAvatar",
+        imagePath: "avatarUrl",
+      },
+    },
   ],
 };

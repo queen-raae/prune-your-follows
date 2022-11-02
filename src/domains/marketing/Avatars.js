@@ -1,5 +1,6 @@
 import React from "react";
 import { useStaticQuery, graphql } from "gatsby";
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
 
 export function Avatars({ children }) {
   const data = useStaticQuery(graphql`
@@ -7,7 +8,11 @@ export function Avatars({ children }) {
       allUserAvatar {
         nodes {
           username
-          avatarUrl
+          localImage {
+            childImageSharp {
+              gatsbyImageData(width: 32, placeholder: BLURRED)
+            }
+          }
         }
       }
     }
@@ -20,11 +25,12 @@ export function Avatars({ children }) {
       {children}
       <div className="flex justify-center -space-x-1 overflow-hidden">
         {data.allUserAvatar.nodes.map((user) => {
+          const image = getImage(user.localImage);
           return (
-            <img
+            <GatsbyImage
               key={user.username}
               className="inline-block h-8 w-8 rounded-full bg-blue-200 ring-2 ring-white"
-              src={user.avatarUrl}
+              image={image}
               alt={user.username}
             />
           );
