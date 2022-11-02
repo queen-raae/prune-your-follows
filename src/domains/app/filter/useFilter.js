@@ -41,7 +41,7 @@ export default function useFilter({ filter = FILTERS[0] }) {
   return useQuery(
     ["following", user?.id, filter.key],
     async () => {
-      const { data } = await axios.get("/api/following", {
+      const { data } = await axios.get("/api/accounts", {
         params: { filter: filter.key },
       });
 

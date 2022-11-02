@@ -9,7 +9,7 @@ export function AccountCard(props) {
 
   const { mutate, isIdle } = useMutation(
     (action) => {
-      return axios.post("/api/following", action);
+      return axios.post("/api/accounts", action);
     },
     {
       onSuccess: () => {

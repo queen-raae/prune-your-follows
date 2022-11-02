@@ -3,7 +3,7 @@ import createError from "http-errors";
 import Joi from "joi";
 import { getToken } from "next-auth/jwt";
 
-import { getFollowing, postFollowing } from "../domains/api";
+import { getAccounts, postAccounts } from "../domains/api";
 
 export default async function handler(req, res) {
   console.log(`${req.baseUrl} - ${req.method}`);
@@ -26,7 +26,7 @@ export default async function handler(req, res) {
       }
 
       res.send(
-        await postFollowing({
+        await postAccounts({
           ...value,
           twitterAccessToken: token.twitterAccessToken,
           userId: token.sub,
@@ -45,7 +45,7 @@ export default async function handler(req, res) {
       if (validationError) {
         throw createError.UnprocessableEntity(validationError);
       }
-      res.send(await getFollowing({ ...value, followerId: token.sub }));
+      res.send(await getAccounts({ ...value, followerId: token.sub }));
     } else {
       throw createError(405, `${req.method} not allowed`);
     }

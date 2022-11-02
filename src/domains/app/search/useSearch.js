@@ -8,7 +8,7 @@ export default function useSearch({ search }) {
   return useQuery(
     ["search", user?.id, search],
     async () => {
-      const { data } = await axios.get("/api/following", {
+      const { data } = await axios.get("/api/accounts", {
         params: { search: search },
       });
 
