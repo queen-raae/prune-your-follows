@@ -2,7 +2,7 @@ import React from "react";
 import { navigate } from "gatsby";
 import { signIn, useSession } from "next-auth/react";
 
-import { Button } from "../common/Button";
+import { Button } from "../../common/Button";
 
 export function LoginButton({ children, ...rest }) {
   const { data: session } = useSession();

@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import useUser from "../useUser";
+import { useUser } from "../user";
 
 export const FILTERS = [
   {

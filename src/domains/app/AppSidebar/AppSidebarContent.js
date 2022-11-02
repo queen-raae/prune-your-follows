@@ -2,13 +2,15 @@ import React from "react";
 import { Link } from "gatsby";
 import clsx from "clsx";
 import { Logo } from "../../common/Logo";
+import { LogoutButton } from "../user";
 
-export function AppSidebarContent({ navigation, filters }) {
+export function AppSidebarContent({ navigation, filters, user }) {
   return (
     <div className="flex min-h-full flex-col bg-gray-100">
       <div className="flex h-16 flex-shrink-0 items-center border-b px-4">
         <Logo as={Link} to="/app" />
       </div>
+
       <div className="mt-6 h-0 flex-1 overflow-y-auto pr-3">
         <nav className="px-2">
           <div className="space-y-1">
@@ -38,6 +40,9 @@ export function AppSidebarContent({ navigation, filters }) {
               </Link>
             ))}
           </div>
+        </nav>
+
+        <nav className="px-2">
           <div className="mt-8">
             <h3
               className="px-3 text-sm font-medium text-gray-500"
@@ -72,7 +77,8 @@ export function AppSidebarContent({ navigation, filters }) {
               ))}
             </div>
           </div>
-
+        </nav>
+        <section className="px-2">
           <a
             href="https://xata.io"
             target="_blank"
@@ -85,8 +91,17 @@ export function AppSidebarContent({ navigation, filters }) {
               className="mt-3 w-1/2 transition group-hover:scale-110"
             />
           </a>
-        </nav>
+        </section>
       </div>
+      <section className="mt-auto border-t px-4 py-4">
+        <p className="truncate text-sm font-medium text-gray-900">
+          {user?.name || "&nbsp"}
+        </p>
+        <p className="truncate text-sm text-gray-500">
+          {user?.username ? `@${user?.username}` : "&nbsp"}
+        </p>
+        <LogoutButton className="mt-2 w-full" />
+      </section>
     </div>
   );
 }

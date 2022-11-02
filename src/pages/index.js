@@ -5,7 +5,7 @@ import { Header } from "../domains/common/Header";
 import { Hero } from "../domains/marketing/Hero";
 import { Features } from "../domains/marketing/Features";
 import { CallToAction } from "../domains/marketing/CallToAction";
-import { LoginButton } from "../domains/app/LoginButton";
+import { LoginButton } from "../domains/app/user";
 
 import useSiteMetadata from "../domains/common/useSiteMetadata";
 

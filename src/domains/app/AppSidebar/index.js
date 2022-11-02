@@ -10,6 +10,7 @@ import { AppSidebarDesktop } from "./AppSidebarDesktop";
 import { AppSidebarContent } from "./AppSidebarContent";
 
 import { FILTERS } from "../filter/useFilter";
+import { useUser } from "../user";
 
 const navigation = [
   { name: "Home", to: "/app/", icon: HomeIcon },
@@ -26,8 +27,9 @@ const navigation = [
 ];
 
 export function AppSidebar({ sidebarOpen, setSidebarOpen }) {
+  const { data: user } = useUser();
   const content = (
-    <AppSidebarContent navigation={navigation} filters={FILTERS} />
+    <AppSidebarContent navigation={navigation} filters={FILTERS} user={user} />
   );
   return (
     <>
