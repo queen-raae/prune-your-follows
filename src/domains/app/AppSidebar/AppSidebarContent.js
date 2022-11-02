@@ -68,6 +68,19 @@ export function AppSidebarContent({ navigation, filters }) {
               ))}
             </div>
           </div>
+
+          <a
+            href="https://xata.io"
+            target="_blank"
+            className="group mt-8 block px-3 text-sm font-medium text-gray-500"
+          >
+            Powered by{" "}
+            <img
+              src="/xata-colored-with-text.svg"
+              alt="Xata logo"
+              className="mt-3 w-1/2 transition group-hover:scale-110"
+            />
+          </a>
         </nav>
       </div>
     </div>
