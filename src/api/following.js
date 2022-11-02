@@ -34,10 +34,10 @@ export default async function handler(req, res) {
       );
     } else if (req.method === "GET") {
       const schema = Joi.object({
-        sort: Joi.string(),
+        filter: Joi.string(),
         search: Joi.string(),
       })
-        .or("sort", "search")
+        .or("filter", "search")
         .required();
 
       const { value, error: validationError } = schema.validate(req.query);

@@ -8,8 +8,13 @@ export function Logo({ variant = "full", as = "div", ...props }) {
       {...props}
       className={clsx("flex items-center", props.className)}
     >
-      <span className="text-3xl">⚔️</span>
-      <h1 className={clsx("pl-3 font-bold", variant === "mark" && "sr-only")}>
+      <span className="text-2xl">⚔️</span>
+      <h1
+        className={clsx(
+          "text-md pl-3 font-bold",
+          variant === "mark" && "sr-only"
+        )}
+      >
         Prune your Follows
       </h1>
     </Component>

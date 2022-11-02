@@ -9,6 +9,8 @@ import { AppSidebarMobile } from "./AppSidebarMobile";
 import { AppSidebarDesktop } from "./AppSidebarDesktop";
 import { AppSidebarContent } from "./AppSidebarContent";
 
+import { FILTERS } from "../filter/useFilter";
+
 const navigation = [
   { name: "Home", to: "/app/", icon: HomeIcon },
   {
@@ -16,23 +18,16 @@ const navigation = [
     to: "/app/unfollowed/",
     icon: UnfollowedIcon,
   },
-  { name: "Hidden", to: "/app/hidden/", icon: HiddenIcon },
-];
-
-const filters = [
   {
-    name: "Overpopular",
-    to: "/app/overpopular/",
-    bgColorClass: "bg-green-500",
+    name: "Hidden",
+    to: "/app/hidden/",
+    icon: HiddenIcon,
   },
-  { name: "Unpopular", to: "/app/unpopular/", bgColorClass: "bg-indigo-500" },
-  { name: "Unactive", to: "/app/unactive", bgColorClass: "bg-indigo-500" },
-  { name: "Overactive", to: "/app/overactive", bgColorClass: "bg-yellow-500" },
 ];
 
 export function AppSidebar({ sidebarOpen, setSidebarOpen }) {
   const content = (
-    <AppSidebarContent navigation={navigation} filters={filters} />
+    <AppSidebarContent navigation={navigation} filters={FILTERS} />
   );
   return (
     <>

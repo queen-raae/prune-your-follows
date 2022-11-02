@@ -9,14 +9,14 @@ export function SearchForm({ term, autoFocus }) {
         Search
       </label>
       <div className="relative w-full text-gray-400 focus-within:text-gray-600">
-        <div className="pointer-events-none absolute inset-y-0 left-8 flex items-center">
+        <div className="pointer-events-none absolute inset-y-0 left-6 flex items-center">
           <MagnifyingGlassIcon className="h-5 w-5" aria-hidden="true" />
         </div>
         <input
           autoFocus={autoFocus}
           id="search-field"
           name="search-field"
-          className="block h-full w-full border-transparent py-2 pl-16 pr-3 text-gray-900 placeholder-gray-500 focus:border-transparent focus:placeholder-gray-400 focus:outline-none focus:ring-0 sm:text-sm"
+          className="block h-full w-full border-transparent py-2 pl-14 pr-3 text-gray-900 placeholder-gray-500 focus:border-transparent focus:placeholder-gray-400 focus:outline-none focus:ring-0 sm:text-sm"
           placeholder="Search"
           type="search"
           value={term}
@@ -25,7 +25,7 @@ export function SearchForm({ term, autoFocus }) {
               state: { searchAutoFocus: true },
             };
             if (event.target.value) {
-              navigate(`/app/${event.target.value}/`, options);
+              navigate(`/app/search/${event.target.value}/`, options);
             } else {
               navigate(`/app/`, options);
             }

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { SORT } from "../app/useFollowing";
+import { FILTERS } from "../app/filter/useFilter";
 import { Container } from "../common/Container";
 
 export function Features() {
@@ -40,19 +40,19 @@ export function Features() {
 
 const features = [
   {
-    name: SORT.INACTIVE,
+    name: FILTERS.INACTIVE,
     description: "Your follows with the lowest number of tweets per year",
   },
   {
-    name: SORT.OVERACTIVE,
+    name: FILTERS.OVERACTIVE,
     description: "Your follows with the highest number of tweets per year",
   },
   {
-    name: SORT.UNPOPULAR,
+    name: FILTERS.UNPOPULAR,
     description: "Your follows with the least number of followers",
   },
   {
-    name: SORT.OVERPOPULAR,
+    name: FILTERS.OVERPOPULAR,
     description: "Your follows with the most number of followers",
   },
 ];

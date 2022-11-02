@@ -5,8 +5,8 @@ import { Logo } from "../../common/Logo";
 
 export function AppSidebarContent({ navigation, filters }) {
   return (
-    <div className="flex min-h-full flex-col bg-gray-100 pt-5 pb-4 pr-5">
-      <div className="flex flex-shrink-0 items-center px-4">
+    <div className="flex min-h-full flex-col bg-gray-100">
+      <div className="flex h-16 flex-shrink-0 items-center border-b px-4">
         <Logo as={Link} to="/app" />
       </div>
       <div className="mt-5 h-0 flex-1 overflow-y-auto">
@@ -46,7 +46,7 @@ export function AppSidebarContent({ navigation, filters }) {
               Filters
             </h3>
             <div
-              className="mt-1 space-y-1"
+              className="mt-2 space-y-1"
               role="group"
               aria-labelledby="mobile-teams-headline"
             >
@@ -54,16 +54,20 @@ export function AppSidebarContent({ navigation, filters }) {
                 <Link
                   key={filter.name}
                   to={filter.to}
-                  className="group flex items-center rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900"
+                  getProps={({ isCurrent }) => {
+                    // the object returned here is passed to the
+                    // anchor element's props
+                    return {
+                      className: clsx(
+                        isCurrent
+                          ? "bg-gray-200 text-gray-900"
+                          : "text-gray-700 hover:bg-gray-50 hover:text-gray-900",
+                        "flex px-3 items-center rounded-md px-2 py-2 text-sm font-medium truncate"
+                      ),
+                    };
+                  }}
                 >
-                  <span
-                    className={clsx(
-                      filter.bgColorClass,
-                      "mr-4 h-2.5 w-2.5 rounded-full"
-                    )}
-                    aria-hidden="true"
-                  />
-                  <span className="truncate">{filter.name}</span>
+                  {filter.name}
                 </Link>
               ))}
             </div>

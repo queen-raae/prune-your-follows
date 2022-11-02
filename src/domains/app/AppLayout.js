@@ -11,7 +11,7 @@ export function AppLayout({ header, children }) {
       <AppSidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
       {/* Main column */}
       <div className="flex flex-col lg:pl-64 [&>:last-child]:flex-1">
-        <header className="sticky top-0 z-10 flex h-16 flex-shrink-0 border-b border-gray-200 bg-white [&>:last-child]:flex-1">
+        <header className="sticky top-0 z-10 flex h-16 flex-shrink-0 items-center border-b border-gray-200 bg-white [&>:last-child]:flex-1">
           <button
             type="button"
             className="border-r border-gray-200 px-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-purple-500 lg:hidden"

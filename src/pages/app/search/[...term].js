@@ -1,9 +1,8 @@
 import React from "react";
 
-import useSiteMetadata from "../../domains/common/useSiteMetadata";
-import { AppLayout } from "../../domains/app/AppLayout";
-import { SearchForm } from "../../domains/app/SearchForm";
-import { SearchResults } from "../../domains/app/SearchResults";
+import useSiteMetadata from "../../../domains/common/useSiteMetadata";
+import { AppLayout } from "../../../domains/app/AppLayout";
+import { SearchForm, SearchResults } from "../../../domains/app/search";
 
 export const Head = () => {
   const meta = useSiteMetadata();
