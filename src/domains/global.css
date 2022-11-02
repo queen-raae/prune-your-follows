@@ -2,9 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  @apply h-full bg-white;
+}
+
+body,
 #___gatsby,
 #gatsby-focus-wrapper {
-  height: 100%;
+  height: @apply h-full;
 }
 
 em {

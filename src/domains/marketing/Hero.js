@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Container } from "../common/Container";
-import { LoginButton } from "../app/LoginButton";
+import { LoginButton } from "../app/user";
 import { Avatars } from "./Avatars";
 
 export function Hero() {
