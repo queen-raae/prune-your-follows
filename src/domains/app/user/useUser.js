@@ -25,8 +25,8 @@ export default function useUser() {
       select: (data) => {
         return {
           ...user,
-          initializing: data?.id && !data?.last,
-          enableQueries: data?.id && data?.last,
+          initializing: Boolean(user?.id && data && !data.last),
+          enableQueries: Boolean(user?.id && data?.last),
         };
       },
       refetchInterval: (data) => {

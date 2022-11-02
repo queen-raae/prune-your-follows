@@ -4,12 +4,18 @@ import { Bars3CenterLeftIcon } from "@heroicons/react/24/outline";
 
 import { AppSidebar } from "./AppSidebar";
 import { Logo } from "../common/Logo";
+import { useUser } from "./user";
+import { FetchingOverlay } from "./FetchingOverlay";
 
 export function AppLayout({ header, children }) {
+  const { data: user } = useUser();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  console.log(user);
 
   return (
     <>
+      <FetchingOverlay open={user.initializing} />
       <AppSidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
       {/* Main column */}
       <div className="flex flex-col lg:pl-64">

@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { DownloadIcon as Icon } from "@heroicons/react/20/solid";
+import { ArrowDownTrayIcon as Icon } from "@heroicons/react/20/solid";
+import { LogoutButton } from "./user";
 
 export function FetchingOverlay({ open }) {
   return (
@@ -46,9 +47,10 @@ export function FetchingOverlay({ open }) {
                     </Dialog.Title>
                     <div className="mt-2">
                       <p className="text-sm text-gray-500">
-                        This will take a little while...You may close this
-                        window and come back, or wait it out!
+                        This will take a little while...You may log out and come
+                        back later, or wait it out!
                       </p>
+                      <LogoutButton variant="outline" className="mt-3" />
                     </div>
                   </div>
                 </div>

@@ -30,7 +30,6 @@ export default async function ({ twitterAccessToken }) {
   // Block imports for the next 5 minutes
   await xata.db.meta.createOrUpdate({
     id: follower.id,
-    last: now,
     next: add(now, { minutes: 5 }),
   });
 
@@ -48,20 +47,24 @@ export default async function ({ twitterAccessToken }) {
       nextToken: nextToken,
     });
 
-    if (error?.statusCode === 429) {
-      console.log(
-        `Twitter 429 for ${follower.username}: Try again in 15 minutes`
-      );
+    if (error?.status === 429) {
+      const next = add(now, { minutes: 15 });
+      const message = `Twitter 429 for ${follower.id}: Try again at ${next}`;
+      console.warn(message);
       await xata.db.meta.createOrUpdate({
         id: follower.id,
-        next: add(now, { minutes: 15 }),
+        next: next,
       });
+      throw createError.TooManyRequests(`Try again at ${next}`);
     } else if (error) {
-      console.log(`Twitter error ${error.statusCode} for ${follower.username}`);
+      const next = now;
+      const message = `Twitter ${error.status} for ${follower.id}`;
+      console.warn(message);
       await xata.db.meta.createOrUpdate({
         id: follower.id,
         next: now,
       });
+      throw createError.InternalServerError(`Try again at ${next}`);
     } else {
       nextToken = meta.next_token;
       followingCount += following.length;
@@ -76,6 +79,11 @@ export default async function ({ twitterAccessToken }) {
       console.log("Following account records updated:", accountsRecords.length);
     }
   } while (nextToken);
+
+  await xata.db.meta.createOrUpdate({
+    id: follower.id,
+    last: now,
+  });
 
   console.log("Imported following", followingCount);
   return "ok";
