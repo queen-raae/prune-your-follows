@@ -20,7 +20,7 @@ export const fetchMyUser = async ({ accessToken }) => {
       "user.fields": USER_FIELDS,
     });
 
-    console.log("Fetched My User", result.data.id, result.data.username);
+    console.log(`Twitter Fetched My User: ${result.data.id}`);
 
     return result;
   } catch (error) {
@@ -42,8 +42,12 @@ export const fetchTwitterFollowing = async ({
       "user.fields": USER_FIELDS,
     });
 
-    console.log("Fetched Followers:", result.data.length);
-    console.log("Is more", Boolean(result.meta.next_token));
+    console.log(
+      `Twitter Fetched Followers for ${userId}: ${result.data.length}`
+    );
+    console.log(
+      `Tritter Is more for ${userId}: ${Boolean(result.meta.next_token)}`
+    );
 
     return result;
   } catch (error) {

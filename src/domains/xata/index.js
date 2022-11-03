@@ -41,6 +41,8 @@ const tables = [
       { name: "timestamp", type: "datetime" },
       { name: "unfollowed", type: "datetime" },
       { name: "hidden", type: "datetime" },
+      { name: "last", type: "datetime" },
+      { name: "accountId", type: "string" },
     ],
   },
   {

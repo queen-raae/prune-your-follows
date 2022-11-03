@@ -92,6 +92,14 @@ declare const tables: readonly [
       {
         readonly name: "hidden";
         readonly type: "datetime";
+      },
+      {
+        readonly name: "last";
+        readonly type: "datetime";
+      },
+      {
+        readonly name: "accountId";
+        readonly type: "string";
       }
     ];
   },

@@ -27,13 +27,14 @@ export function AccountCard(props) {
       {...props}
       actions={[
         {
-          label: "Hide",
-          onClick: () => mutate({ accountId: props.id, action: "hide" }),
+          label: "Keep",
+          onClick: () => mutate({ accountId: props.accountId, action: "hide" }),
           disabled: disabled,
         },
         {
           label: "Unfollow",
-          onClick: () => mutate({ accountId: props.id, action: "unfollow" }),
+          onClick: () =>
+            mutate({ accountId: props.accountId, action: "unfollow" }),
           disabled: disabled,
         },
       ]}

@@ -1,12 +1,12 @@
 import createError from "http-errors";
-import { add, differenceInYears, parseISO } from "date-fns";
+import { add, differenceInYears } from "date-fns";
 import { getXataClient } from "../xata";
 import { fetchMyUser, fetchTwitterFollowing } from "./twitter";
 
 const xata = getXataClient();
 
 export default async function ({ twitterAccessToken }) {
-  const { data: follower, error } = await fetchMyUser({
+  const { data: user, error } = await fetchMyUser({
     accessToken: twitterAccessToken,
   });
 
@@ -14,22 +14,23 @@ export default async function ({ twitterAccessToken }) {
     throw createError.InternalServerError(error);
   }
 
-  console.log(`Import following for: ${follower.username}`);
-
   const meta = await xata.db.meta.read({
-    id: follower.id,
+    id: user.id,
   });
 
   const now = new Date();
-  const next = parseISO(meta?.next);
+  const next = meta?.next || now;
 
-  if (now <= next) {
-    throw createError.TooManyRequests(`Try again at ${meta?.next}`);
+  console.log(`PYF Try to import following for ${user.id}:`, now, next);
+
+  if (now < next) {
+    const message = `PYF 429 for ${user.id}: Try again at ${meta?.next}`;
+    throw createError.TooManyRequests(message);
   }
 
   // Block imports for the next 5 minutes
   await xata.db.meta.createOrUpdate({
-    id: follower.id,
+    id: user.id,
     next: add(now, { minutes: 5 }),
   });
 
@@ -39,78 +40,82 @@ export default async function ({ twitterAccessToken }) {
   do {
     const {
       data: following,
-      meta,
+      meta: twitterMeta,
       error,
     } = await fetchTwitterFollowing({
-      userId: follower.id,
+      userId: user.id,
       accessToken: twitterAccessToken,
       nextToken: nextToken,
     });
 
     if (error?.status === 429) {
       const next = add(now, { minutes: 15 });
-      const message = `Twitter 429 for ${follower.id}: Try again at ${next}`;
+      const message = `Twitter 429 for ${user.id}: Try again at ${next}`;
       console.warn(message);
       await xata.db.meta.createOrUpdate({
-        id: follower.id,
+        id: user.id,
         next: next,
       });
       throw createError.TooManyRequests(`Try again at ${next}`);
     } else if (error) {
       const next = now;
-      const message = `Twitter ${error.status} for ${follower.id}`;
+      const message = `Twitter ${error.status} for ${user.id}`;
       console.warn(message);
       await xata.db.meta.createOrUpdate({
-        id: follower.id,
+        id: user.id,
         next: now,
       });
       throw createError.InternalServerError(`Try again at ${next}`);
     } else {
-      nextToken = meta.next_token;
+      nextToken = twitterMeta.next_token;
       followingCount += following.length;
 
-      const accounts = following.map((user) => {
-        const account = transformTwitterUserToAccount({ user, timestamp: now });
-        account.followed_by = follower.id;
-        return account;
+      const records = following.map((account) => {
+        const record = transformTwitterAccountToAccountRecord(account);
+        record.id = `${user.id}-${account.id}`;
+        record.followed_by = user.id;
+        record.last = now;
+        return record;
       });
 
-      const accountsRecords = await xata.db.accounts.createOrReplace(accounts);
-      console.log("Following account records updated:", accountsRecords.length);
+      const accountsRecords = await xata.db.accounts.createOrReplace(records);
+      console.log(
+        "PYF Following account records updated:",
+        accountsRecords.length
+      );
     }
   } while (nextToken);
 
   await xata.db.meta.createOrUpdate({
-    id: follower.id,
+    id: user.id,
     last: now,
   });
 
-  console.log("Imported following", followingCount);
+  console.log("PYF Imported following", followingCount);
   return "ok";
 }
 
-export const transformTwitterUserToAccount = ({ user, timestamp }) => {
+export const transformTwitterAccountToAccountRecord = (account) => {
   const yearsOnTwitter = differenceInYears(
     new Date(),
-    new Date(user.created_at)
+    new Date(account.created_at)
   );
   const averageTweetsPerYear = Math.floor(
-    user.public_metrics.tweet_count / (yearsOnTwitter || 1) // Make sure we are not dividing by 0
+    account.public_metrics.tweet_count / (yearsOnTwitter || 1) // Make sure we are not dividing by 0
   );
 
   return {
-    id: user.id,
-    username: user.username,
-    name: user.name,
-    timestamp: timestamp,
+    accountId: account.id,
+    username: account.username,
+    name: account.name,
     meta: {
-      created_at: user.created_at,
-      description: user.description,
-      location: user.location,
-      url: user.url,
-      profile_image_url: user.profile_image_url,
+      created_at: account.created_at,
+      description: account.description,
+      location: account.location,
+      url: account.url,
+      profile_image_url: account.profile_image_url,
     },
-    public_metrics: user.public_metrics,
+    public_metrics: account.public_metrics,
     calculated_metrics: {
       years_on_twitter: yearsOnTwitter,
       average_tweets_per_year: averageTweetsPerYear,

@@ -10,39 +10,44 @@ export default async function ({
   twitterAccessToken,
   action,
 }) {
-  return await actions[action]({ userId, accountId, twitterAccessToken });
+  return await actions[action]({
+    recordId: `${userId}-${accountId}`,
+    userId,
+    accountId,
+    twitterAccessToken,
+  });
 }
 
 const actions = {
-  hide: async ({ userId, accountId }) => {
-    console.log("Hide", userId, accountId);
+  hide: async ({ recordId, userId, accountId }) => {
+    console.log("PYF POST Account Hide", userId, accountId);
 
     const record = await xata.db.accounts.createOrUpdate({
-      id: accountId,
+      id: recordId,
       hidden: new Date(),
     });
 
-    console.log("Successfull hide", accountId);
+    console.log("PYF POST Account Successfull hide", accountId);
 
     return record;
   },
-  unhide: async ({ userId, accountId }) => {
-    console.log("Unhide", userId, accountId);
+  unhide: async ({ recordId, userId, accountId }) => {
+    console.log("PYF POST Account Unhide", userId, accountId);
 
     const record = await xata.db.accounts.createOrUpdate({
-      id: accountId,
+      id: recordId,
       hidden: null,
     });
 
-    console.log("Successfull uhide", accountId);
+    console.log("PYF POST Account Successfull uhide", accountId);
 
     return record;
   },
-  unfollow: async ({ userId, accountId, twitterAccessToken }) => {
-    console.log("Unfollow", userId, accountId);
+  unfollow: async ({ recordId, userId, accountId, twitterAccessToken }) => {
+    console.log("PYF POST Account Unfollow", userId, accountId);
 
     await xata.db.accounts.createOrUpdate({
-      id: accountId,
+      id: recordId,
       // data.following should be true after a successful unfollow,
       // but lets use this return info to be sure
       unfollowed: new Date(),
@@ -55,17 +60,23 @@ const actions = {
     });
 
     if (error) {
+      await xata.db.accounts.createOrUpdate({
+        id: recordId,
+        // data.following should be true after a successful unfollow,
+        // but lets use this return info to be sure
+        unfollowed: null,
+      });
       throw createError.InternalServerError(error);
     }
 
     const record = await xata.db.accounts.createOrUpdate({
-      id: accountId,
+      id: recordId,
       // data.following should be true after a successful unfollow,
       // but lets use this return info to be sure
       unfollowed: data.following ? null : new Date(),
     });
 
-    console.log("Successfull unfollow", accountId);
+    console.log("PYF POST Account Successfull unfollow", accountId);
 
     return record;
   },
