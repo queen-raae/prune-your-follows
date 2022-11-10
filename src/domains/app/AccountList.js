@@ -7,9 +7,9 @@ export function AccountList({ accounts, variant = "grid", className }) {
     <ul
       className={clsx(
         variant === "grid" &&
-          "grid gap-6 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4",
+          "grid gap-6 sm:grid-cols-2 md:grid-cols-3 2xl:grid-cols-4",
         variant === "row" &&
-          "flex items-stretch gap-6 overflow-x-scroll pb-7 [&>*]:w-96 [&>*]:shrink-0 [&>*]:grow-0 [&>*]:truncate",
+          "flex items-stretch gap-6 overflow-x-scroll pb-7 [&>*]:w-96 [&>*]:shrink-0 [&>*]:grow-0 [&>*>p]:truncate",
         className
       )}
     >

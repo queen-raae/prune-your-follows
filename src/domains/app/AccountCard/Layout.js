@@ -79,12 +79,12 @@ export function AccountCardLayout(props) {
             {displayName && (
               <a
                 href={twitterUrl}
-                className="group inline-flex items-center text-gray-700 hover:text-gray-900"
+                className="group text-gray-700 hover:text-gray-900"
                 target="_blank"
                 rel="noreferrer"
               >
-                {displayName}{" "}
-                <ExternalLinkIcon className="ml-1 h-3 opacity-50 transition group-hover:opacity-100" />
+                {displayName}&nbsp;
+                <ExternalLinkIcon className="ml-1 inline h-3 opacity-50 transition group-hover:opacity-100" />
               </a>
             )}
           </p>
