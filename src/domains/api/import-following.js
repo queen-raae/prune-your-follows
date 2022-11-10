@@ -63,9 +63,9 @@ export default async function ({ twitterAccessToken }) {
       console.warn(message);
       await xata.db.meta.createOrUpdate({
         id: user.id,
-        next: now,
+        next: next,
       });
-      throw createError.InternalServerError(`Try again at ${next}`);
+      throw createError.InternalServerError(message);
     } else {
       nextToken = twitterMeta.next_token;
       followingCount += following.length;
@@ -78,7 +78,7 @@ export default async function ({ twitterAccessToken }) {
         return record;
       });
 
-      const accountsRecords = await xata.db.accounts.createOrReplace(records);
+      const accountsRecords = await xata.db.accounts.createOrUpdate(records);
       console.log(
         "PYF Following account records updated:",
         accountsRecords.length
