@@ -29,13 +29,18 @@ export default function App(props) {
       >
         {FOLLOWS_FILTERS.map((filter) => {
           return (
-            <section className="mb-8 [&>:first-child]:mb-6" key={filter.key}>
-              <FilterHeader as={Link} to={filter.to} filter={filter} />
+            <section className="mb-8" key={filter.key}>
+              <FilterHeader
+                className="mb-6 leading-normal"
+                as={Link}
+                to={filter.to}
+                filter={filter}
+              />
 
               <FilterResults
                 filter={filter}
                 variant="row"
-                className="px4 -mx-4 lg:-mx-8 lg:px-8"
+                className="px4 -mr-4 lg:-mx-8 lg:px-8"
               />
             </section>
           );

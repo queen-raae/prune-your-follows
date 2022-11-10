@@ -79,12 +79,12 @@ export function AccountCardLayout(props) {
             {displayName && (
               <a
                 href={twitterUrl}
-                className="group inline-flex items-center text-gray-700 hover:text-gray-900"
+                className="group text-gray-700 hover:text-gray-900"
                 target="_blank"
                 rel="noreferrer"
               >
-                {displayName}{" "}
-                <ExternalLinkIcon className="ml-1 h-3 opacity-50 transition group-hover:opacity-100" />
+                {displayName}&nbsp;
+                <ExternalLinkIcon className="ml-1 inline h-3 opacity-50 transition group-hover:opacity-100" />
               </a>
             )}
           </p>
@@ -114,17 +114,18 @@ export function AccountCardLayout(props) {
         </p>
       </div>
 
-      <div className="flex border-t [&>:last-child]:border-0">
+      <div className="isolate inline-flex border-t">
         {actions.map((action, index) => {
           return (
             <button
               key={(action, index)}
               className={clsx(
-                "relative z-10 ml-auto w-1/2 border-r p-3",
-                "text-sm font-medium text-gray-700",
-                "focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500",
-                "hover:bg-gray-50 disabled:bg-transparent disabled:text-gray-300",
-                "last:text-indigo-600"
+                `w-1/${actions.length}`,
+                "border-r p-3",
+                "text-sm font-medium text-gray-700 hover:bg-gray-50",
+                "focus:z-10 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-indigo-500",
+                "disabled:bg-transparent disabled:text-gray-300",
+                "first:rounded-bl-md last:rounded-br-md last:border-r-0 last:text-indigo-600"
               )}
               {...action}
             >
