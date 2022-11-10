@@ -124,7 +124,7 @@ export function AccountCardLayout(props) {
                 "text-sm font-medium text-gray-700",
                 "focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500",
                 "hover:bg-gray-50 disabled:bg-transparent disabled:text-gray-300",
-                "last:text-indigo-600"
+                "first:rounded-bl-md last:rounded-br-md last:text-indigo-600"
               )}
               {...action}
             >
