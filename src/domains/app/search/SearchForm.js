@@ -2,7 +2,8 @@ import React from "react";
 import { navigate } from "gatsby";
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 
-export function SearchForm({ term, autoFocus }) {
+export function SearchForm({ term: encodedTerm, autoFocus }) {
+  const term = decodeURIComponent(encodedTerm || "");
   return (
     <form className="flex w-full">
       <label htmlFor="search-field" className="sr-only">
@@ -24,8 +25,9 @@ export function SearchForm({ term, autoFocus }) {
             const options = {
               state: { searchAutoFocus: true },
             };
+            const newEncodedTerm = encodeURIComponent(event.target.value);
             if (event.target.value) {
-              navigate(`/app/search/${event.target.value}/`, options);
+              navigate(`/app/search/${newEncodedTerm}/`, options);
             } else {
               navigate(`/app/`, options);
             }
