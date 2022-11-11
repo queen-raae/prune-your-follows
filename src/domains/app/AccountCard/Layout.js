@@ -120,7 +120,7 @@ export function AccountCardLayout(props) {
             <button
               key={(action, index)}
               className={clsx(
-                `w-1/${actions.length}`,
+                actions.length > 1 ? `w-1/${actions.length}` : `w-full`,
                 "border-r p-3",
                 "text-sm font-medium text-gray-700 hover:bg-gray-50",
                 "focus:z-10 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-indigo-500",

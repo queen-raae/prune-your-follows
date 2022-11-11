@@ -25,7 +25,7 @@ export default function App(props) {
   return (
     <>
       <AppLayout header={<FilterHeader filter={filter} />}>
-        {/* <FilterResults filter={filter} /> */}
+        <FilterResults filter={filter} />
       </AppLayout>
     </>
   );
