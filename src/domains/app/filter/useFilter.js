@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import {
   HomeIcon,
   ArchiveBoxXMarkIcon as UnfollowedIcon,
-  EyeSlashIcon as KeptIcon,
+  ArchiveBoxIcon as KeptIcon,
 } from "@heroicons/react/24/outline";
 import { useUser } from "../user";
 
@@ -45,14 +45,14 @@ export const MAIN_FILTERS = [
     name: "Unfollowed",
     key: "unfollowed",
     to: "/app/unfollowed/",
-    description: "(Not done) The accounts unfollowed from the app",
+    description: "The accounts unfollowed since first using the app",
     icon: UnfollowedIcon,
   },
   {
-    name: "Keep",
+    name: "Kept",
     key: "hidden",
     to: "/app/keep/",
-    description: "(Not done) The accounts marked keep",
+    description: "The accounts marked keep, hidden from search and filters",
     icon: KeptIcon,
   },
 ];

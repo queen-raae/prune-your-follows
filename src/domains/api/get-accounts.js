@@ -9,29 +9,38 @@ export default async function ({ followerId, filter, search }) {
 
   const followingFilter = {
     followed_by: followerId,
-    last: { $ge: meta?.last },
     $all: [
-      { $exists: "last" },
+      // Account imported in last import,
+      // or unfollowed/followed in app since last import
+      { last: { $ge: meta?.last } },
+      // Account is not unfollowed and not hidden
       { $notExists: "unfollowed" },
       { $notExists: "hidden" },
+      // Account has new data shape
+      { $exists: "last" },
     ],
   };
 
   const unfollowedFilter = {
     followed_by: followerId,
     $all: [
+      // Account is unfollowed, or not part of last import
+      { $any: [{ $exists: "unfollowed" }, { last: { $lt: meta?.last } }] },
+      // Account has new data shape
       { $exists: "last" },
-      { $any: [{ $exists: "unfollowed", last: { $lt: meta?.last } }] },
-      { $notExists: "hidden" },
     ],
   };
 
   const hiddenFilter = {
     followed_by: followerId,
     $all: [
-      { $exists: "last" },
-      { $all: [{ $notExists: "unfollowed", last: { $ge: meta?.last } }] },
+      // Account imported in last import
+      { last: { $ge: meta?.last } },
+      // Account is not unfollowed and is hidden
+      { $notExists: "unfollowed" },
       { $exists: "hidden" },
+      // Account has new data shape
+      { $exists: "last" },
     ],
   };
 
@@ -62,7 +71,7 @@ export default async function ({ followerId, filter, search }) {
   } else if (filter === "unfollowed") {
     return await xata.db.accounts
       .filter(unfollowedFilter)
-      .sort("timestamp", "desc")
+      .sort("last", "desc")
       .sort("unfollowed", "desc")
       .getPaginated(params);
   } else if (filter === "hidden") {

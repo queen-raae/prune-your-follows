@@ -75,6 +75,7 @@ export default async function ({ twitterAccessToken }) {
         record.id = `${user.id}-${account.id}`;
         record.followed_by = user.id;
         record.last = now;
+        record.unfollowed = null;
         return record;
       });
 

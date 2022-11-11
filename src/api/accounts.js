@@ -16,7 +16,9 @@ export default async function handler(req, res) {
     if (req.method === "POST") {
       const schema = Joi.object({
         accountId: Joi.string().required(),
-        action: Joi.string().valid("hide", "unhide", "unfollow").required(),
+        action: Joi.string()
+          .valid("hide", "unhide", "unfollow", "follow")
+          .required(),
       });
 
       const { value, error: validationError } = schema.validate(req.body);
