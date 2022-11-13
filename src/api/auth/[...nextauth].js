@@ -18,14 +18,15 @@ export const authConfig = {
     }),
   ],
   callbacks: {
-    async jwt({ token, account, profile }) {
+    async jwt({ token, account, profile, user }) {
       if (account) {
         token.twitterAccessToken = account.access_token;
+        token.twitterExpiresAt = account.expires_at * 1000;
 
         axios.post(
           process.env.NEXTAUTH_URL + "/api/import",
           {
-            twitterAccessToken: account.access_token,
+            twitterAccessToken: token.twitterAccessToken,
           },
           //All statuses are valid, we are just kicking this off
           { validateStatus: (status) => !!status }
@@ -39,10 +40,15 @@ export const authConfig = {
       return token;
     },
     async session({ session, token }) {
+      if (Date.now() >= token.twitterExpiresAt) {
+        throw Error("Twitter: Access Token expired");
+      }
+
       session.user = {
         ...session.user,
         ...token.twitterProfile,
       };
+
       return session;
     },
   },
