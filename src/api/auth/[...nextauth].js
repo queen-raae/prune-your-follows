@@ -40,7 +40,7 @@ export const authConfig = {
       return token;
     },
     async session({ session, token }) {
-      if (Date.now() >= token.twitterExpiresAt) {
+      if (!token.twitterExpiresAt || Date.now() >= token.twitterExpiresAt) {
         throw Error("Twitter: Access Token expired");
       }
 
