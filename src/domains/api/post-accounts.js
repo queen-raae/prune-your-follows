@@ -27,7 +27,7 @@ const actions = {
       hidden: new Date(),
     });
 
-    console.log("PYF: POST Account Successfull hide", accountId);
+    console.log("PYF: POST Account Successfull Hide", accountId);
 
     return record;
   },
@@ -39,7 +39,7 @@ const actions = {
       hidden: null,
     });
 
-    console.log("PYF: POST Account Successfull uhide", accountId);
+    console.log("PYF: POST Account Successfull Unhide", accountId);
 
     return record;
   },
