@@ -10,22 +10,19 @@ export function AccountCard(props) {
   const { data: user } = useUser();
   const { accountId, unfollowed, hidden, last } = props;
 
-  const { mutate, isIdle } = useMutation(
+  const { mutate, status } = useMutation(
     (action) => {
       return axios.post("/api/accounts", action);
     },
     {
-      onSuccess: () => {
+      onSettled: () => {
         queryClient.invalidateQueries(["accounts"]);
       },
     }
   );
 
-  if (!isIdle) return null;
-
   const disabled = !props.id;
   const actions = [];
-  const messages = [];
 
   if (hidden) {
     actions.push({
@@ -52,9 +49,12 @@ export function AccountCard(props) {
     });
   }
 
-  if (unfollowed) {
-    messages.push({ type: "info", text: "Unfollowed from app" });
-  }
-
-  return <AccountCardLayout {...props} actions={actions} messages={messages} />;
+  return (
+    <AccountCardLayout
+      {...props}
+      actions={actions}
+      status={status}
+      hide={status === "success" || status === "loading"}
+    />
+  );
 }
