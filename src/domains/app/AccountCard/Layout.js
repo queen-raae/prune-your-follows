@@ -16,7 +16,7 @@ const display = (...props) => {
 };
 
 export function AccountCardLayout(props) {
-  const { as, highlight, onUnfollow, onHide, actions, ...account } = props;
+  const { as, highlight, actions, status, ...account } = props;
 
   const twitterUrl = account.username
     ? `https://twitter.com/${account.username}`
@@ -59,7 +59,8 @@ export function AccountCardLayout(props) {
     <Component
       className={clsx(
         "transistion flex flex-col",
-        "rounded-lg border border-gray-300 bg-white shadow-sm"
+        "rounded-lg border border-gray-300 bg-white shadow-sm",
+        status === "error" && "border-red-300"
       )}
     >
       <div className="flex px-4 pt-5">

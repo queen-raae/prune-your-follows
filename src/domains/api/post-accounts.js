@@ -20,31 +20,31 @@ export default async function ({
 
 const actions = {
   hide: async ({ recordId, userId, accountId }) => {
-    console.log("PYF POST Account Hide", userId, accountId);
+    console.log("PYF: POST Account Hide", userId, accountId);
 
     const record = await xata.db.accounts.createOrUpdate({
       id: recordId,
       hidden: new Date(),
     });
 
-    console.log("PYF POST Account Successfull hide", accountId);
+    console.log("PYF: POST Account Successfull hide", accountId);
 
     return record;
   },
   unhide: async ({ recordId, userId, accountId }) => {
-    console.log("PYF POST Account Unhide", userId, accountId);
+    console.log("PYF: POST Account Unhide", userId, accountId);
 
     const record = await xata.db.accounts.createOrUpdate({
       id: recordId,
       hidden: null,
     });
 
-    console.log("PYF POST Account Successfull uhide", accountId);
+    console.log("PYF: POST Account Successfull uhide", accountId);
 
     return record;
   },
   follow: async ({ recordId, userId, accountId, twitterAccessToken }) => {
-    console.log("PYF POST Account Unfollow", userId, accountId);
+    console.log("PYF: POST Account Follow", userId, accountId);
 
     const original = await xata.db.accounts.getFirst({ id: recordId });
     const now = new Date();
@@ -62,11 +62,17 @@ const actions = {
     });
 
     if (error) {
+      console.warn(
+        "Twitter: Follow failed, rolling back",
+        userId,
+        accountId,
+        error.message
+      );
       await xata.db.accounts.createOrUpdate({
         id: recordId,
         // data.following should be true after a successful unfollow,
         // but lets use this return info to be sure
-        unfollowed: original.unfollowed,
+        unfollowed: original.unfollowed ? original.unfollowed : null,
         last: original.last,
       });
       throw createError.InternalServerError(error);
@@ -80,12 +86,12 @@ const actions = {
       last: now,
     });
 
-    console.log("PYF POST Account Successfull Follow", accountId);
+    console.log("PYF: POST Account Successfull Follow", accountId);
 
     return record;
   },
   unfollow: async ({ recordId, userId, accountId, twitterAccessToken }) => {
-    console.log("PYF POST Account Unfollow", userId, accountId);
+    console.log("PYF: POST Account Unfollow", userId, accountId);
 
     const original = await xata.db.accounts.getFirst({ id: recordId });
     const now = new Date();
@@ -103,9 +109,16 @@ const actions = {
     });
 
     if (error) {
+      console.warn(
+        "Twitter: Unfollow failed, rolling back",
+        userId,
+        accountId,
+        error.message,
+        original.unfollowed
+      );
       await xata.db.accounts.createOrUpdate({
         id: recordId,
-        unfollowed: original.unfollowed,
+        unfollowed: original.unfollowed ? original.unfollowed : null,
         last: original.last,
       });
       throw createError.InternalServerError(error);
@@ -119,7 +132,7 @@ const actions = {
       last: now,
     });
 
-    console.log("PYF POST Account Successfull Unfollow", accountId);
+    console.log("PYF: POST Account Successfull Unfollow", accountId);
 
     return record;
   },
