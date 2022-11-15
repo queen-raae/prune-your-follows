@@ -21,8 +21,6 @@ export function AccountCard(props) {
     }
   );
 
-  if (status === "success" || status === "loading") return null;
-
   const disabled = !props.id;
   const actions = [];
 
@@ -51,5 +49,12 @@ export function AccountCard(props) {
     });
   }
 
-  return <AccountCardLayout {...props} actions={actions} status={status} />;
+  return (
+    <AccountCardLayout
+      {...props}
+      actions={actions}
+      status={status}
+      hide={status === "success" || status === "loading"}
+    />
+  );
 }
