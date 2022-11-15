@@ -113,8 +113,7 @@ const actions = {
         "Twitter: Unfollow failed, rolling back",
         userId,
         accountId,
-        error.message,
-        original.unfollowed
+        error.message
       );
       await xata.db.accounts.createOrUpdate({
         id: recordId,
