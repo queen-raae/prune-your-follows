@@ -12,7 +12,7 @@ const createUserAvatarNodes = async (gatsbyUtils) => {
 
   const xata = getXataClient();
 
-  const records = await xata.db.meta.getAll();
+  const records = await xata.db.meta.getMany();
 
   const twitterClient = new Client(process.env.TWITTER_BEARER_TOKEN);
 
@@ -24,15 +24,19 @@ const createUserAvatarNodes = async (gatsbyUtils) => {
       }
     );
 
-    createNode({
-      id: createNodeId(account.username),
-      avatarUrl: account.profile_image_url,
-      username: account.username,
-      internal: {
-        type: "UserAvatar",
-        contentDigest: createContentDigest(account),
-      },
-    });
+    if (account) {
+      createNode({
+        id: createNodeId(account.username),
+        avatarUrl: account.profile_image_url,
+        username: account.username,
+        internal: {
+          type: "UserAvatar",
+          contentDigest: createContentDigest(account),
+        },
+      });
+    } else {
+      reporter.warn(`No Twitter account for ${record.id}`);
+    }
   }
 };
 

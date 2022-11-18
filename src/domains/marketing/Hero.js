@@ -28,7 +28,20 @@ export function Hero() {
       </p>
       <div className="mt-10 justify-center space-y-6">
         <LoginButton>Sign in with Twitter</LoginButton>
-        <p>In Beta, expect bugs 🐞</p>
+        <p>
+          In Beta!
+          <br /> The UI might be a little sluggish. But the core features work.
+          <br /> DM{" "}
+          <a
+            className="underline"
+            href="https://twitter.com/raae"
+            rel="noreferrer"
+            target={"_blank"}
+          >
+            @raae
+          </a>{" "}
+          if you run into any problem.
+        </p>
       </div>
 
       <Avatars>
