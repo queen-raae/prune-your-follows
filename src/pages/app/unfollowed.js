@@ -2,11 +2,8 @@ import React from "react";
 
 import useSiteMetadata from "../../domains/common/useSiteMetadata";
 import { AppLayout } from "../../domains/app/AppLayout";
-import {
-  FilterResults,
-  FilterHeader,
-  getFilter,
-} from "../../domains/app/filter";
+import { Header } from "../../domains/app/Header";
+import { FilterResults, getFilter } from "../../domains/app/filter";
 
 export const Head = () => {
   const meta = useSiteMetadata();
@@ -24,7 +21,7 @@ export default function App(props) {
 
   return (
     <>
-      <AppLayout header={<FilterHeader filter={filter} />}>
+      <AppLayout header={<Header {...filter} />}>
         <FilterResults filter={filter} />
       </AppLayout>
     </>

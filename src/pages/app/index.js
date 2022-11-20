@@ -4,11 +4,8 @@ import { Link } from "gatsby";
 import useSiteMetadata from "../../domains/common/useSiteMetadata";
 import { AppLayout } from "../../domains/app/AppLayout";
 import { SearchForm } from "../../domains/app/search";
-import {
-  FilterHeader,
-  FilterResults,
-  FOLLOWS_FILTERS,
-} from "../../domains/app/filter";
+import { Header } from "../../domains/app/Header";
+import { FilterResults, FOLLOWS_FILTERS } from "../../domains/app/filter";
 
 export const Head = () => {
   const meta = useSiteMetadata();
@@ -30,11 +27,11 @@ export default function App(props) {
         {FOLLOWS_FILTERS.map((filter) => {
           return (
             <section className="mb-8" key={filter.key}>
-              <FilterHeader
+              <Header
                 className="mb-6 leading-normal"
                 as={Link}
-                to={filter.to}
-                filter={filter}
+                to={filter.path}
+                {...filter}
               />
 
               <FilterResults

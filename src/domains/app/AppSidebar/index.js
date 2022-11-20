@@ -4,14 +4,15 @@ import { AppSidebarMobile } from "./AppSidebarMobile";
 import { AppSidebarDesktop } from "./AppSidebarDesktop";
 import { AppSidebarContent } from "./AppSidebarContent";
 
-import { FOLLOWS_FILTERS, MAIN_FILTERS } from "../filter";
 import { useUser } from "../user";
+import { FOLLOWS_FILTERS, MAIN_FILTERS } from "../filter";
+import { EXPORT_NAV_ITEM } from "../export";
 
 export function AppSidebar({ sidebarOpen, setSidebarOpen }) {
   const { data: user } = useUser();
   const content = (
     <AppSidebarContent
-      navigation={MAIN_FILTERS}
+      navigation={[...MAIN_FILTERS, EXPORT_NAV_ITEM]}
       filters={FOLLOWS_FILTERS}
       user={user}
     />
