@@ -1,5 +1,5 @@
 import React from "react";
-import { AccountList } from "../AccountList";
+import { AccountList } from "../accounts";
 import useFilter from "./useFilter";
 
 export function FilterResults({ filter, ...props }) {
