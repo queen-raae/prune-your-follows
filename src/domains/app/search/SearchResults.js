@@ -1,5 +1,5 @@
 import React from "react";
-import { AccountList } from "../AccountList";
+import { AccountList } from "../accounts";
 import useSearch from "./useSearch";
 
 export function SearchResults({ term }) {

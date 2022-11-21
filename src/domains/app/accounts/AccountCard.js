@@ -3,6 +3,7 @@ import parse from "html-react-parser";
 import clsx from "clsx";
 
 import { ArrowTopRightOnSquareIcon as ExternalLinkIcon } from "@heroicons/react/20/solid";
+import useAccountAction from "./useAccountAction";
 
 const display = (...props) => {
   const theString = props
@@ -15,8 +16,9 @@ const display = (...props) => {
   return theString ? parse(theString) : "";
 };
 
-export function AccountCardLayout(props) {
-  const { as, highlight, actions, status, hide, ...account } = props;
+export function AccountCard(props) {
+  const { as, highlight, ...account } = props;
+  const { actions, status } = useAccountAction(account);
 
   const twitterUrl = account.username
     ? `https://twitter.com/${account.username}`
@@ -61,7 +63,7 @@ export function AccountCardLayout(props) {
         "transistion flex flex-col",
         "rounded-lg border border-gray-300 bg-white shadow-sm",
         status === "error" && "border-red-300",
-        hide && "hidden"
+        (status === "success" || status === "loading") && "hidden"
       )}
     >
       <div className="flex px-4 pt-5">
