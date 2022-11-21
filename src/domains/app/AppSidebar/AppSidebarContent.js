@@ -17,7 +17,7 @@ export function AppSidebarContent({ navigation, filters, user }) {
             {navigation.map((item) => (
               <Link
                 key={item.name}
-                to={item.to}
+                to={item.path}
                 getProps={({ isCurrent }) => {
                   // the object returned here is passed to the
                   // anchor element's props
@@ -58,7 +58,7 @@ export function AppSidebarContent({ navigation, filters, user }) {
               {filters.map((filter) => (
                 <Link
                   key={filter.name}
-                  to={filter.to}
+                  to={filter.path}
                   getProps={({ isCurrent }) => {
                     // the object returned here is passed to the
                     // anchor element's props
