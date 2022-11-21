@@ -69,16 +69,18 @@ export default async function ({ followerId, filter, search }) {
       .sort("public_metrics.followers_count", "desc")
       .getPaginated(params);
   } else if (filter === "unfollowed") {
-    return await xata.db.accounts
+    const records = await xata.db.accounts
       .filter(unfollowedFilter)
       .sort("last", "desc")
       .sort("unfollowed", "desc")
-      .getPaginated(params);
+      .getAll();
+    return { records };
   } else if (filter === "hidden") {
-    return await xata.db.accounts
+    const records = await xata.db.accounts
       .filter(hiddenFilter)
       .sort("hidden", "desc")
-      .getPaginated(params);
+      .getAll();
+    return { records };
   } else if (search) {
     const results = await xata.search.all(search, {
       tables: [
