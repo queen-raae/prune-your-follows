@@ -22,8 +22,7 @@ export function Avatar({ imageUrl, altText, className }) {
     >
       <img
         className={clsx(
-          status === "failed" && "hidden",
-          !imageUrl && "hidden",
+          status === "fulfilled" ? "visible" : "hidden",
           "w-full"
         )}
         src={imageUrl}
@@ -33,19 +32,4 @@ export function Avatar({ imageUrl, altText, className }) {
       />
     </div>
   );
-
-  // return (
-  //   <>
-  //     {imageUrl ? (
-  //       <img
-  //         className={clsx("rounded-full border", className)}
-  //         src={imageUrl}
-  //         alt={altText}
-  //         onError={handleError}
-  //       />
-  //     ) : (
-  //       <div className={clsx("rounded-full border", className)} />
-  //     )}
-  //   </>
-  // );
 }
