@@ -1,8 +1,13 @@
 import clsx from "clsx";
 import React, { useState } from "react";
 
-export function Avatar({ imageUrl, altText, className }) {
+export function Avatar({ imageUrl, altText, className, name = "" }) {
   const [status, setStatus] = useState("loading");
+  let initials = name
+    .split(" ")
+    .map((word) => Array.from(word).slice(0, 1))
+    .slice(0, 2)
+    .join("");
 
   const handleOnLoad = () => {
     setStatus("fulfilled");
@@ -16,7 +21,8 @@ export function Avatar({ imageUrl, altText, className }) {
     <div
       className={clsx(
         "overflow-hidden rounded-full border bg-slate-400",
-        status === "loading" && "animate-pulse",
+        "flex items-center justify-center",
+        status === "loading" ? "animate-pulse" : "",
         className
       )}
     >
@@ -30,6 +36,15 @@ export function Avatar({ imageUrl, altText, className }) {
         onLoad={handleOnLoad}
         onError={handleOnError}
       />
+      <span
+        aria-hidden={true}
+        className={clsx(
+          status === "failed" ? "visible" : "hidden",
+          "text-slate-100"
+        )}
+      >
+        {initials}
+      </span>
     </div>
   );
 }

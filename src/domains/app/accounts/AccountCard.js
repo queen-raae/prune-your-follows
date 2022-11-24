@@ -72,6 +72,7 @@ export function AccountCard(props) {
           <Avatar
             imageUrl={avatarImageUrl}
             altText={avatarImageAlt}
+            name={account.name}
             className="h-10 w-10"
           />
         </div>
