@@ -1,8 +1,9 @@
 import React from "react";
 import parse from "html-react-parser";
 import clsx from "clsx";
-
 import { ArrowTopRightOnSquareIcon as ExternalLinkIcon } from "@heroicons/react/20/solid";
+
+import { Avatar } from "./Avatar";
 import useAccountAction from "./useAccountAction";
 
 const display = (...props) => {
@@ -68,15 +69,11 @@ export function AccountCard(props) {
     >
       <div className="flex px-4 pt-5">
         <div className="flex-shrink-0">
-          {avatarImageUrl ? (
-            <img
-              className="h-10 w-10 rounded-full border"
-              src={avatarImageUrl}
-              alt={avatarImageAlt}
-            />
-          ) : (
-            <div className="h-10 w-10 rounded-full border" />
-          )}
+          <Avatar
+            imageUrl={avatarImageUrl}
+            altText={avatarImageAlt}
+            className="h-10 w-10"
+          />
         </div>
         <div className="pl-3 pr-5">
           <p className="text-sm font-medium leading-5">
