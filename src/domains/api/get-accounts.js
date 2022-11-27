@@ -2,13 +2,13 @@ import { getXataClient } from "../xata";
 
 const xata = getXataClient();
 
-export default async function ({ followerId, filter, search }) {
-  const meta = await xata.db.meta.read({ id: followerId });
+export default async function ({ userId, filter, search }) {
+  const meta = await xata.db.meta.read({ id: userId });
 
-  console.log(`PYF GET Accounts For ${followerId}:`, search, filter);
+  console.log(`PYF GET Accounts For ${userId}:`, search, filter);
 
   const followingFilter = {
-    followed_by: followerId,
+    followed_by: userId,
     $all: [
       // Account imported in last import,
       // or unfollowed/followed in app since last import
@@ -22,7 +22,7 @@ export default async function ({ followerId, filter, search }) {
   };
 
   const unfollowedFilter = {
-    followed_by: followerId,
+    followed_by: userId,
     $all: [
       // Account is unfollowed, or not part of last import
       { $any: [{ $exists: "unfollowed" }, { last: { $lt: meta?.last } }] },
@@ -32,7 +32,7 @@ export default async function ({ followerId, filter, search }) {
   };
 
   const hiddenFilter = {
-    followed_by: followerId,
+    followed_by: userId,
     $all: [
       // Account imported in last import
       { last: { $ge: meta?.last } },
