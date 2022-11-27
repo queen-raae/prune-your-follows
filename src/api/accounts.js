@@ -47,8 +47,8 @@ export default async function handler(req, res) {
       if (validationError) {
         throw createError.UnprocessableEntity(validationError);
       }
-      CHANGE TO USER ID TO BE CONSISTENT
-      res.send(await getAccounts({ ...value, followerId: token.sub }));
+
+      res.send(await getAccounts({ ...value, userId: token.sub }));
     } else {
       throw createError(405, `${req.method} not allowed`);
     }
