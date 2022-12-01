@@ -81,7 +81,7 @@ export default async function ({ userId, filter, search, size, offset }) {
       .sort("hidden", "desc")
       .getPaginated(params);
   } else if (search) {
-    const results = await xata.search.all(search, {
+    const searchResults = await xata.search.all(search, {
       tables: [
         {
           table: "accounts",
@@ -99,7 +99,7 @@ export default async function ({ userId, filter, search, size, offset }) {
       prefix: "phrase",
     });
 
-    const records = results.map((result) => {
+    const records = searchResults.map((result) => {
       return {
         ...result,
         searchInfo: result.record.getMetadata(),
