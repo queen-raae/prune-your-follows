@@ -16,8 +16,8 @@ export const Head = () => {
 };
 
 export default function App(props) {
-  const { location } = props;
-  const filter = getFilter({ path: location.pathname });
+  const { params } = props;
+  const filter = getFilter({ filterParam: params.filter });
   return (
     <>
       <AppLayout header={<Header {...filter} />}>

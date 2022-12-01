@@ -44,14 +44,14 @@ export const MAIN_FILTERS = [
   {
     name: "Unfollowed",
     key: "unfollowed",
-    path: "/app/unfollowed/",
+    path: "/app/filter/unfollowed/",
     description: "The accounts unfollowed since first using the app",
     icon: UnfollowedIcon,
   },
   {
     name: "Kept",
     key: "hidden",
-    path: "/app/keep/",
+    path: "/app/filter/keep/",
     description: "The accounts marked keep, hidden from search and filters",
     icon: KeptIcon,
   },
@@ -59,9 +59,9 @@ export const MAIN_FILTERS = [
 
 export const FILTERS = [...MAIN_FILTERS, ...FOLLOWS_FILTERS];
 
-export function getFilter({ path }, filters = FILTERS) {
+export function getFilter({ filterParam }, filters = FILTERS) {
   return filters.find((filter) => {
-    return filter.path === path;
+    return filter.path.includes(`/${filterParam}/`);
   });
 }
 
