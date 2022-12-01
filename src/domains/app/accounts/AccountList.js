@@ -4,7 +4,7 @@ import { AccountCard } from "./AccountCard";
 
 export function AccountList(props) {
   const { accounts, variant = "grid", pagination, disabled, className } = props;
-  console.log(props);
+
   return (
     <>
       <ul

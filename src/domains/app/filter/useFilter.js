@@ -85,7 +85,6 @@ export default function useFilter({
     {
       enabled: Boolean(user?.enableQueries),
       keepPreviousData: true,
-      // select: (result) => result.records,
       placeholderData: {
         records: [
           {},
