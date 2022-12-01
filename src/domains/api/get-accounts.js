@@ -2,10 +2,10 @@ import { getXataClient } from "../xata";
 
 const xata = getXataClient();
 
-export default async function ({ userId, filter, search }) {
+export default async function ({ userId, filter, search, size, offset }) {
   const meta = await xata.db.meta.read({ id: userId });
 
-  console.log(`PYF GET Accounts For ${userId}:`, search, filter);
+  console.log(`PYF GET Accounts For ${userId}:`, search, filter, size, offset);
 
   const followingFilter = {
     followed_by: userId,
@@ -44,43 +44,42 @@ export default async function ({ userId, filter, search }) {
     ],
   };
 
-  const params = { pagination: { size: 50 } };
+  const params = { pagination: { size: size, offset: offset } };
+  let results = { records: [] };
 
   if (filter === "inactive") {
-    return await xata.db.accounts
+    results = await xata.db.accounts
       .filter(followingFilter)
       .sort("calculated_metrics.average_tweets_per_year", "asc")
       .sort("calculated_metrics.years_on_twitter", "desc")
       .getPaginated(params);
   } else if (filter === "active") {
-    return await xata.db.accounts
+    results = await xata.db.accounts
       .filter(followingFilter)
       .sort("calculated_metrics.average_tweets_per_year", "desc")
       .sort("calculated_metrics.years_on_twitter", "asc")
       .getPaginated(params);
   } else if (filter === "unpopular") {
-    return await xata.db.accounts
+    results = await xata.db.accounts
       .filter(followingFilter)
       .sort("public_metrics.followers_count", "asc")
       .getPaginated(params);
   } else if (filter === "popular") {
-    return await xata.db.accounts
+    results = await xata.db.accounts
       .filter(followingFilter)
       .sort("public_metrics.followers_count", "desc")
       .getPaginated(params);
   } else if (filter === "unfollowed") {
-    const records = await xata.db.accounts
+    results = await xata.db.accounts
       .filter(unfollowedFilter)
       .sort("last", "desc")
       .sort("unfollowed", "desc")
-      .getAll();
-    return { records };
+      .getPaginated(params);
   } else if (filter === "hidden") {
-    const records = await xata.db.accounts
+    results = await xata.db.accounts
       .filter(hiddenFilter)
       .sort("hidden", "desc")
-      .getAll();
-    return { records };
+      .getPaginated(params);
   } else if (search) {
     const results = await xata.search.all(search, {
       tables: [
@@ -100,13 +99,14 @@ export default async function ({ userId, filter, search }) {
       prefix: "phrase",
     });
 
-    return results.map((result) => {
+    const records = results.map((result) => {
       return {
         ...result,
         searchInfo: result.record.getMetadata(),
       };
     });
-  } else {
-    return { records: [] };
+    results = { records };
   }
+
+  return results;
 }

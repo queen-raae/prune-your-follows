@@ -65,21 +65,27 @@ export function getFilter({ filterParam }, filters = FILTERS) {
   });
 }
 
-export default function useFilter({ filter = FILTERS[0] }) {
+export default function useFilter({
+  filter = FILTERS[0],
+  pageIndex = 0,
+  size = 64,
+}) {
   const { data: user } = useUser();
+  const offset = size * pageIndex;
 
   return useQuery(
-    ["accounts", user?.id, "filter", filter.key],
+    ["accounts", user?.id, "filter", filter.key, size, offset],
     async () => {
       const { data } = await axios.get("/api/accounts", {
-        params: { filter: filter.key },
+        params: { filter: filter.key, size: size, offset: offset },
       });
 
       return data;
     },
     {
       enabled: Boolean(user?.enableQueries),
-      select: (result) => result.records,
+      keepPreviousData: true,
+      // select: (result) => result.records,
       placeholderData: {
         records: [
           {},
