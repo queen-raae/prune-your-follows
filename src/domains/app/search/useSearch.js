@@ -16,6 +16,35 @@ export default function useSearch({ search }) {
     },
     {
       enabled: Boolean(user?.enableQueries) && Boolean(search),
+      keepPreviousData: true,
+      placeholderData: {
+        records: [
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+        ],
+      },
     }
   );
 }

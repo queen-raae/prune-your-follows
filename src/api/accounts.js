@@ -38,6 +38,8 @@ export default async function handler(req, res) {
       const schema = Joi.object({
         filter: Joi.string(),
         search: Joi.string(),
+        offset: Joi.number().default(0),
+        size: Joi.number().default(24),
       })
         .or("filter", "search")
         .required();
