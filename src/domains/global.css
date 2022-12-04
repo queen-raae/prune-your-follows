@@ -3,13 +3,13 @@
 @tailwind utilities;
 
 html {
-  @apply h-full bg-white;
+  @apply h-full bg-lime-800;
 }
 
 body,
 #___gatsby,
 #gatsby-focus-wrapper {
-  height: @apply h-full;
+  @apply min-h-full bg-green-50;
 }
 
 em {

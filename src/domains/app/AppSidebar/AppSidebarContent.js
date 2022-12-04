@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "gatsby";
 import clsx from "clsx";
 import { Logo } from "../../common/Logo";
+import XataLogo from "../../common/xata-colored-with-text.svg";
 import { LogoutButton } from "../user";
 
 export function AppSidebarContent({ navigation, filters, user }) {
@@ -86,11 +87,7 @@ export function AppSidebarContent({ navigation, filters, user }) {
             className="group mt-8 block px-3 text-sm font-medium text-gray-500"
           >
             Powered by{" "}
-            <img
-              src="/xata-colored-with-text.svg"
-              alt="Xata logo"
-              className="mt-3 w-1/2 transition group-hover:scale-110"
-            />
+            <XataLogo className="mt-3 h-10 w-1/2 transition group-hover:scale-110" />
           </a>
         </section>
       </div>

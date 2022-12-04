@@ -3,6 +3,7 @@ import React from "react";
 import { Footer } from "../domains/marketing/Footer";
 import { Header } from "../domains/marketing/Header";
 import { Hero } from "../domains/marketing/Hero";
+import { Avatars } from "../domains/marketing/Avatars";
 import { Features } from "../domains/marketing/Features";
 import { CallToAction } from "../domains/marketing/CallToAction";
 
@@ -27,6 +28,7 @@ export default function Home() {
       </Header>
       <main>
         <Hero />
+        <Avatars />
         <Features />
         <CallToAction />
       </main>

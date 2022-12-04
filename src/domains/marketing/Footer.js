@@ -1,14 +1,13 @@
 import React from "react";
 
-import { Container } from "./Container";
 import { Logo } from "../common/Logo";
 
 export function Footer() {
   return (
-    <footer className="bg-slate-50">
-      <Container className="flex flex-col items-center border-t border-slate-400/10 py-10 sm:flex-row sm:justify-between sm:space-y-3">
+    <footer>
+      <div className="mx-auto flex max-w-7xl flex-col items-center border-t border-stone-400/10 px-4 py-10 sm:flex-row sm:justify-between sm:space-y-3 sm:px-6 lg:px-8">
         <Logo className="w-auto" variant="mark" />
-        <p className="text-sm text-slate-500 sm:text-center">
+        <p className="text-sm text-stone-500 sm:text-center">
           Made by{" "}
           <a
             href="https://queen.raae.codes/emails/?utm_source=app&utm_campaign=prune-your-follows"
@@ -77,7 +76,7 @@ export function Footer() {
             </svg>
           </a>
         </div>
-      </Container>
+      </div>
     </footer>
   );
 }

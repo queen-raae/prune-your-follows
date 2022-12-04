@@ -25,15 +25,17 @@ const createUserAvatarNodes = async (gatsbyUtils) => {
     );
 
     if (account) {
-      createNode({
-        id: createNodeId(account.username),
-        avatarUrl: account.profile_image_url,
-        username: account.username,
-        internal: {
-          type: "UserAvatar",
-          contentDigest: createContentDigest(account),
-        },
-      });
+      for (let i = 0; i < 30; i++) {
+        createNode({
+          id: createNodeId(account.username + i),
+          avatarUrl: account.profile_image_url,
+          username: account.username,
+          internal: {
+            type: "UserAvatar",
+            contentDigest: createContentDigest(account),
+          },
+        });
+      }
     } else {
       reporter.warn(`No Twitter account for ${record.id}`);
     }
