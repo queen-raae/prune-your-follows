@@ -1,8 +1,6 @@
 import React from "react";
 import { signOut } from "next-auth/react";
 
-import { Button } from "../../common/Button";
-
 export function LogoutButton({ ...rest }) {
   const handleAuth = () => {
     const redirectTo = window.location.origin;
@@ -10,8 +8,8 @@ export function LogoutButton({ ...rest }) {
   };
 
   return (
-    <Button {...rest} onClick={handleAuth}>
+    <button {...rest} onClick={handleAuth}>
       <span>Sign out</span>
-    </Button>
+    </button>
   );
 }

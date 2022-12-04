@@ -12,7 +12,7 @@ export function Logo({ variant = "full", as = "div", ...props }) {
       <LogoMark />
       <h1
         className={clsx(
-          "text-md pl-3 font-bold",
+          "text-md -m-3 pl-3 font-bold text-green-800",
           variant === "mark" && "sr-only"
         )}
       >

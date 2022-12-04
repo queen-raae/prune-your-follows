@@ -18,7 +18,7 @@ export function AppSidebarMobile({ sidebarOpen, setSidebarOpen, children }) {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-gray-600 bg-opacity-75" />
+          <div className="fixed inset-0 bg-lime-900 bg-opacity-75" />
         </Transition.Child>
 
         <div className="fixed inset-0 z-40 flex flex-row-reverse">

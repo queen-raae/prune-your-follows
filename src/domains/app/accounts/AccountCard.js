@@ -62,8 +62,8 @@ export function AccountCard(props) {
     <Component
       className={clsx(
         "transistion flex flex-col",
-        "rounded-lg border border-gray-300 bg-white shadow-sm",
-        status === "error" && "border-red-300",
+        "rounded-lg border-2 bg-green-50 shadow-sm",
+        status === "error" ? "border-red-600" : "border-lime-600",
         (status === "success" || status === "loading") && "hidden"
       )}
     >
@@ -81,7 +81,7 @@ export function AccountCard(props) {
             {displayName && (
               <a
                 href={twitterUrl}
-                className="group text-gray-700 hover:text-gray-900"
+                className="group text-stone-700 hover:text-stone-900"
                 target="_blank"
                 rel="noreferrer"
               >
@@ -90,44 +90,43 @@ export function AccountCard(props) {
               </a>
             )}
           </p>
-          <p className="text-sm leading-5 text-gray-500">
+          <p className="leading- text-sm">
             {displayUsername && <>@{displayUsername}</>}
             {displayLocation && <> - {displayLocation}</>}
           </p>
         </div>
       </div>
-      <p className="px-5 py-4 text-sm leading-5 text-gray-900">
+      <p className="leading- px-5 py-4 text-sm">
         {displayDescription || <>&nbsp;</>}
       </p>
       <div
         className={clsx(
-          "mt-auto flex justify-between space-x-3 border-t bg-slate-100 py-3 px-4"
+          "mt-auto flex justify-between space-x-3 border-t border-green-200 bg-green-100 py-3 px-4"
         )}
       >
-        <p className="text-xs leading-5 text-gray-500">
+        <p className="text-xs leading-5 text-green-800">
           <strong>{displayFollowerCount}</strong> Followers
           <br />
           <strong>{displayFollowingCount}</strong> Following
         </p>
-        <p className="text-right text-xs leading-5 text-gray-500">
+        <p className="text-right text-xs leading-5 text-green-800">
           Joined <strong>{displayYearsOnTwitter}</strong> years ago
           <br />
           Average <strong>{displayAverageTweetsPerYear}</strong> tweets per year
         </p>
       </div>
 
-      <div className="isolate inline-flex border-t">
+      <div className="isolate flex items-stretch border-t border-green-600">
         {actions.map((action, index) => {
           return (
             <button
               key={(action, index)}
               className={clsx(
-                actions.length > 1 ? `w-1/${actions.length}` : `w-full`,
-                "border-r p-3",
-                "text-sm font-medium text-gray-700 hover:bg-gray-50",
-                "focus:z-10 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-indigo-500",
-                "disabled:bg-transparent disabled:text-gray-300",
-                "first:rounded-bl-md last:rounded-br-md last:border-r-0 last:text-indigo-600"
+                "grow border-r border-green-800 bg-white p-3",
+                "text-sm font-medium text-green-900 hover:bg-green-100",
+                "focus:z-10 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-lime-500",
+                "disabled:bg-transparent disabled:opacity-60",
+                "first:rounded-bl-lg last:rounded-br-lg last:border-r-0 last:bg-green-200"
               )}
               {...action}
             >

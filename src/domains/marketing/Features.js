@@ -53,11 +53,11 @@ export function Features({ features = FOLLOWS_FILTERS }) {
         <div className="mt-12 lg:col-span-3 lg:mt-0 lg:pl-10">
           <div className="space-y-10 sm:grid sm:grid-flow-col sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 sm:space-y-0 lg:gap-x-8">
             <aside>
-              <h2 className="text-lg font-semibold leading-8 tracking-tight text-green-600">
+              <h2 className="text-lg font-semibold leading-8 tracking-tight text-green-900">
                 Made by
               </h2>
               <a
-                href="https://twitter.com/raae"
+                href="https://queen.raae.codes/?utm_campaign=prune+your+follows&utm_source=app&utm_medium=features"
                 className="group mt-1.5 block max-w-xs"
               >
                 <span className="block text-lg font-light leading-tight tracking-tight text-stone-600 transition group-hover:text-lime-800">
@@ -71,11 +71,11 @@ export function Features({ features = FOLLOWS_FILTERS }) {
               </a>
             </aside>
             <aside>
-              <h2 className="text-lg font-semibold leading-8 tracking-tight text-green-600">
+              <h2 className="text-lg font-semibold leading-8 tracking-tight text-green-900">
                 Powered by
               </h2>
               <a
-                href="https://xata.io/?utm_campaign=prune+your+follows&utm_source=app&utm_medium=feature"
+                href="https://xata.io/?utm_campaign=prune+your+follows&utm_source=app&utm_medium=features"
                 className="group mt-1.5 block max-w-xs text-lg font-semibold leading-snug tracking-tight text-stone-600 transition hover:text-lime-700"
               >
                 <XataLogo className="h-12 w-32 transition group-hover:scale-105" />

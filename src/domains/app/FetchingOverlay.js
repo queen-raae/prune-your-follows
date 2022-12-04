@@ -16,7 +16,7 @@ export function FetchingOverlay({ open }) {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+          <div className="fixed inset-0 bg-lime-900 bg-opacity-75 transition-opacity" />
         </Transition.Child>
 
         <div className="fixed inset-0 z-10 overflow-y-auto">
@@ -41,16 +41,19 @@ export function FetchingOverlay({ open }) {
                   <div className="mt-3 text-center sm:mt-5">
                     <Dialog.Title
                       as="h3"
-                      className="text-lg font-medium leading-6 text-gray-900"
+                      className="text-lg font-medium leading-6 text-stone-900"
                     >
                       Importing your follows
                     </Dialog.Title>
                     <div className="mt-2">
-                      <p className="text-sm text-gray-500">
+                      <p className="text-sm text-stone-500">
                         This will take a little while...You may log out and come
                         back later, or wait it out!
                       </p>
-                      <LogoutButton variant="outline" className="mt-3" />
+                      <LogoutButton
+                        variant="outline"
+                        className="mt-3 flex w-full items-center justify-center rounded-md border border-transparent bg-green-900 px-3 py-2 text-sm font-medium text-orange-50 shadow-sm sm:px-8"
+                      />
                     </div>
                   </div>
                 </div>

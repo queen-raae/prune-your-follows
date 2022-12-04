@@ -9,10 +9,10 @@ html {
 body,
 #___gatsby,
 #gatsby-focus-wrapper {
-  @apply min-h-full bg-green-50;
+  @apply min-h-full bg-green-50 text-stone-600;
 }
 
 em {
   @apply bg-amber-300;
-  @apply text-slate-900;
+  @apply text-stone-900;
 }
