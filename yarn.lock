@@ -2518,11 +2518,6 @@
   resolved "https://registry.yarnpkg.com/@raae/gatsby-plugin-fathom/-/gatsby-plugin-fathom-0.0.4.tgz#8ba8c5fd077e47de33b85df63573eede94590f39"
   integrity sha512-0VaaOANHr6aqIW0VlMyeqV6K22clJLETcDLwx3i/pD65HWuTcBt4k2AmspCJfmtaHOA5r3SgQVSrxQsjzVsqjQ==
 
-"@raae/gatsby-plugin-svg-emoji-favicon@0.1.5":
-  version "0.1.5"
-  resolved "https://registry.yarnpkg.com/@raae/gatsby-plugin-svg-emoji-favicon/-/gatsby-plugin-svg-emoji-favicon-0.1.5.tgz#3c6e81fa126438804ecaf6787bbfb3e0ca133ff3"
-  integrity sha512-cqWt1EtvIqXzRrKLbmEZJDL211NLfFXSaPpnUy3/G6QYnFBXGw8SZ1sC/iNLXoweCdWLgwAjk0I7DZE3axQWMA==
-
 "@sideway/address@^4.1.3":
   version "4.1.4"
   resolved "https://registry.yarnpkg.com/@sideway/address/-/address-4.1.4.tgz#03dccebc6ea47fdc226f7d3d1ad512955d4783f0"
@@ -6296,6 +6291,17 @@ gatsby-plugin-image@2.24.0:
     gatsby-plugin-utils "^3.18.0"
     objectFitPolyfill "^2.3.5"
     prop-types "^15.8.1"
+
+gatsby-plugin-manifest@^4.0.0:
+  version "4.24.0"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-manifest/-/gatsby-plugin-manifest-4.24.0.tgz#ad537b48f9fb8e7c93234945a4889ecf3c099f66"
+  integrity sha512-xlpJMNALNozeC0lIspQQZw68qi4pE1nhgPfsLiUtAc5CLihm2LNbGLAKcYHCXwudRHo5Hvp6Xi4VOwtMkRKwmQ==
+  dependencies:
+    "@babel/runtime" "^7.15.4"
+    gatsby-core-utils "^3.24.0"
+    gatsby-plugin-utils "^3.18.0"
+    semver "^7.3.7"
+    sharp "^0.30.7"
 
 gatsby-plugin-mdx@3.20.0:
   version "3.20.0"
