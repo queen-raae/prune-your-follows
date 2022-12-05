@@ -26,7 +26,7 @@ const createUserAvatarNodes = async (gatsbyUtils) => {
 
     if (account) {
       createNode({
-        id: createNodeId(account.username + i),
+        id: createNodeId(account.username),
         avatarUrl: account.profile_image_url,
         username: account.username,
         internal: {
