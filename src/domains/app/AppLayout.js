@@ -18,12 +18,11 @@ export function AppLayout({ header, children }) {
       {/* Main column */}
       <div className="flex min-h-full flex-col lg:pl-64">
         <header className="sticky top-0 z-10 flex h-16 flex-shrink-0 items-center border-b border-green-100 bg-green-50 px-4 lg:px-8">
-          <Logo as={Link} to="/app" className="pr-4 lg:hidden" variant="mark" />
+          <Logo as={Link} to="/app" className="mr-4 lg:hidden" variant="mark" />
           {header}
           <div className="ml-auto border-l border-green-100 pl-3">
             <button
-              type="button"
-              className="p-2 text-green-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-lime-500 lg:hidden"
+              className="rounded-sm p-2 text-green-500 lg:hidden"
               onClick={() => setSidebarOpen(true)}
             >
               <span className="sr-only">Open sidebar</span>

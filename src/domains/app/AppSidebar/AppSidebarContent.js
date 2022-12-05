@@ -8,11 +8,11 @@ import { LogoutButton } from "../user";
 export function AppSidebarContent({ navigation, filters, user }) {
   return (
     <div className="flex min-h-full flex-col bg-green-100">
-      <div className="flex h-16 flex-shrink-0 items-center border-b border-green-100 px-4">
+      <div className="flex h-16 flex-shrink-0 items-center border-b border-green-200 px-4">
         <Logo as={Link} to="/app" />
       </div>
 
-      <div className="mt-6 h-0 flex-1 overflow-y-auto pr-3">
+      <div className="h-0 flex-1 overflow-y-auto pt-6 pr-3">
         <nav className="px-2">
           <div className="space-y-1">
             {navigation.map((item) => (
@@ -76,7 +76,7 @@ export function AppSidebarContent({ navigation, filters, user }) {
         <aside className="px-2">
           <a
             href="https://queen.raae.codes/?utm_campaign=prune+your+follows&utm_source=app&utm_medium=sidebar"
-            className="group mt-8 block px-3 text-sm font-medium text-stone-600"
+            className="group mt-8 block rounded-sm px-3 text-sm font-medium text-stone-600"
           >
             Made by Queen{" "}
             <span className="font-bold group-hover:text-orange-800">@raae</span>{" "}
@@ -90,14 +90,14 @@ export function AppSidebarContent({ navigation, filters, user }) {
           </a>
           <a
             href="https://xata.io/?utm_campaign=prune+your+follows&utm_source=app&utm_medium=sidebar"
-            className="group mt-2 block px-3 text-sm font-medium text-stone-600"
+            className="group mt-2 block rounded-sm px-3 text-sm font-medium text-stone-600"
           >
             Powered by{" "}
             <XataLogo className="inline-block h-5 w-16 -translate-y-px transition group-hover:scale-110" />
           </a>
         </aside>
       </div>
-      <section className="mt-auto border-t border-green-100 px-4 py-4">
+      <section className="mt-auto border-t border-green-200 px-4 py-4">
         <p className="truncate text-sm font-medium text-green-900">
           {user?.name || "&nbsp"}
         </p>

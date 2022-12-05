@@ -16,3 +16,7 @@ em {
   @apply bg-amber-300;
   @apply text-stone-900;
 }
+
+*:focus-visible {
+  @apply outline outline-2 outline-lime-500;
+}

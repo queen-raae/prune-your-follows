@@ -122,9 +122,9 @@ export function AccountCard(props) {
             <button
               key={(action, index)}
               className={clsx(
-                "grow border-r border-green-800 bg-white p-3",
+                "grow border-r border-green-600 bg-white p-3",
                 "text-sm font-medium text-green-900 hover:bg-green-100",
-                "focus:z-10 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-lime-500",
+                "focus:z-10 focus-visible:border-transparent",
                 "disabled:bg-transparent disabled:opacity-60",
                 "first:rounded-bl-lg last:rounded-br-lg last:border-r-0 last:bg-green-200"
               )}

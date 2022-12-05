@@ -7,12 +7,12 @@ export function Logo({ variant = "full", as = "div", ...props }) {
   return (
     <Component
       {...props}
-      className={clsx("flex items-center", props.className)}
+      className={clsx("flex items-center rounded-md", props.className)}
     >
       <LogoMark />
       <h1
         className={clsx(
-          "text-md -m-3 pl-3 font-bold text-green-800",
+          "text-md -m-3 pl-3 pr-6 font-bold text-green-800",
           variant === "mark" && "sr-only"
         )}
       >
