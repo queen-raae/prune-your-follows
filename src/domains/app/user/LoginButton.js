@@ -17,7 +17,7 @@ export function LoginButton({ children, ...rest }) {
 
   return (
     <button {...rest} onClick={handleAuth}>
-      {children || "Go to app"}
+      {children}
     </button>
   );
 }
