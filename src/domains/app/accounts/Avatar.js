@@ -20,7 +20,7 @@ export function Avatar({ imageUrl, altText, className, name = "" }) {
   return (
     <div
       className={clsx(
-        "overflow-hidden rounded-full border bg-slate-400",
+        "overflow-hidden rounded-full border border-green-700 bg-green-700",
         "flex items-center justify-center",
         status === "loading" ? "animate-pulse" : "",
         className
@@ -29,7 +29,7 @@ export function Avatar({ imageUrl, altText, className, name = "" }) {
       <img
         className={clsx(
           status === "fulfilled" ? "visible" : "hidden",
-          "w-full"
+          "h-full w-full"
         )}
         src={imageUrl}
         alt={altText}
@@ -40,7 +40,7 @@ export function Avatar({ imageUrl, altText, className, name = "" }) {
         aria-hidden={true}
         className={clsx(
           status === "failed" ? "visible" : "hidden",
-          "text-slate-100"
+          "text-green-100"
         )}
       >
         {initials}

@@ -16,20 +16,21 @@ export function AppLayout({ header, children }) {
       <FetchingOverlay open={user.initializing} />
       <AppSidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
       {/* Main column */}
-      <div className="flex flex-col lg:pl-64">
-        <header className="sticky top-0 z-10 flex h-16 flex-shrink-0 items-center border-b border-gray-200 bg-white px-4 lg:px-8">
-          <Logo as={Link} to="/app" className="pr-4 lg:hidden" variant="mark" />
+      <div className="flex min-h-full flex-col lg:pl-64">
+        <header className="sticky top-0 z-10 flex h-16 flex-shrink-0 items-center border-b border-green-100 bg-green-50 px-4 lg:px-8">
+          <Logo as={Link} to="/app" className="mr-4 lg:hidden" variant="mark" />
           {header}
-          <button
-            type="button"
-            className="ml-auto border-l border-gray-200 pl-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-purple-500 lg:hidden"
-            onClick={() => setSidebarOpen(true)}
-          >
-            <span className="sr-only">Open sidebar</span>
-            <Bars3CenterLeftIcon className="h-6 w-6" aria-hidden="true" />
-          </button>
+          <div className="ml-auto border-l border-green-100 pl-3">
+            <button
+              className="rounded-sm p-2 text-green-500 lg:hidden"
+              onClick={() => setSidebarOpen(true)}
+            >
+              <span className="sr-only">Open sidebar</span>
+              <Bars3CenterLeftIcon className="h-6 w-6" aria-hidden="true" />
+            </button>
+          </div>
         </header>
-        <main className="p-4 lg:p-8">{children}</main>
+        <main className="bg-white p-4 lg:p-8">{children}</main>
       </div>
     </>
   );

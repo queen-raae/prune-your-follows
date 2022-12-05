@@ -41,13 +41,13 @@ export function ExportPage(props) {
                 value={exportType}
                 defaultChecked={exportType === "CSV"}
                 className={clsx(
-                  "h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-500",
-                  "disabled:text-blue-400"
+                  "h-4 w-4 border-stone-300 text-green-600 focus:ring-green-500",
+                  "disabled:text-green-400"
                 )}
               />
               <label
                 htmlFor={exportType}
-                className="ml-3 block text-sm font-medium text-gray-700"
+                className="ml-3 block text-sm font-medium text-stone-700"
               >
                 as a {exportType} file
               </label>
@@ -59,10 +59,10 @@ export function ExportPage(props) {
           className={clsx(
             "group inline-flex items-center justify-center rounded-full py-2 px-4",
             "text-sm font-semibold",
-            "hover:text-slate-10 bg-blue-600 text-white hover:bg-blue-500",
-            "focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600",
-            "active:bg-blue-800 active:text-blue-100",
-            "disabled:bg-blue-400",
+            "hover:text-stone-10 bg-green-600 text-white hover:bg-green-500",
+            "focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime-600",
+            "active:bg-green-800 active:text-green-100",
+            "disabled:bg-green-400",
             className
           )}
           disabled={disabled}

@@ -10,15 +10,15 @@ export function Header(props) {
     <Component
       {...props}
       className={clsx(
-        "group flex flex-wrap items-center leading-snug",
+        "group flex flex-wrap items-center leading-snug md:flex-nowrap",
         className
       )}
     >
-      <h2 className="text-md mr-2 font-bold">{name}</h2>
+      <h2 className="text-md mr-2 font-bold text-green-800">{name}</h2>
       {to && (
-        <ArrowLongRightIcon className="block h-4 pl-2 opacity-60 transition group-hover:translate-x-1 group-hover:opacity-100 lg:order-last" />
+        <ArrowLongRightIcon className="block h-4 pl-2 opacity-60 transition group-hover:translate-x-1 group-hover:opacity-100 md:order-last" />
       )}
-      <p className="opacity-80">{description}</p>
+      <p className="basis-full text-stone-600 md:basis-auto">{description}</p>
     </Component>
   );
 }

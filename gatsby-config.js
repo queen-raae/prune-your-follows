@@ -24,9 +24,11 @@ module.exports = {
       },
     },
     {
-      resolve: "@raae/gatsby-plugin-svg-emoji-favicon",
+      resolve: `gatsby-plugin-react-svg`,
       options: {
-        emoji: "⚔️",
+        rule: {
+          include: /.svg$/,
+        },
       },
     },
     `gatsby-plugin-image`,
@@ -37,6 +39,18 @@ module.exports = {
       options: {
         nodeType: "UserAvatar",
         imagePath: "avatarUrl",
+      },
+    },
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `Prune Your Follows`,
+        short_name: `Prune`,
+        start_url: `/app`,
+        background_color: `#f0fdf4`,
+        theme_color: `#65a30d`,
+        display: `standalone`,
+        icon: `src/domains/common/icons8-cut.svg`,
       },
     },
   ],

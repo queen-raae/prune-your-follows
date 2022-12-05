@@ -2,16 +2,17 @@ import React from "react";
 import { Link } from "gatsby";
 import clsx from "clsx";
 import { Logo } from "../../common/Logo";
+import XataLogo from "../../common/xata-colored-with-text.svg";
 import { LogoutButton } from "../user";
 
 export function AppSidebarContent({ navigation, filters, user }) {
   return (
-    <div className="flex min-h-full flex-col bg-gray-100">
-      <div className="flex h-16 flex-shrink-0 items-center border-b px-4">
+    <div className="flex min-h-full flex-col bg-green-100">
+      <div className="flex h-16 flex-shrink-0 items-center border-b border-green-200 px-4">
         <Logo as={Link} to="/app" />
       </div>
 
-      <div className="mt-6 h-0 flex-1 overflow-y-auto pr-3">
+      <div className="h-0 flex-1 overflow-y-auto pt-6 pr-3">
         <nav className="px-2">
           <div className="space-y-1">
             {navigation.map((item) => (
@@ -23,10 +24,9 @@ export function AppSidebarContent({ navigation, filters, user }) {
                   // anchor element's props
                   return {
                     className: clsx(
-                      isCurrent
-                        ? "bg-gray-200 text-gray-900 [&>:first-child]:text-gray-500"
-                        : "text-gray-700 hover:bg-gray-50 hover:text-gray-900 [&>:first-child]:text-gray-400 [&>:first-child]hover:text-gray-500",
-                      "flex items-center rounded-md px-2 py-2 text-sm font-medium"
+                      "flex items-center rounded-md px-2 py-2 text-sm font-medium",
+                      "transition hover:bg-green-50 hover:text-green-700",
+                      isCurrent ? "bg-white text-green-900" : "text-stone-600"
                     ),
                   };
                 }}
@@ -44,17 +44,11 @@ export function AppSidebarContent({ navigation, filters, user }) {
 
         <nav className="px-2">
           <div className="mt-8">
-            <h3
-              className="px-3 text-sm font-medium text-gray-500"
-              id="mobile-teams-headline"
-            >
+            <h2 className="px-3 text-sm font-semibold tracking-tight text-green-600">
               Filters
-            </h3>
-            <div
-              className="mt-2 space-y-1"
-              role="group"
-              aria-labelledby="mobile-teams-headline"
-            >
+            </h2>
+
+            <div className="mt-2 space-y-1" role="group">
               {filters.map((filter) => (
                 <Link
                   key={filter.name}
@@ -64,10 +58,11 @@ export function AppSidebarContent({ navigation, filters, user }) {
                     // anchor element's props
                     return {
                       className: clsx(
+                        "flex items-center rounded-md px-3 py-2 text-sm font-medium",
+                        "transition hover:bg-green-50 hover:text-green-700",
                         isCurrent
-                          ? "bg-gray-200 text-gray-900"
-                          : "text-gray-700 hover:bg-gray-50 hover:text-gray-900",
-                        "flex px-3 items-center rounded-md px-2 py-2 text-sm font-medium truncate"
+                          ? "bg-green-50 text-green-900"
+                          : "text-stone-600"
                       ),
                     };
                   }}
@@ -78,30 +73,38 @@ export function AppSidebarContent({ navigation, filters, user }) {
             </div>
           </div>
         </nav>
-        <section className="px-2">
+        <aside className="px-2">
           <a
-            href="https://xata.io"
-            target="_blank"
-            rel="noreferrer"
-            className="group mt-8 block px-3 text-sm font-medium text-gray-500"
+            href="https://queen.raae.codes/?utm_campaign=prune+your+follows&utm_source=app&utm_medium=sidebar"
+            className="group mt-8 block rounded-sm px-3 text-sm font-medium text-stone-600"
+          >
+            Made by Queen{" "}
+            <span className="font-bold group-hover:text-orange-800">@raae</span>{" "}
+            <span
+              role="img"
+              aria-label="crown"
+              className="inline-block -translate-y-px translate-x-0.5 scale-110"
+            >
+              👑
+            </span>
+          </a>
+          <a
+            href="https://xata.io/?utm_campaign=prune+your+follows&utm_source=app&utm_medium=sidebar"
+            className="group mt-2 block rounded-sm px-3 text-sm font-medium text-stone-600"
           >
             Powered by{" "}
-            <img
-              src="/xata-colored-with-text.svg"
-              alt="Xata logo"
-              className="mt-3 w-1/2 transition group-hover:scale-110"
-            />
+            <XataLogo className="inline-block h-5 w-16 -translate-y-px transition group-hover:scale-110" />
           </a>
-        </section>
+        </aside>
       </div>
-      <section className="mt-auto border-t px-4 py-4">
-        <p className="truncate text-sm font-medium text-gray-900">
+      <section className="mt-auto border-t border-green-200 px-4 py-4">
+        <p className="truncate text-sm font-medium text-green-900">
           {user?.name || "&nbsp"}
         </p>
-        <p className="truncate text-sm text-gray-500">
+        <p className="truncate text-sm text-green-700">
           {user?.username ? `@${user?.username}` : "&nbsp"}
         </p>
-        <LogoutButton className="mt-2 w-full" />
+        <LogoutButton className="mt-2 flex w-full items-center justify-center rounded-md border border-transparent bg-green-900 px-3 py-2 text-sm font-medium text-orange-50 shadow-sm sm:px-8" />
       </section>
     </div>
   );

@@ -1,4 +1,3 @@
-import clsx from "clsx";
 import React from "react";
 import { AccountList } from "../accounts";
 import useSearch from "./useSearch";
