@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { navigate } from "gatsby";
 
 import useSiteMetadata from "../../../domains/common/useSiteMetadata";
 import { AppLayout } from "../../../domains/app/AppLayout";
@@ -15,15 +16,31 @@ export const Head = () => {
 };
 
 export default function App(props) {
-  const { term, location } = props;
+  const { term: encodedTerm, location } = props;
+  const [term, setTerm] = useState(decodeURIComponent(encodedTerm || ""));
+
+  useEffect(() => {
+    const newEncodedTerm = encodeURIComponent(term || "");
+
+    if (newEncodedTerm) {
+      navigate(`/app/search/${newEncodedTerm}/`);
+    } else {
+      navigate(`/app/`, { state: { searchAutoFocus: true } });
+    }
+  }, [term]);
+
   return (
     <>
       <AppLayout
         header={
-          <SearchForm term={term} autoFocus={location.state?.searchAutoFocus} />
+          <SearchForm
+            term={term}
+            onTermChange={setTerm}
+            autoFocus={location.state?.searchAutoFocus}
+          />
         }
       >
-        <SearchResults term={term} />
+        <SearchResults term={encodedTerm} />
       </AppLayout>
     </>
   );

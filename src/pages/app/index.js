@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "gatsby";
-
+import { navigate } from "gatsby";
 import useSiteMetadata from "../../domains/common/useSiteMetadata";
 import { AppLayout } from "../../domains/app/AppLayout";
 import { SearchForm } from "../../domains/app/search";
@@ -22,7 +22,16 @@ export default function App(props) {
   return (
     <>
       <AppLayout
-        header={<SearchForm autoFocus={location.state?.searchAutoFocus} />}
+        header={
+          <SearchForm
+            autoFocus={location.state?.searchAutoFocus}
+            onTermChange={(term) => {
+              navigate(`/app/search/${term}`, {
+                state: { searchAutoFocus: true },
+              });
+            }}
+          />
+        }
       >
         {FOLLOWS_FILTERS.map((filter) => {
           return (
