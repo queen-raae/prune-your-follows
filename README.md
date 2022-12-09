@@ -18,7 +18,7 @@ and fuzzy search:
 
 Still a work in progress, will soon be launched at pruneyourfollows.com.
 
-Powered by [Xata](https://xata.io/?utm_source=readme&utm_campaign=prune-your-follow) - The serverless, branchable, scalable, consistent, highly available, and searchable database service focused on the developer experience.
+Powered by [Xata](https://xata.io/?utm_source=github&utm_campaign=prune+your+follows&utm_medium=readme) - The serverless, branchable, scalable, consistent, highly available, and searchable database service focused on the developer experience.
 
 &nbsp;
 
@@ -26,8 +26,8 @@ Powered by [Xata](https://xata.io/?utm_source=readme&utm_campaign=prune-your-fol
 
 ### 1-on-1 Emergency Gatsby Call
 
-Are you stuck on a reef in the sharky waters around the Gatsby islands? Check out [1-on-1 Emergency Gatsby Call](https://queen.raae.codes/gatsby-emergency/?utm_source=readme&utm_campaign=prune-your-follows) with Queen Raae to get friendly advice you can put into action immediately from a seasoned Gatsby developer.
+Are you stuck on a reef in the sharky waters around the Gatsby islands? Check out [1-on-1 Emergency Gatsby Call](https://queen.raae.codes/gatsby-emergency/?utm_source=github&utm_campaign=prune+your+follows&utm_medium=readme) with Queen Raae to get friendly advice you can put into action immediately from a seasoned Gatsby developer.
 
 ### Stay updated and get the most out of Gatsby
 
-Learn how to get the most out of Gatsby and **stay updated** on the app by [subscribing](https://queen.raae.codes/emails/?utm_source=readme&utm_campaign=prune-your-follows) to daily emails from Queen Raae and Cap'n Ola.
+Learn how to get the most out of Gatsby and **stay updated** on the app by [subscribing](https://queen.raae.codes/emails/?utm_source=github&utm_campaign=prune+your+follows&utm_medium=readme) to daily emails from Queen Raae and Cap'n Ola.
