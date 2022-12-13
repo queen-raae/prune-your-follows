@@ -16,7 +16,7 @@ export default function useUser() {
   const user = session?.user;
 
   useEffect(() => {
-    setSentryUser({ userId: user?.id });
+    setSentryUser({ id: user?.id });
   }, [user?.id]);
 
   return useQuery(
