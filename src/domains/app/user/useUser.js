@@ -1,4 +1,6 @@
-import axios from "axios";
+import { useEffect } from "react";
+import axios from "../axios";
+import { setUser as setSentryUser } from "@sentry/gatsby";
 import { navigate } from "gatsby";
 import { useQuery } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
@@ -12,6 +14,10 @@ export default function useUser() {
   });
 
   const user = session?.user;
+
+  useEffect(() => {
+    setSentryUser({ id: user?.id });
+  }, [user?.id]);
 
   return useQuery(
     ["user", user?.id],

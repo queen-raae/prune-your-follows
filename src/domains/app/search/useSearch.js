@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+import axios from "../axios";
 import { useUser } from "../user";
 
 export default function useSearch({ search }) {
