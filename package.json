@@ -24,6 +24,8 @@
     "@mdx-js/react": "v1",
     "@raae/gatsby-plugin-fathom": "0.0.4",
     "@sentry/gatsby": "7.25.0",
+    "@sentry/node": "7.25.0",
+    "@sentry/tracing": "7.25.0",
     "@tanstack/react-query": "4.1.0",
     "@tanstack/react-query-devtools": "4.0.10",
     "@xata.io/client": "0.21.3",
