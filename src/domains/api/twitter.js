@@ -12,6 +12,11 @@ const USER_FIELDS = [
   "name",
 ];
 
+const enrichError = (error, endpoint) => {
+  error.name = `TwitterError`;
+  error.message = `${endpoint}: ${error.statusText}`;
+};
+
 export const fetchMyUser = async ({ accessToken }) => {
   try {
     const twitter = new Client(accessToken);
@@ -24,6 +29,7 @@ export const fetchMyUser = async ({ accessToken }) => {
 
     return result;
   } catch (error) {
+    enrichError(error, "findMyUser");
     return { error };
   }
 };
@@ -51,6 +57,7 @@ export const fetchTwitterFollowing = async ({
 
     return result;
   } catch (error) {
+    enrichError(error, "usersIdFollowing");
     return { error };
   }
 };
@@ -70,6 +77,7 @@ export const unfollowUser = async ({
     );
     return data;
   } catch (error) {
+    enrichError(error, "usersIdUnfollow");
     return { error };
   }
 };
@@ -89,6 +97,7 @@ export const followUser = async ({
     );
     return data;
   } catch (error) {
+    enrichError(error, "usersIdFollow");
     return { error };
   }
 };

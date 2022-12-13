@@ -1,4 +1,3 @@
-import createError from "http-errors";
 import { getXataClient } from "../xata";
 import { unfollowUser, followUser } from "./twitter";
 
@@ -77,7 +76,7 @@ const actions = {
         unfollowed: original.unfollowed ? original.unfollowed : null,
         last: original.last ? original.last : null,
       });
-      throw createError.InternalServerError(error);
+      throw error;
     }
 
     const record = await xata.db.accounts.createOrUpdate({
@@ -124,7 +123,7 @@ const actions = {
         unfollowed: original.unfollowed ? original.unfollowed : null,
         last: original.last ? original.last : null,
       });
-      throw createError.InternalServerError(error);
+      throw error;
     }
 
     const record = await xata.db.accounts.createOrUpdate({

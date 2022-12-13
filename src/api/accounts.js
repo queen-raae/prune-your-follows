@@ -1,16 +1,19 @@
 import "../domains/api/fetch-polyfill";
 import createError from "http-errors";
 import Joi from "joi";
+import * as Sentry from "@sentry/node";
 import { getToken } from "next-auth/jwt";
 
-import { getAccounts, postAccounts } from "../domains/api";
+import { getAccounts, postAccounts, initSentry } from "../domains/api";
+
+initSentry();
 
 export default async function handler(req, res) {
-  console.log(`${req.baseUrl} - ${req.method}`);
-
   const token = await getToken({ req });
 
   if (!token) throw new createError.Unauthorized();
+
+  Sentry.setUser({ id: token.sub });
 
   try {
     if (req.method === "POST") {
@@ -55,13 +58,23 @@ export default async function handler(req, res) {
       throw createError(405, `${req.method} not allowed`);
     }
   } catch (error) {
-    const status =
-      error.response?.status || error.status || error.statusCode || 500;
-    const message =
-      error.response?.data?.message || error.message || error.statusText;
+    let status = createError.isHttpError(error) ? error.statusCode : 500;
+    let message = error.message;
 
-    // Something went wrong, log it
-    // console.error(error);
+    if (error.name === "TwitterError" && error.status === 429) {
+      // Pass through Twitter Rate Limiting
+      status = 429;
+    } else if (error.requestId) {
+      error.name = "XataError";
+    }
+
+    Sentry.captureException(error, {
+      extra: {
+        error: error,
+        errorAsText: JSON.stringify(error, null, 2),
+      },
+    });
+
     console.error(`${status} -`, message);
 
     // Respond with error code and message
