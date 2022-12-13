@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../axios";
 import Papa from "papaparse";
 import { useMutation } from "@tanstack/react-query";
 

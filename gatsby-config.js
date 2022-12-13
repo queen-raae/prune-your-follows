@@ -2,6 +2,14 @@ require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
 });
 
+let environment = "development";
+
+if (process.env.GATSBY_CLOUD && process.env.BRANCH === "main") {
+  environment = "production";
+} else if (process.env.GATSBY_CLOUD) {
+  environment = "staging";
+}
+
 module.exports = {
   siteMetadata: {
     title: `Prune your follows`,
@@ -51,6 +59,15 @@ module.exports = {
         theme_color: `#65a30d`,
         display: `standalone`,
         icon: `src/domains/common/icons8-cut.svg`,
+      },
+    },
+    {
+      resolve: "@sentry/gatsby",
+      options: {
+        dsn: process.env.SENTRY_DSN,
+        tracesSampleRate: process.env.SENTRY_SAMPLE_RATE || 0.7,
+        environment: environment,
+        release: process.env.COMMIT_REF,
       },
     },
   ],
