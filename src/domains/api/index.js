@@ -7,4 +7,4 @@ export { default as getMeta } from "./get-meta";
 
 export { default as getExport } from "./get-export";
 
-export * from "./sentry";
+export { default as wrapper } from "./wrapper";
