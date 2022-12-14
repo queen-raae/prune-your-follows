@@ -9,7 +9,7 @@ export function FetchingOverlay({ open }) {
     <Modal open={open} title="Importing your follows" Icon={Icon}>
       <div className="space-y-4">
         <p>
-          This will take a little while...You may log out and come back later,
+          The import will take some time...You may log out and come back later,
           or wait it out!
         </p>
 

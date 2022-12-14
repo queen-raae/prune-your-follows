@@ -8,7 +8,7 @@ export function RateLimitOverlay({ open }) {
     <Modal open={open} Icon={Icon} title="Twitter needs a break">
       <div className="space-y-3">
         <p>
-          Unfortunatly there are some strict limits on the number of unfollows
+          Unfortunately, there are some strict limits on the number of unfollows
           you may do in 15 minutes, and the number of unfollows Prune your
           Follows may facilitate in a day.
         </p>
