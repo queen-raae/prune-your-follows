@@ -8,7 +8,6 @@ customAxios.interceptors.response.use(
     return response;
   },
   (error) => {
-    console.log(error);
     Sentry.captureException(error, {
       extra: {
         error: error.response.data,

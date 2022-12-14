@@ -19,7 +19,7 @@ export default async function handler(req, res) {
       const { value, error: validationError } = schema.validate(req.query);
 
       if (validationError) {
-        throw createError.UnprocessableEntity(validationError);
+        throw createError.UnprocessableEntity(validationError.message);
       }
 
       res.send(await getAccounts({ ...value, userId: userId }));
@@ -35,7 +35,7 @@ export default async function handler(req, res) {
       const { value, error: validationError } = schema.validate(req.body);
 
       if (validationError) {
-        throw createError.UnprocessableEntity(validationError);
+        throw createError.UnprocessableEntity(validationError.message);
       }
 
       res.send(
