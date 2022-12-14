@@ -4,6 +4,7 @@ export { getAccounts } from "./get-accounts";
 export { postAccounts } from "./post-accounts";
 
 export { getMeta } from "./get-meta";
+export { postMeta } from "./post-meta";
 
 export { getExport } from "./get-export";
 

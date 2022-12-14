@@ -28,7 +28,8 @@ const Root = ({ children }) => {
     <SessionProvider>
       <QueryClientProvider client={queryClient}>
         <RateLimitOverlay open={isRateLimitted} />
-        {children} <ReactQueryDevtools initialIsOpen={false} />
+        {children}
+        <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </SessionProvider>
   );
