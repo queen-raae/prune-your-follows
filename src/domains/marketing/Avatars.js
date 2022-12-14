@@ -32,7 +32,7 @@ export function Avatars() {
         {data.allUserAvatar.nodes.map((user) => {
           const image = getImage(user.localImage);
           return (
-            <li className="shrink-0">
+            <li className="shrink-0" key={user.username}>
               <GatsbyImage
                 key={user.username}
                 className="h-10 w-10 rounded-full ring-2 ring-orange-50"
