@@ -22,7 +22,7 @@ export function AppLayout({ header, children }) {
           {header}
           <div className="ml-auto border-l border-green-100 pl-3">
             <button
-              className="rounded-sm p-2 text-green-500 lg:hidden"
+              className="rounded-sm p-2 text-green-700 transition hover:text-green-500 lg:hidden"
               onClick={() => setSidebarOpen(true)}
             >
               <span className="sr-only">Open sidebar</span>
