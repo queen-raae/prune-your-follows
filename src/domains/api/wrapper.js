@@ -74,12 +74,16 @@ export async function wrapper(req, res, handlers) {
     const isHttpError = createError.isHttpError(error);
     let status = isHttpError ? error.statusCode : 500;
     let message = isHttpError && error.expose ? error.message : "";
+    let messageForUser = "";
     const tags = {};
 
     if (error.name === "TwitterResponseError") {
       // Pass through Twitter Rate Limiting
       status = error.status;
-      message = error.error?.errors?.[0]?.message || error.statusText;
+      message = error.message;
+      messageForUser =
+        error.error?.errors?.[0]?.message &&
+        `Twitter says "${error.error?.errors?.[0]?.message}"`;
       tags["twitter.statusText"] = error.statusText;
       tags["twitter.endpoint"] = error.endpoint;
     } else if (error.requestId) {
@@ -87,12 +91,15 @@ export async function wrapper(req, res, handlers) {
       error.name = "XataError";
     }
 
-    tags["request.endpoint"] = req.baseUrl;
+    tags["request.endpoint"] = req.originalUrl;
     tags["request.method"] = req.method;
     tags["response.message"] = message;
     tags["response.status"] = status;
 
-    console.error(`${req.method} ${req.baseUrl} ${status} -`, error.message);
+    console.error(
+      `${req.method} ${req.originalUrl} ${status} -`,
+      error.message
+    );
 
     Sentry.captureException(error, {
       tags: tags,
@@ -105,6 +112,7 @@ export async function wrapper(req, res, handlers) {
     // Respond with error code and message
     res.status(status).json({
       message: message,
+      messageForUser: messageForUser,
     });
   }
 }

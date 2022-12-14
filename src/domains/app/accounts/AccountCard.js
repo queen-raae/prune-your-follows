@@ -19,7 +19,7 @@ const display = (...props) => {
 
 export function AccountCard(props) {
   const { as, highlight, ...account } = props;
-  const { actions, status } = useAccountAction(account);
+  const { actions, status, error } = useAccountAction(account);
 
   const twitterUrl = account.username
     ? `https://twitter.com/${account.username}`
@@ -81,7 +81,7 @@ export function AccountCard(props) {
             {displayName && (
               <a
                 href={twitterUrl}
-                className="group text-stone-700 hover:text-stone-900"
+                className=" group text-stone-700 hover:text-stone-900"
                 target="_blank"
                 rel="noreferrer"
               >
@@ -90,15 +90,43 @@ export function AccountCard(props) {
               </a>
             )}
           </p>
-          <p className="leading- text-sm">
+          <p className="text-sm leading-tight">
             {displayUsername && <>@{displayUsername}</>}
             {displayLocation && <> - {displayLocation}</>}
           </p>
         </div>
       </div>
-      <p className="leading- px-5 py-4 text-sm">
-        {displayDescription || <>&nbsp;</>}
-      </p>
+
+      {status === "error" ? (
+        <p className="mx-5 my-5 rounded-sm bg-red-50 px-3 py-2 text-xs text-red-900">
+          {error.response?.data?.messageForUser || (
+            <>
+              Something unexpected went wrong, please let us know on{" "}
+              <a
+                className="underline"
+                href="https://github.com/queen-raae/prune-your-follows/discussions/categories/support"
+              >
+                Github
+              </a>{" "}
+              or in a{" "}
+              <a
+                href="https://twitter.com/raae"
+                className="underline"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Twitter DM
+              </a>
+              .
+            </>
+          )}
+        </p>
+      ) : (
+        <p className="px-5 py-4 text-sm leading-snug">
+          {displayDescription || <>&nbsp;</>}
+        </p>
+      )}
+
       <div
         className={clsx(
           "mt-auto flex justify-between space-x-3 border-t border-green-200 bg-green-100 py-3 px-4"
