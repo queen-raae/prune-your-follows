@@ -13,8 +13,12 @@ const USER_FIELDS = [
 ];
 
 const enrichError = (error, endpoint) => {
-  error.name = `TwitterError`;
-  error.message = `${endpoint}: ${error.statusText}`;
+  if (!error.message) {
+    // TODO: Find a better way to check for TwitterResponseError?
+    error.name = `TwitterResponseError`;
+    error.message = `${endpoint}: ${error.statusText}`;
+    error.endpoint = endpoint;
+  }
 };
 
 export const fetchMyUser = async ({ accessToken }) => {
@@ -25,7 +29,7 @@ export const fetchMyUser = async ({ accessToken }) => {
       "user.fields": USER_FIELDS,
     });
 
-    console.log(`Twitter Fetched My User: ${result.data.id}`);
+    console.log(`Twitter Fetched: ${result.data.id}`);
 
     return result;
   } catch (error) {
@@ -52,7 +56,7 @@ export const fetchTwitterFollowing = async ({
       `Twitter Fetched Followers for ${userId}: ${result.data.length}`
     );
     console.log(
-      `Tritter Is more for ${userId}: ${Boolean(result.meta.next_token)}`
+      `Twitter Is more for ${userId}: ${Boolean(result.meta.next_token)}`
     );
 
     return result;

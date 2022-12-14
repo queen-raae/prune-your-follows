@@ -1,5 +1,8 @@
+import createError from "http-errors";
+import Joi from "joi";
 import * as Sentry from "@sentry/node";
 import { getToken } from "next-auth/jwt";
+import { fetchMyUser } from "./twitter";
 
 let environment = "development";
 
@@ -13,48 +16,104 @@ Sentry.init({
   dsn: process.env.SENTRY_DSN_FUNCTIONS,
   tracesSampleRate: process.env.SENTRY_SAMPLE_RATE_FUNCTIONS || 0.7,
   environment: environment,
+  integrations: (defaults) => {
+    if (environment === "development") {
+      // Hack to solve memory issues in dev
+      return defaults.filter((integration) => integration.name !== "Http");
+    } else {
+      return defaults;
+    }
+  },
 });
 
 export default async function wrapper(req, res, handlers) {
-  const token = await getToken({ req });
-
-  if (!token) throw new createError.Unauthorized();
-
-  Sentry.setUser({ id: token.sub });
-
   try {
+    let userId = "";
+    let twitterAccessToken = "";
+
+    const token = await getToken({ req });
+
+    if (token) {
+      userId = token.sub;
+      twitterAccessToken = token.twitterAccessToken;
+    } else {
+      const schema = Joi.object({
+        twitterAccessToken: Joi.string().required(),
+      }).required();
+
+      const { value, error: validationError } = schema.validate(req.body);
+
+      if (validationError) {
+        throw new createError.Unauthorized();
+      }
+
+      twitterAccessToken = value.twitterAccessToken;
+
+      const { data: user, error } = await fetchMyUser({
+        accessToken: twitterAccessToken,
+      });
+
+      if (error) {
+        throw error;
+      }
+
+      userId = user.id;
+    }
+
+    Sentry.setUser({ id: userId });
+
     if (handlers[req.method]) {
       await handlers[req.method]({
-        userId: token.sub,
-        twitterAccessToken: token.twitterAccessToken,
+        userId: userId,
+        twitterAccessToken: twitterAccessToken,
       });
     } else {
       throw createError.MethodNotAllowed(`${req.method} not allowed`);
     }
   } catch (error) {
-    let status = createError.isHttpError(error) ? error.statusCode : 500;
-    let message = error.message;
+    const isHttpError = createError.isHttpError(error);
+    let status = isHttpError ? error.statusCode : 500;
+    let message = isHttpError && error.expose ? error.message : "";
+    const tags = {
+      endpoint: req.baseUrl,
+      method: req.method,
+    };
 
-    if (error.name === "TwitterError" && error.status === 429) {
+    if (error.name === "TwitterResponseError") {
       // Pass through Twitter Rate Limiting
-      status = 429;
+      status = error.status;
+      message = error.error?.errors?.[0]?.message || error.statusText;
+      // tags["twitter.statusText"] = error.statusText;
+      // tags["twitter.endpoint"] = error.endpoint;
     } else if (error.requestId) {
       // TODO: Come up with a better check?
       error.name = "XataError";
     }
 
+    console.error(`${req.method} ${req.baseUrl} ${status} -`, error.message);
+
     Sentry.captureException(error, {
+      tags: {
+        endpoint: req.baseUrl,
+        method: req.method,
+      },
       extra: {
         error: error,
         errorAsText: JSON.stringify(error, null, 2),
+        request: {
+          endpoint: req.baseUrl,
+          method: req.method,
+        },
+        response: {
+          message: message,
+          status: status,
+        },
       },
     });
 
-    console.error(`${status} -`, message);
-
     // Respond with error code and message
     res.status(status).json({
-      message: error.expose ? message : `Faulty ${req.baseUrl}`,
+      message: message,
     });
   }
 }

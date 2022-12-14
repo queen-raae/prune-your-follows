@@ -1,36 +1,28 @@
 import createError from "http-errors";
 import { add, differenceInYears } from "date-fns";
 import { getXataClient } from "../xata";
-import { fetchMyUser, fetchTwitterFollowing } from "./twitter";
+import { fetchTwitterFollowing } from "./twitter";
 
 const xata = getXataClient();
 
-export default async function ({ twitterAccessToken }) {
-  const { data: user, error } = await fetchMyUser({
-    accessToken: twitterAccessToken,
-  });
-
-  if (error) {
-    throw createError.InternalServerError(error);
-  }
-
+export async function importFollowing({ userId, twitterAccessToken }) {
   const meta = await xata.db.meta.read({
-    id: user.id,
+    id: userId,
   });
 
   const now = new Date();
   const next = meta?.next || now;
 
-  console.log(`PYF Try to import following for ${user.id}:`, now, next);
+  console.log(`PYF Try to import following for ${userId}:`, now, next);
 
   if (now < next) {
-    const message = `PYF 429 for ${user.id}: Try again at ${meta?.next}`;
-    throw createError.TooManyRequests(message);
+    console.warn(`PYF 429 for ${userId}: Try again at ${next}`);
+    throw createError.TooManyRequests();
   }
 
   // Block imports for the next 5 minutes
   await xata.db.meta.createOrUpdate({
-    id: user.id,
+    id: userId,
     next: add(now, { minutes: 5 }),
   });
 
@@ -43,37 +35,27 @@ export default async function ({ twitterAccessToken }) {
       meta: twitterMeta,
       error,
     } = await fetchTwitterFollowing({
-      userId: user.id,
+      userId: userId,
       accessToken: twitterAccessToken,
       nextToken: nextToken,
     });
 
-    if (error?.status === 429) {
-      const next = add(now, { minutes: 15 });
-      const message = `Twitter 429 for ${user.id}: Try again at ${next}`;
-      console.warn(message);
+    if (error) {
+      const next = error.status === 429 ? add(now, { minutes: 15 }) : now;
+      console.warn(`Twitter ${error.status} for ${userId}: Try again ${next}`);
       await xata.db.meta.createOrUpdate({
-        id: user.id,
+        id: userId,
         next: next,
       });
-      throw createError.TooManyRequests(`Try again at ${next}`);
-    } else if (error) {
-      const next = now;
-      const message = `Twitter ${error.status} for ${user.id}`;
-      console.warn(message);
-      await xata.db.meta.createOrUpdate({
-        id: user.id,
-        next: next,
-      });
-      throw createError.InternalServerError(message);
+      throw error;
     } else {
       nextToken = twitterMeta.next_token;
       followingCount += following.length;
 
       const records = following.map((account) => {
         const record = transformTwitterAccountToAccountRecord(account);
-        record.id = `${user.id}-${account.id}`;
-        record.followed_by = user.id;
+        record.id = `${userId}-${account.id}`;
+        record.followed_by = userId;
         record.last = now;
         record.unfollowed = null;
         return record;
@@ -88,7 +70,7 @@ export default async function ({ twitterAccessToken }) {
   } while (nextToken);
 
   await xata.db.meta.createOrUpdate({
-    id: user.id,
+    id: userId,
     last: now,
   });
 
