@@ -12,6 +12,15 @@ const USER_FIELDS = [
   "name",
 ];
 
+const enrichError = (error, endpoint) => {
+  if (!error.message) {
+    // TODO: Find a better way to check for TwitterResponseError?
+    error.name = `TwitterResponseError`;
+    error.message = `${endpoint}: ${error.statusText}`;
+    error.endpoint = endpoint;
+  }
+};
+
 export const fetchMyUser = async ({ accessToken }) => {
   try {
     const twitter = new Client(accessToken);
@@ -20,10 +29,11 @@ export const fetchMyUser = async ({ accessToken }) => {
       "user.fields": USER_FIELDS,
     });
 
-    console.log(`Twitter Fetched My User: ${result.data.id}`);
+    console.log(`Twitter Fetched: ${result.data.id}`);
 
     return result;
   } catch (error) {
+    enrichError(error, "findMyUser");
     return { error };
   }
 };
@@ -46,11 +56,12 @@ export const fetchTwitterFollowing = async ({
       `Twitter Fetched Followers for ${userId}: ${result.data.length}`
     );
     console.log(
-      `Tritter Is more for ${userId}: ${Boolean(result.meta.next_token)}`
+      `Twitter Is more for ${userId}: ${Boolean(result.meta.next_token)}`
     );
 
     return result;
   } catch (error) {
+    enrichError(error, "usersIdFollowing");
     return { error };
   }
 };
@@ -70,6 +81,7 @@ export const unfollowUser = async ({
     );
     return data;
   } catch (error) {
+    enrichError(error, "usersIdUnfollow");
     return { error };
   }
 };
@@ -89,6 +101,7 @@ export const followUser = async ({
     );
     return data;
   } catch (error) {
+    enrichError(error, "usersIdFollow");
     return { error };
   }
 };

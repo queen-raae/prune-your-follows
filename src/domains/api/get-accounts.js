@@ -2,7 +2,7 @@ import { getXataClient } from "../xata";
 
 const xata = getXataClient();
 
-export default async function ({ userId, filter, search, size, offset }) {
+export async function getAccounts({ userId, filter, search, size, offset }) {
   const meta = await xata.db.meta.read({ id: userId });
 
   console.log(`PYF GET Accounts For ${userId}:`, search, filter, size, offset);

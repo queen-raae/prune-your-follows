@@ -1,19 +1,30 @@
 import "../domains/api/fetch-polyfill";
 import createError from "http-errors";
 import Joi from "joi";
-import { getToken } from "next-auth/jwt";
 
-import { getAccounts, postAccounts } from "../domains/api";
+import { getAccounts, postAccounts, wrapper } from "../domains/api";
 
 export default async function handler(req, res) {
-  console.log(`${req.baseUrl} - ${req.method}`);
+  await wrapper(req, res, {
+    GET: async ({ userId }) => {
+      const schema = Joi.object({
+        filter: Joi.string(),
+        search: Joi.string(),
+        offset: Joi.number().default(0),
+        size: Joi.number().default(24),
+      })
+        .or("filter", "search")
+        .required();
 
-  const token = await getToken({ req });
+      const { value, error: validationError } = schema.validate(req.query);
 
-  if (!token) throw new createError.Unauthorized();
+      if (validationError) {
+        throw createError.UnprocessableEntity(validationError);
+      }
 
-  try {
-    if (req.method === "POST") {
+      res.send(await getAccounts({ ...value, userId: userId }));
+    },
+    POST: async ({ userId, twitterAccessToken }) => {
       const schema = Joi.object({
         accountId: Joi.string().required(),
         action: Joi.string()
@@ -30,43 +41,10 @@ export default async function handler(req, res) {
       res.send(
         await postAccounts({
           ...value,
-          twitterAccessToken: token.twitterAccessToken,
-          userId: token.sub,
+          twitterAccessToken: twitterAccessToken,
+          userId: userId,
         })
       );
-    } else if (req.method === "GET") {
-      const schema = Joi.object({
-        filter: Joi.string(),
-        search: Joi.string(),
-        offset: Joi.number().default(0),
-        size: Joi.number().default(24),
-      })
-        .or("filter", "search")
-        .required();
-
-      const { value, error: validationError } = schema.validate(req.query);
-
-      if (validationError) {
-        throw createError.UnprocessableEntity(validationError);
-      }
-
-      res.send(await getAccounts({ ...value, userId: token.sub }));
-    } else {
-      throw createError(405, `${req.method} not allowed`);
-    }
-  } catch (error) {
-    const status =
-      error.response?.status || error.status || error.statusCode || 500;
-    const message =
-      error.response?.data?.message || error.message || error.statusText;
-
-    // Something went wrong, log it
-    // console.error(error);
-    console.error(`${status} -`, message);
-
-    // Respond with error code and message
-    res.status(status).json({
-      message: error.expose ? message : `Faulty ${req.baseUrl}`,
-    });
-  }
+    },
+  });
 }
