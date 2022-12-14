@@ -3,7 +3,7 @@ import { unfollowUser, followUser } from "./twitter";
 
 const xata = getXataClient();
 
-export default async function ({
+export async function postAccounts({
   userId,
   accountId,
   twitterAccessToken,
