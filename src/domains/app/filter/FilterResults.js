@@ -7,7 +7,6 @@ import {
 
 import { AccountList } from "../accounts";
 import useFilter from "./useFilter";
-import clsx from "clsx";
 
 export function FilterResults(props) {
   const { filter, pageIndex } = props;
