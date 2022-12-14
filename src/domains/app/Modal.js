@@ -34,7 +34,7 @@ export function Modal({ open, Icon, title, children }) {
                   "relative transform overflow-hidden transition-all",
                   "w-full p-6 sm:max-w-sm",
                   "rounded-lg bg-white shadow-xl",
-                  "space-y-2 text-center text-sm text-stone-600"
+                  "text-center text-sm text-stone-600"
                 )}
               >
                 <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-green-100">
@@ -42,7 +42,7 @@ export function Modal({ open, Icon, title, children }) {
                 </div>
                 <Dialog.Title
                   as="h3"
-                  className="text-lg font-medium leading-6 text-stone-900"
+                  className="mb-3 text-lg font-medium leading-6 text-stone-900"
                 >
                   {title}
                 </Dialog.Title>
