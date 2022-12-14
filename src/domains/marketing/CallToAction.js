@@ -15,6 +15,7 @@ export function CallToAction() {
             aria-hidden="true"
             layout="fullWidth"
             className="h-full bg-lime-800"
+            alt=""
           />
           <div className="absolute inset-0 bg-gradient-to-r from-lime-600 to-lime-900 mix-blend-multiply" />
         </div>
