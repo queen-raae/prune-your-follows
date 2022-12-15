@@ -1,6 +1,16 @@
 import React from "react";
+import { useStaticQuery, graphql } from "gatsby";
 
 export function Stats() {
+  const data = useStaticQuery(graphql`
+    query {
+      statistics {
+        unfollowedCount
+        userCount
+      }
+    }
+  `);
+
   return (
     <section className="bg-green-100 pt-1">
       <div className=" bg-green-50 pb-6">
@@ -14,7 +24,7 @@ export function Stats() {
                     Users
                   </dt>
                   <dd className="order-1 text-5xl font-bold tracking-tight text-green-600">
-                    186
+                    {data.statistics.userCount}
                   </dd>
                 </div>
                 <div className="flex flex-col border-t border-stone-100 p-6 text-center sm:border-0 sm:border-l">
@@ -22,7 +32,7 @@ export function Stats() {
                     Unfollows
                   </dt>
                   <dd className="order-1 text-5xl font-bold tracking-tight text-green-600">
-                    3971
+                    {data.statistics.unfollowedCount}
                   </dd>
                 </div>
               </dl>
