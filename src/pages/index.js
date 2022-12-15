@@ -6,6 +6,7 @@ import { Header } from "../domains/marketing/Header";
 import { Hero } from "../domains/marketing/Hero";
 import { Avatars } from "../domains/marketing/Avatars";
 import { Features } from "../domains/marketing/Features";
+import { Newsletter } from "../domains/marketing/Newsletter";
 import { CallToAction } from "../domains/marketing/CallToAction";
 
 import { LoginButton } from "../domains/app/user";
@@ -34,7 +35,9 @@ export default function Home() {
         <Hero />
         <Avatars />
         <Features />
+
         <CallToAction />
+        <Newsletter />
       </main>
       <Footer />
     </>

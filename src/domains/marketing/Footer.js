@@ -22,7 +22,7 @@ export function Footer() {
           >
             Xata
           </a>{" "}
-          | Get help on{" "}
+          | Support: Get help on{" "}
           <a
             className="underline"
             href="https://github.com/queen-raae/prune-your-follows/discussions/categories/support"
