@@ -12,7 +12,8 @@ export function RateLimitOverlay({ open }) {
       <p>
         Unfortunately, there are some strict limits on the number of unfollows
         you may do in 15 minutes, and the number of unfollows Prune your Follows
-        may facilitate in a day.
+        may facilitate in <strong>a day across all users</strong>. It will not
+        be as bad on non-"Product Hunt Launch" days.
       </p>
 
       {user.email ? (
