@@ -11,9 +11,10 @@ export function RateLimitOverlay({ open }) {
     <Modal open={open} Icon={Icon} title="Twitter needs a break">
       <p>
         Unfortunately, there are some strict limits on the number of unfollows
-        you may do in 15 minutes, and the number of unfollows Prune your Follows
-        may facilitate in <strong>a day across all users</strong>. It will not
-        be as bad on non-"Product Hunt Launch" days.
+        Prune your Follows may facilitate daily{" "}
+        <strong>across all users</strong>. The success of today’s Product Hunt
+        Launch got us over pretty fast. On any other day, you should be able to
+        unfollow 50 accounts every 15 minutes.
       </p>
 
       {user.email ? (
