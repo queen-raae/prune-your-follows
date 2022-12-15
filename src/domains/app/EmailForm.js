@@ -22,6 +22,7 @@ export function EmailForm() {
             type="text"
             name="email"
             id="email"
+            required
             disabled={isDisabled}
             className="block w-full rounded-md border border-stone-300 py-2 px-3 shadow-sm focus:border-green-700 sm:text-sm"
             placeholder="you@example.com"
