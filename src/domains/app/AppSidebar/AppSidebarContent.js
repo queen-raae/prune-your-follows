@@ -99,10 +99,10 @@ export function AppSidebarContent({ navigation, filters, user }) {
       </div>
       <section className="mt-auto border-t border-green-200 px-4 py-4">
         <p className="truncate text-sm font-medium text-green-900">
-          {user?.name || "&nbsp"}
+          {user?.name || <>&nbsp;</>}
         </p>
         <p className="truncate text-sm text-green-700">
-          {user?.username ? `@${user?.username}` : "&nbsp"}
+          {user?.username ? `@${user?.username}` : <>&nbsp;</>}
         </p>
         <LogoutButton className="mt-2 flex w-full items-center justify-center rounded-md border border-transparent bg-green-900 px-3 py-2 text-sm font-medium text-orange-50 shadow-sm sm:px-8" />
       </section>
