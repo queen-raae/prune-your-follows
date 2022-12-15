@@ -8,12 +8,14 @@ import { LogoutButton, useUser } from "./user";
 export function RateLimitOverlay({ open }) {
   const { data: user } = useUser();
   return (
-    <Modal open={open} Icon={Icon} title="Twitter needs a break">
+    <Modal open={open} Icon={Icon} title="Wow, thank you for the love! ">
       <p>
-        Wow, thank you for the love! Today's success has pushed us over the
-        limit of the number of unfollows PYF's is allowed to facilitate{" "}
-        <strong>across</strong> all users. Come back tomorrow, and you should be
-        able to unfollow 50 accounts per 15 minutes!
+        Today's success has capped PYF's Twitter access{" "}
+        <strong>across all users</strong>.
+      </p>
+      <p className="mt-1">
+        Come back tomorrow, and you should be able to unfollow 50 accounts per
+        15 minutes!
       </p>
 
       {user.email ? (
@@ -25,12 +27,10 @@ export function RateLimitOverlay({ open }) {
         </>
       ) : (
         <>
-          <h4 className="mt-4 text-base font-medium leading-loose">
-            Need a reminder?
+          <h4 className="mt-4 mb-2 text-base font-medium leading-loose">
+            Need a reminder to come back?
           </h4>
-          <p className="mb-3">
-            Sign up for a reminder to come back when PYF is not such hot news.
-          </p>
+
           <EmailForm />
         </>
       )}
