@@ -5,7 +5,7 @@ import { FOLLOWS_FILTERS } from "../app/filter/useFilter";
 
 export function Features({ features = FOLLOWS_FILTERS }) {
   return (
-    <section className="relative bg-green-50 pt-20 pb-28 sm:py-32">
+    <section className="relative bg-green-50 pt-12 pb-28 sm:py-32">
       <div className="mx-auto max-w-7xl px-4 py-0 lg:grid lg:grid-cols-5 lg:gap-x-24 lg:py-24 lg:px-8">
         <div className="mt-12 lg:col-span-2 lg:mt-0">
           <h2 className="text-lg font-semibold leading-8 tracking-tight text-green-600">

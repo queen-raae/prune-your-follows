@@ -1,6 +1,8 @@
 const { getXataClient } = require("./xata");
 const { Client } = require("twitter-api-sdk");
 
+const xata = getXataClient();
+
 const createUserAvatarNodes = async (gatsbyUtils) => {
   // 1. Get the list of user from Xata ✅
   // 2. Get info about from Twitter ✅
@@ -9,8 +11,6 @@ const createUserAvatarNodes = async (gatsbyUtils) => {
 
   const { actions, createNodeId, createContentDigest, reporter } = gatsbyUtils;
   const { createNode } = actions;
-
-  const xata = getXataClient();
 
   const records = await xata.db.meta.getMany();
 
@@ -41,7 +41,37 @@ const createUserAvatarNodes = async (gatsbyUtils) => {
 };
 
 exports.sourceNodes = async (gatsbyUtils) => {
-  const { reporter } = gatsbyUtils;
+  const { reporter, actions, createNodeId, createContentDigest } = gatsbyUtils;
+  const { createNode } = actions;
+
+  const result = await xata.db.accounts.aggregate({
+    unfollowsTotal: {
+      count: {
+        filter: {
+          unfollowed: { $ge: new Date("2022-11-03") },
+        },
+      },
+    },
+    usersTotal: {
+      uniqueCount: {
+        column: "followed_by",
+      },
+    },
+  });
+
+  const statsData = {
+    unfollowedCount: result.aggs.unfollowsTotal,
+    userCount: result.aggs.usersTotal,
+  };
+
+  createNode({
+    id: createNodeId("statistics"),
+    ...statsData,
+    internal: {
+      type: "Statistics",
+      contentDigest: createContentDigest(statsData),
+    },
+  });
 
   reporter.verbose("Sourcing user avatars - START");
   await createUserAvatarNodes(gatsbyUtils);
