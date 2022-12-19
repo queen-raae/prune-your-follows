@@ -8,14 +8,11 @@ import { LogoutButton, useUser } from "./user";
 export function RateLimitOverlay({ open }) {
   const { data: user } = useUser();
   return (
-    <Modal open={open} Icon={Icon} title="Wow, thank you for the love! ">
+    <Modal open={open} Icon={Icon} title="Twitter needs a break">
       <p>
-        Today's success has capped PYF's Twitter access{" "}
-        <strong>across all users</strong>.
-      </p>
-      <p className="mt-1">
-        Come back tomorrow, and you should be able to unfollow 50 accounts per
-        15 minutes!
+        Look at you pruning to your heart's content. Twitter only allows 50
+        unfollows in 15 minutes, though 😬 Wait a couple of minutes and try
+        again.
       </p>
 
       {user.email ? (
