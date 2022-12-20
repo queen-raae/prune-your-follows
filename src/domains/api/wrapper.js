@@ -75,7 +75,7 @@ export async function wrapper(req, res, handlers) {
     let status = isHttpError ? error.statusCode : 500;
     let message = isHttpError && error.expose ? error.message : "";
     let messageForUser = "";
-    let code = status;
+    let code = `${status}`;
     const tags = {};
 
     if (error.name === "TwitterResponseError") {
