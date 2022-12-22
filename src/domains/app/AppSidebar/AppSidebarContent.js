@@ -77,6 +77,7 @@ export function AppSidebarContent({ navigation, filters, user }) {
           <a
             href="https://queen.raae.codes/?utm_campaign=prune+your+follows&utm_source=app&utm_medium=sidebar"
             className="group mt-8 block rounded-sm px-3 text-sm font-medium text-stone-600"
+            onClick={(event) => fathom.trackGoal("E5XIJ5CK", 0)}
           >
             Made by Queen{" "}
             <span className="font-bold group-hover:text-orange-800">@raae</span>{" "}

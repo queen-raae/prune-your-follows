@@ -12,6 +12,7 @@ export function Footer() {
           <a
             href="https://queen.raae.codes/?utm_campaign=prune+your+follows&utm_source=app&utm_medium=footer"
             className="underline"
+            onClick={(event) => fathom.trackGoal("E5XIJ5CK", 0)}
           >
             Queen Raae
           </a>

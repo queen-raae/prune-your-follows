@@ -59,6 +59,7 @@ export function Features({ features = FOLLOWS_FILTERS }) {
               <a
                 href="https://queen.raae.codes/?utm_campaign=prune+your+follows&utm_source=app&utm_medium=features"
                 className="group mt-1.5 block max-w-xs"
+                onClick={(event) => fathom.trackGoal("E5XIJ5CK", 0)}
               >
                 <span className="block text-lg font-light leading-tight tracking-tight text-stone-600 transition group-hover:text-lime-800">
                   Queen{" "}
