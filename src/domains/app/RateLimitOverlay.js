@@ -9,10 +9,19 @@ export function RateLimitOverlay({ open }) {
   const { data: user } = useUser();
   return (
     <Modal open={open} Icon={Icon} title="Twitter needs a break">
-      <p>
+      {/* <p>
         Look at you pruning to your heart's content. Twitter only allows 50
         unfollows in 15 minutes, though 😬 Wait a couple of minutes and try
         again.
+      </p> */}
+
+      <p>
+        PYF may not facilitate any more unfollows today, looks like the holidays
+        brought the big pruners to the table and Twitter's limit was reached 😬
+      </p>
+      <p className="mt-1">
+        Come back in 24 hours, and you should be able to unfollow 50 accounts
+        per 15 minutes!
       </p>
 
       {user.email ? (
