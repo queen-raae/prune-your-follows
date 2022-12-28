@@ -16,8 +16,8 @@ export function RateLimitOverlay({ open }) {
       </p> */}
 
       <p>
-        PYF may not facilitate any more unfollows today, looks like the holidays
-        brought the big pruners to the table and Twitter's limit was reached 😬
+        Twitter does not allow PYF to facilitate any more unfollows today. Such
+        is the price of getting featured in Tech Crunch 😬 🤩
       </p>
       <p className="mt-1">
         Come back in 24 hours, and you should be able to unfollow 50 accounts
