@@ -1,8 +1,10 @@
 import React from "react";
 
 import { Logo } from "../common/Logo";
+import { useFathom } from "@raae/gatsby-plugin-fathom";
 
 export function Footer() {
+  const { trackGoal, trackPageview } = useFathom;
   return (
     <footer>
       <div className="mx-auto flex max-w-7xl flex-col items-center border-t border-stone-400/10 px-4 py-10 sm:flex-row sm:justify-between sm:space-y-3 sm:px-6 lg:px-8">
@@ -10,32 +12,50 @@ export function Footer() {
         <p className="text-sm text-stone-500 sm:text-center">
           Made by{" "}
           <a
-            href="https://queen.raae.codes/?utm_campaign=prune+your+follows&utm_source=app&utm_medium=footer"
+            onClick={() =>
+              trackPageview({
+                url: "https://pruneyourfollows.com/",
+                referrer: "https://queen.raae.codes/footer",
+              })
+            }
             className="underline"
-            onClick={(event) => fathom.trackGoal("E5XIJ5CK", 0)}
           >
             Queen Raae
           </a>
           , powered by{" "}
           <a
+            onClick={() =>
+              trackPageview({
+                url: "https://xata.io/",
+                referrer: "https://queen.raae.codes/footer",
+              })
+            }
             className="underline"
-            href="https://xata.io/?utm_campaign=prune+your+follows&utm_source=app&utm_medium=footer"
           >
             Xata
           </a>{" "}
           | Support: Get help on{" "}
           <a
             className="underline"
-            href="https://github.com/queen-raae/prune-your-follows/discussions/categories/support"
+            onClick={() =>
+              trackPageview({
+                url: "https://github.com/queen-raae/prune-your-follows/discussions/categories/support",
+                referrer: "https://queen.raae.codes/footer",
+              })
+            }
           >
             Github
           </a>{" "}
           or{" "}
           <a
-            href="https://twitter.com/raae"
             className="underline"
             target="_blank"
             rel="noreferrer"
+            onClick={() =>
+              trackPageview({
+                url: "https://twitter.com/raae",
+              })
+            }
           >
             Twitter DM
           </a>
@@ -43,7 +63,7 @@ export function Footer() {
 
         <div className="flex gap-x-6">
           <a
-            href="https://twitter.com/raae"
+            onClick={() => trackPageview({ url: "https://twitter.com/raae" })}
             className="group"
             aria-label="@raae on Twitter"
             target="_blank"
@@ -57,11 +77,15 @@ export function Footer() {
             </svg>
           </a>
           <a
-            href="https://github.com/queen-raae/prune-your-follows"
+            onClick={() =>
+              trackPageview({
+                url: "https://github.com/queen-raae/prune-your-follows",
+                referrer: "https://queen.raae.codes/footer",
+              })
+            }
             className="group"
             aria-label="Queen Raae on GitHub"
             target="_blank"
-            rel="noreferrer"
           >
             <svg
               aria-hidden="true"

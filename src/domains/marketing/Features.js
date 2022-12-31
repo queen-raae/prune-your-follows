@@ -3,7 +3,10 @@ import XataLogo from "../common/xata-colored-with-text.svg";
 
 import { FOLLOWS_FILTERS } from "../app/filter/useFilter";
 
+import { useFathom } from "@raae/gatsby-plugin-fathom";
+
 export function Features({ features = FOLLOWS_FILTERS }) {
+  const { trackGoal, trackPageview } = useFathom;
   return (
     <section className="relative bg-green-50 pt-12 pb-28 sm:py-32">
       <div className="mx-auto max-w-7xl px-4 py-0 lg:grid lg:grid-cols-5 lg:gap-x-24 lg:py-24 lg:px-8">
@@ -57,9 +60,13 @@ export function Features({ features = FOLLOWS_FILTERS }) {
                 Made by
               </h2>
               <a
-                href="https://queen.raae.codes/?utm_campaign=prune+your+follows&utm_source=app&utm_medium=features"
                 className="group mt-1.5 block max-w-xs"
-                onClick={(event) => fathom.trackGoal("E5XIJ5CK", 0)}
+                onClick={() =>
+                  trackPageview({
+                    url: "https://pruneyourfollows.com/",
+                    referrer: "https://queen.raae.codes",
+                  })
+                }
               >
                 <span className="block text-lg font-light leading-tight tracking-tight text-stone-600 transition group-hover:text-lime-800">
                   Queen{" "}
