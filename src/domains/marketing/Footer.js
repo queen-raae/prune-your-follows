@@ -1,10 +1,11 @@
 import React from "react";
 
 import { Logo } from "../common/Logo";
+
 import { useFathom } from "@raae/gatsby-plugin-fathom";
 
 export function Footer() {
-  const { trackGoal, trackPageview } = useFathom;
+  const { trackPageview } = useFathom();
   return (
     <footer>
       <div className="mx-auto flex max-w-7xl flex-col items-center border-t border-stone-400/10 px-4 py-10 sm:flex-row sm:justify-between sm:space-y-3 sm:px-6 lg:px-8">
@@ -14,8 +15,8 @@ export function Footer() {
           <a
             onClick={() =>
               trackPageview({
-                url: "https://pruneyourfollows.com/",
-                referrer: "https://queen.raae.codes/footer",
+                url: "https://queen.raae.codes/",
+                referrer: "https://pruneyourfollows.com/footer",
               })
             }
             className="underline"
@@ -27,7 +28,7 @@ export function Footer() {
             onClick={() =>
               trackPageview({
                 url: "https://xata.io/",
-                referrer: "https://queen.raae.codes/footer",
+                referrer: "https://pruneyourfollows.com/footer",
               })
             }
             className="underline"
@@ -40,7 +41,7 @@ export function Footer() {
             onClick={() =>
               trackPageview({
                 url: "https://github.com/queen-raae/prune-your-follows/discussions/categories/support",
-                referrer: "https://queen.raae.codes/footer",
+                referrer: "https://pruneyourfollows.com/footer",
               })
             }
           >
@@ -80,7 +81,7 @@ export function Footer() {
             onClick={() =>
               trackPageview({
                 url: "https://github.com/queen-raae/prune-your-follows",
-                referrer: "https://queen.raae.codes/footer",
+                referrer: "https://pruneyourfollows.com/footer",
               })
             }
             className="group"

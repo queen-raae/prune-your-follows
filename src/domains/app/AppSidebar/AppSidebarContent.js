@@ -77,9 +77,13 @@ export function AppSidebarContent({ navigation, filters, user }) {
         </nav>
         <aside className="px-2">
           <a
-            href="https://queen.raae.codes/?utm_campaign=prune+your+follows&utm_source=app&utm_medium=sidebar"
+            onClick={() =>
+              trackPageview({
+                url: "https://queen.raae.codes/",
+                referrer: "https://pruneyourfollows.com/",
+              })
+            }
             className="group mt-8 block rounded-sm px-3 text-sm font-medium text-stone-600"
-            onClick={() => trackGoal("E5XIJ5CK", 0)}
           >
             Made by Queen{" "}
             <span className="font-bold group-hover:text-orange-800">@raae</span>{" "}
@@ -92,7 +96,12 @@ export function AppSidebarContent({ navigation, filters, user }) {
             </span>
           </a>
           <a
-            href="https://xata.io/?utm_campaign=prune+your+follows&utm_source=app&utm_medium=sidebar"
+            onClick={() =>
+              trackPageview({
+                url: "https://xata.io/",
+                referrer: "https://pruneyourfollows.com/",
+              })
+            }
             className="group mt-2 block rounded-sm px-3 text-sm font-medium text-stone-600"
           >
             Powered by{" "}
