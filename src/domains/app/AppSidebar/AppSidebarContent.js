@@ -4,10 +4,10 @@ import clsx from "clsx";
 import { Logo } from "../../common/Logo";
 import XataLogo from "../../common/xata-colored-with-text.svg";
 import { LogoutButton } from "../user";
-import { useFathom } from "@raae/gatsby-plugin-fathom";
+import { useFathom } from "@raae/gatsby-plugin-fathom"
 
 export function AppSidebarContent({ navigation, filters, user }) {
-  const { trackGoal, trackPageview } = useFathom();
+  const { trackGoal } = useFathom();
   return (
     <div className="flex min-h-full flex-col bg-green-100">
       <div className="flex h-16 flex-shrink-0 items-center border-b border-green-200 px-4">
@@ -78,11 +78,12 @@ export function AppSidebarContent({ navigation, filters, user }) {
         <aside className="px-2">
           <a
             onClick={() =>
-              trackPageview({
+              trackGoal(E5XIJ5CK, 0, {
                 url: "https://queen.raae.codes/",
                 referrer: "https://pruneyourfollows.com/",
               })
             }
+            href="https://queen.raae.codes/"
             className="group mt-8 block rounded-sm px-3 text-sm font-medium text-stone-600"
           >
             Made by Queen{" "}
@@ -97,11 +98,12 @@ export function AppSidebarContent({ navigation, filters, user }) {
           </a>
           <a
             onClick={() =>
-              trackPageview({
+              trackGoal(GEVKO638, 0, {
                 url: "https://xata.io/",
                 referrer: "https://pruneyourfollows.com/",
               })
             }
+            href="https://xata.io/"
             className="group mt-2 block rounded-sm px-3 text-sm font-medium text-stone-600"
           >
             Powered by{" "}
