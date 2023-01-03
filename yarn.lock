@@ -2513,10 +2513,10 @@
     schema-utils "^2.6.5"
     source-map "^0.7.3"
 
-"@raae/gatsby-plugin-fathom@0.0.4":
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/@raae/gatsby-plugin-fathom/-/gatsby-plugin-fathom-0.0.4.tgz#8ba8c5fd077e47de33b85df63573eede94590f39"
-  integrity sha512-0VaaOANHr6aqIW0VlMyeqV6K22clJLETcDLwx3i/pD65HWuTcBt4k2AmspCJfmtaHOA5r3SgQVSrxQsjzVsqjQ==
+"@raae/gatsby-plugin-fathom@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@raae/gatsby-plugin-fathom/-/gatsby-plugin-fathom-0.1.0.tgz#ca5dd57ea33f88919b16749157e5ad2c72bc87a4"
+  integrity sha512-EYoh59E0U5/1q1ZzPNCamg83UxMEUEpCzfm0dPJPjT8E6Fm4bFx1k4wdml2VemfNGCzk6kzM6w3TLPrPMFyckQ==
 
 "@sentry/browser@7.25.0":
   version "7.25.0"

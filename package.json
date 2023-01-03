@@ -22,7 +22,7 @@
     "@heroicons/react": "2.0.12",
     "@mdx-js/mdx": "v1",
     "@mdx-js/react": "v1",
-    "@raae/gatsby-plugin-fathom": "0.0.4",
+    "@raae/gatsby-plugin-fathom": "^0.1.0",
     "@sentry/gatsby": "7.25.0",
     "@sentry/node": "7.25.0",
     "@sentry/tracing": "7.25.0",

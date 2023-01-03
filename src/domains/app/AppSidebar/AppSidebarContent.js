@@ -4,7 +4,7 @@ import clsx from "clsx";
 import { Logo } from "../../common/Logo";
 import XataLogo from "../../common/xata-colored-with-text.svg";
 import { LogoutButton } from "../user";
-import { useFathom } from "@raae/gatsby-plugin-fathom"
+import { useFathom } from "@raae/gatsby-plugin-fathom";
 
 export function AppSidebarContent({ navigation, filters, user }) {
   const { trackGoal } = useFathom();
@@ -77,12 +77,7 @@ export function AppSidebarContent({ navigation, filters, user }) {
         </nav>
         <aside className="px-2">
           <a
-            onClick={() =>
-              trackGoal(E5XIJ5CK, 0, {
-                url: "https://queen.raae.codes/",
-                referrer: "https://pruneyourfollows.com/",
-              })
-            }
+            onClick={() => (E5XIJ5CK, 0)}
             href="https://queen.raae.codes/"
             className="group mt-8 block rounded-sm px-3 text-sm font-medium text-stone-600"
           >
@@ -97,12 +92,7 @@ export function AppSidebarContent({ navigation, filters, user }) {
             </span>
           </a>
           <a
-            onClick={() =>
-              trackGoal(GEVKO638, 0, {
-                url: "https://xata.io/",
-                referrer: "https://pruneyourfollows.com/",
-              })
-            }
+            onClick={() => (GEVKO638, 0)}
             href="https://xata.io/"
             className="group mt-2 block rounded-sm px-3 text-sm font-medium text-stone-600"
           >
