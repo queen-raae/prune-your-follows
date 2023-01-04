@@ -4,6 +4,7 @@ import { navigate } from "gatsby";
 import useSiteMetadata from "../../../domains/common/useSiteMetadata";
 import { AppLayout } from "../../../domains/app/AppLayout";
 import { SearchForm, SearchResults } from "../../../domains/app/search";
+import { useDebounce } from "usehooks-ts";
 
 export const Head = () => {
   const meta = useSiteMetadata();
@@ -18,16 +19,17 @@ export const Head = () => {
 export default function App(props) {
   const { term: encodedTerm, location } = props;
   const [term, setTerm] = useState(decodeURIComponent(encodedTerm || ""));
+  const debouncedTerm = useDebounce(term, 300);
 
   useEffect(() => {
-    const newEncodedTerm = encodeURIComponent(term || "");
+    const newEncodedTerm = encodeURIComponent(debouncedTerm || "");
 
     if (newEncodedTerm) {
       navigate(`/app/search/${newEncodedTerm}/`);
     } else {
       navigate(`/app/`, { state: { searchAutoFocus: true } });
     }
-  }, [term]);
+  }, [debouncedTerm]);
 
   return (
     <>
