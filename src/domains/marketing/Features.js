@@ -61,7 +61,7 @@ export function Features({ features = FOLLOWS_FILTERS }) {
               <a
                 className="group mt-1.5 block max-w-xs"
                 href="https://queen.raae.codes"
-                onClick={() => (E5XIJ5CK, 0)}
+                onClick={() => trackGoal("E5XIJ5CK", 0)}
               >
                 <span className="block text-lg font-light leading-tight tracking-tight text-stone-600 transition group-hover:text-lime-800">
                   Queen{" "}
@@ -78,7 +78,7 @@ export function Features({ features = FOLLOWS_FILTERS }) {
                 Powered by
               </h2>
               <a
-                onClick={() => (GEVKO638, 0)}
+                onClick={() => trackGoal("GEVKO638", 0)}
                 href="https://xata.io/"
                 className="group mt-1.5 block max-w-xs text-lg font-semibold leading-snug tracking-tight text-stone-600 transition hover:text-lime-700"
               >

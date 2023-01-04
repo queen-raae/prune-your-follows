@@ -77,7 +77,7 @@ export function AppSidebarContent({ navigation, filters, user }) {
         </nav>
         <aside className="px-2">
           <a
-            onClick={() => (E5XIJ5CK, 0)}
+            onClick={() => trackGoal("E5XIJ5CK", 0)}
             href="https://queen.raae.codes/"
             className="group mt-8 block rounded-sm px-3 text-sm font-medium text-stone-600"
           >
@@ -92,7 +92,7 @@ export function AppSidebarContent({ navigation, filters, user }) {
             </span>
           </a>
           <a
-            onClick={() => (GEVKO638, 0)}
+            onClick={() => trackGoal("GEVKO638", 0)}
             href="https://xata.io/"
             className="group mt-2 block rounded-sm px-3 text-sm font-medium text-stone-600"
           >
