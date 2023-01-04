@@ -4,7 +4,7 @@ import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 
 export function SearchForm({ term, onTermChange, ...props }) {
   return (
-    <form className="flex w-full">
+    <form className="flex w-full" onSubmit={(event) => event.preventDefault()}>
       <label htmlFor="search-field" className="sr-only">
         Search
       </label>
