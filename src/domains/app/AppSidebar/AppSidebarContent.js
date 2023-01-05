@@ -4,8 +4,10 @@ import clsx from "clsx";
 import { Logo } from "../../common/Logo";
 import XataLogo from "../../common/xata-colored-with-text.svg";
 import { LogoutButton } from "../user";
+import { useFathom } from "@raae/gatsby-plugin-fathom";
 
 export function AppSidebarContent({ navigation, filters, user }) {
+  const { trackGoal } = useFathom();
   return (
     <div className="flex min-h-full flex-col bg-green-100">
       <div className="flex h-16 flex-shrink-0 items-center border-b border-green-200 px-4">
@@ -75,7 +77,8 @@ export function AppSidebarContent({ navigation, filters, user }) {
         </nav>
         <aside className="px-2">
           <a
-            href="https://queen.raae.codes/?utm_campaign=prune+your+follows&utm_source=app&utm_medium=sidebar"
+            onClick={() => trackGoal("E5XIJ5CK", 0)}
+            href="https://queen.raae.codes/"
             className="group mt-8 block rounded-sm px-3 text-sm font-medium text-stone-600"
           >
             Made by Queen{" "}
@@ -89,7 +92,8 @@ export function AppSidebarContent({ navigation, filters, user }) {
             </span>
           </a>
           <a
-            href="https://xata.io/?utm_campaign=prune+your+follows&utm_source=app&utm_medium=sidebar"
+            onClick={() => trackGoal("GEVKO638", 0)}
+            href="https://xata.io/"
             className="group mt-2 block rounded-sm px-3 text-sm font-medium text-stone-600"
           >
             Powered by{" "}
@@ -104,7 +108,10 @@ export function AppSidebarContent({ navigation, filters, user }) {
         <p className="truncate text-sm text-green-700">
           {user?.username ? `@${user?.username}` : <>&nbsp;</>}
         </p>
-        <LogoutButton className="mt-2 flex w-full items-center justify-center rounded-md border border-transparent bg-green-900 px-3 py-2 text-sm font-medium text-orange-50 shadow-sm sm:px-8" />
+        <LogoutButton
+          onClick={() => trackGoal("E5XIJ5CK", 0)}
+          className="mt-2 flex w-full items-center justify-center rounded-md border border-transparent bg-green-900 px-3 py-2 text-sm font-medium text-orange-50 shadow-sm sm:px-8"
+        />
       </section>
     </div>
   );

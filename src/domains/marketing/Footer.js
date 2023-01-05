@@ -2,7 +2,10 @@ import React from "react";
 
 import { Logo } from "../common/Logo";
 
+import { useFathom } from "@raae/gatsby-plugin-fathom";
+
 export function Footer() {
+  const { trackGoal } = useFathom();
   return (
     <footer>
       <div className="mx-auto flex max-w-7xl flex-col items-center border-t border-stone-400/10 px-4 py-10 sm:flex-row sm:justify-between sm:space-y-3 sm:px-6 lg:px-8">
@@ -10,22 +13,25 @@ export function Footer() {
         <p className="text-sm text-stone-500 sm:text-center">
           Made by{" "}
           <a
-            href="https://queen.raae.codes/?utm_campaign=prune+your+follows&utm_source=app&utm_medium=footer"
+            onClick={() => trackGoal("E5XIJ5CK", 0)}
+            href="https://queen.raae.codes/"
             className="underline"
           >
             Queen Raae
           </a>
           , powered by{" "}
           <a
+            onClick={() => trackGoal("GEVKO638", 0)}
+            href="https://xata.io/"
             className="underline"
-            href="https://xata.io/?utm_campaign=prune+your+follows&utm_source=app&utm_medium=footer"
           >
             Xata
           </a>{" "}
           | Support: Get help on{" "}
           <a
-            className="underline"
             href="https://github.com/queen-raae/prune-your-follows/discussions/categories/support"
+            className="underline"
+            onClick={() => trackGoal("KPVE0RLO", 0)}
           >
             Github
           </a>{" "}
@@ -35,6 +41,7 @@ export function Footer() {
             className="underline"
             target="_blank"
             rel="noreferrer"
+            onClick={() => trackGoal("0U7VHDJA", 0)}
           >
             Twitter DM
           </a>
@@ -43,6 +50,7 @@ export function Footer() {
         <div className="flex gap-x-6">
           <a
             href="https://twitter.com/raae"
+            onClick={() => trackGoal("0U7VHDJA", 0)}
             className="group"
             aria-label="@raae on Twitter"
             target="_blank"
@@ -56,11 +64,11 @@ export function Footer() {
             </svg>
           </a>
           <a
+            onClick={() => trackGoal("KPVE0RLO", 0)}
             href="https://github.com/queen-raae/prune-your-follows"
             className="group"
             aria-label="Queen Raae on GitHub"
             target="_blank"
-            rel="noreferrer"
           >
             <svg
               aria-hidden="true"
