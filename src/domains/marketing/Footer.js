@@ -31,7 +31,7 @@ export function Footer() {
           <a
             href="https://github.com/queen-raae/prune-your-follows/discussions/categories/support"
             className="underline"
-            onClick={() => trackGoal("E5XIJ5CK", 0)}
+            onClick={() => trackGoal("KPVE0RLO", 0)}
           >
             Github
           </a>{" "}
@@ -41,7 +41,7 @@ export function Footer() {
             className="underline"
             target="_blank"
             rel="noreferrer"
-            onClick={() => trackGoal("E5XIJ5CK", 0)}
+            onClick={() => trackGoal("0U7VHDJA", 0)}
           >
             Twitter DM
           </a>
@@ -50,7 +50,7 @@ export function Footer() {
         <div className="flex gap-x-6">
           <a
             href="https://twitter.com/raae"
-            onClick={() => trackGoal("E5XIJ5CK", 0)}
+            onClick={() => trackGoal("0U7VHDJA", 0)}
             className="group"
             aria-label="@raae on Twitter"
             target="_blank"
@@ -64,7 +64,7 @@ export function Footer() {
             </svg>
           </a>
           <a
-            onClick={() => trackGoal("E5XIJ5CK", 0)}
+            onClick={() => trackGoal("KPVE0RLO", 0)}
             href="https://github.com/queen-raae/prune-your-follows"
             className="group"
             aria-label="Queen Raae on GitHub"
