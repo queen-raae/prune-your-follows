@@ -70,5 +70,13 @@ module.exports = {
         release: process.env.COMMIT_REF,
       },
     },
+    {
+      resolve: `gatsby-plugin-gatsby-cloud`,
+      options: {
+        headers: {
+          "/*": ["Referrer-Policy: strict-origin-when-cross-origin"],
+        },
+      },
+    },
   ],
 };
