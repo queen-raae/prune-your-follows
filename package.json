@@ -36,6 +36,7 @@
     "date-fns": "2.29.1",
     "focus-visible": "5.2.0",
     "gatsby": "^4.20.0",
+    "gatsby-plugin-gatsby-cloud": "4.25.0",
     "gatsby-plugin-image": "2.24.0",
     "gatsby-plugin-manifest": "^4.0.0",
     "gatsby-plugin-mdx": "3.20.0",
