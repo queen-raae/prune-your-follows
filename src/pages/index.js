@@ -19,6 +19,7 @@ export const Head = () => {
     <>
       <title>{meta?.title}</title>
       <meta name="description" content={meta?.description} />
+      <meta name="og:image" content={meta?.url + "/og-image.png"} />
     </>
   );
 };
