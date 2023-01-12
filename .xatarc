@@ -3,6 +3,7 @@
   "codegen": {
     "output": "./src/domains/xata/index.js",
     "moduleType": "esm",
-    "declarations": true
+    "declarations": true,
+    "workersBuildId": ""
   }
 }
