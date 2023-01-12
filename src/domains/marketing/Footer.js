@@ -39,8 +39,6 @@ export function Footer() {
           <a
             href="https://twitter.com/raae"
             className="underline"
-            target="_blank"
-            rel="noreferrer"
             onClick={() => trackGoal("0U7VHDJA", 0)}
           >
             Twitter DM
@@ -53,8 +51,6 @@ export function Footer() {
             onClick={() => trackGoal("0U7VHDJA", 0)}
             className="group"
             aria-label="@raae on Twitter"
-            target="_blank"
-            rel="noreferrer"
           >
             <svg
               aria-hidden="true"
@@ -68,7 +64,6 @@ export function Footer() {
             href="https://github.com/queen-raae/prune-your-follows"
             className="group"
             aria-label="Queen Raae on GitHub"
-            target="_blank"
           >
             <svg
               aria-hidden="true"

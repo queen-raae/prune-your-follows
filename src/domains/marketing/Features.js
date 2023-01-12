@@ -1,7 +1,7 @@
 import React from "react";
 import XataLogo from "../common/xata-colored-with-text.svg";
 
-import { FOLLOWS_FILTERS } from "../app/filter/useFilter";
+import { FOLLOWS_FILTERS } from "../app/filter";
 import { useFathom } from "@raae/gatsby-plugin-fathom";
 
 export function Features({ features = FOLLOWS_FILTERS }) {
