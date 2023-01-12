@@ -10,6 +10,7 @@
   ],
   "scripts": {
     "develop": "gatsby develop",
+    "workers": "xata workers watch",
     "start": "gatsby develop",
     "build": "gatsby build",
     "serve": "gatsby serve",

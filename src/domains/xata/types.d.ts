@@ -1,4 +1,4 @@
-import {
+import type {
   BaseClientOptions,
   SchemaInference,
   XataRecord,
@@ -82,10 +82,6 @@ declare const tables: readonly [
         readonly type: "string";
       },
       {
-        readonly name: "timestamp";
-        readonly type: "datetime";
-      },
-      {
         readonly name: "unfollowed";
         readonly type: "datetime";
       },
@@ -113,17 +109,21 @@ declare const tables: readonly [
       {
         readonly name: "next";
         readonly type: "datetime";
+      },
+      {
+        readonly name: "email";
+        readonly type: "email";
       }
     ];
   }
 ];
-export declare type SchemaTables = typeof tables;
-export declare type InferredTypes = SchemaInference<SchemaTables>;
-export declare type Accounts = InferredTypes["accounts"];
-export declare type AccountsRecord = Accounts & XataRecord;
-export declare type Meta = InferredTypes["meta"];
-export declare type MetaRecord = Meta & XataRecord;
-export declare type DatabaseSchema = {
+export type SchemaTables = typeof tables;
+export type InferredTypes = SchemaInference<SchemaTables>;
+export type Accounts = InferredTypes["accounts"];
+export type AccountsRecord = Accounts & XataRecord;
+export type Meta = InferredTypes["meta"];
+export type MetaRecord = Meta & XataRecord;
+export type DatabaseSchema = {
   accounts: AccountsRecord;
   meta: MetaRecord;
 };
@@ -132,4 +132,5 @@ export declare class XataClient extends DatabaseClient<DatabaseSchema> {
   constructor(options?: BaseClientOptions);
 }
 export declare const getXataClient: () => XataClient;
+export declare const xataWorker: any;
 export {};
