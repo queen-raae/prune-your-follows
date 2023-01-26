@@ -15,7 +15,6 @@ import { Stats } from "../domains/marketing/Stats";
 
 export const Head = () => {
   const { url, socialImage, ...meta } = useSiteMetadata();
-  console.log(socialImage);
   return (
     <>
       <title>{meta?.title}</title>
