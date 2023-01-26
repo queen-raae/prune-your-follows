@@ -15,7 +15,10 @@ module.exports = {
     title: `Prune your follows`,
     tagline: `Let's prune your follows!`,
     description: `Find Twitter accounts to unfollow and make room for new follows.`,
-    url: "https://prune.raae.tech",
+    url:
+      environment === "development"
+        ? "http://localhost:8000"
+        : "https://pruneyourfollows.com",
   },
   trailingSlash: "always",
   plugins: [
