@@ -28,6 +28,15 @@ module.exports = {
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
     {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        // The unique name for each instance
+        name: `assets`,
+        // Path to the directory
+        path: `${__dirname}/assets/`,
+      },
+    },
+    {
       resolve: `@raae/gatsby-plugin-fathom`,
       options: {
         site: "LFDKNTLD",

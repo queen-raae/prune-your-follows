@@ -14,15 +14,21 @@ import useSiteMetadata from "../domains/common/useSiteMetadata";
 import { Stats } from "../domains/marketing/Stats";
 
 export const Head = () => {
-  const meta = useSiteMetadata();
-  const socialImage = `${meta.url}/og-image.png`;
+  const { url, socialImage, ...meta } = useSiteMetadata();
+  console.log(socialImage);
   return (
     <>
       <title>{meta?.title}</title>
       <meta name="description" content={meta?.description} />
-      <meta property="og:image" content={socialImage} />
+      <meta
+        property="og:image"
+        content={`${url}${socialImage?.gatsbyImageData.images?.fallback?.src}`}
+      />
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:image" content={socialImage} />
+      <meta
+        name="twitter:image"
+        content={`${url}${socialImage?.gatsbyImageData.images?.fallback?.src}`}
+      />
     </>
   );
 };
