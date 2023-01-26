@@ -45,7 +45,7 @@
     "gatsby-plugin-react-svg": "3.3.0",
     "gatsby-plugin-remote-images": "3.5.0",
     "gatsby-plugin-sharp": "4.24.0",
-    "gatsby-source-filesystem": "4.24.0",
+    "gatsby-source-filesystem": "4.25.0",
     "gatsby-transformer-sharp": "4.24.0",
     "html-react-parser": "3.0.4",
     "lodash": "4.17.21",
