@@ -7,10 +7,9 @@ export function Avatars() {
     query {
       allUserAvatar {
         nodes {
-          username
           localImage {
             childImageSharp {
-              gatsbyImageData(width: 32, placeholder: BLURRED)
+              gatsbyImageData(width: 6, placeholder: BLURRED)
             }
           }
         }
@@ -29,16 +28,18 @@ export function Avatars() {
       </div>
 
       <ul className="flex justify-center -space-x-1 overflow-hidden py-6">
-        {data.allUserAvatar.nodes.map((user) => {
+        {data.allUserAvatar.nodes.map((user, index) => {
           const image = getImage(user.localImage);
           return (
-            <li className="shrink-0" key={user.username}>
-              <GatsbyImage
-                key={user.username}
-                className="h-10 w-10 rounded-full ring-2 ring-orange-50"
-                image={image}
-                alt={user.username}
-              />
+            <li className="relative h-10 w-10 shrink-0" key={index}>
+              <div className="absolute inset-0 overflow-hidden rounded-full bg-orange-50">
+                <GatsbyImage
+                  className="h-full w-full"
+                  image={image}
+                  alt={`Random user ${index}`}
+                />
+              </div>
+              <div className="absolute inset-0 rounded-full ring-2 ring-orange-50"></div>
             </li>
           );
         })}
