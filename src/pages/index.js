@@ -11,7 +11,7 @@ import { CallToAction } from "../domains/marketing/CallToAction";
 
 import { LoginButton } from "../domains/app/user";
 import useSiteMetadata from "../domains/common/useSiteMetadata";
-import { Stats } from "../domains/marketing/Stats";
+import { UsageData } from "../domains/marketing/UsageData";
 
 export const Head = () => {
   const { url, socialImage, ...meta } = useSiteMetadata();
@@ -44,7 +44,7 @@ export default function Home() {
       <main>
         <Hero />
         <Avatars />
-        <Stats />
+        <UsageData />
         <Features />
         <CallToAction />
         <Newsletter />

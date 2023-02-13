@@ -59,17 +59,17 @@ exports.sourceNodes = async (gatsbyUtils) => {
     },
   });
 
-  const statsData = {
+  const usageData = {
     unfollowedCount: result.aggs.unfollowsTotal,
     userCount: result.aggs.usersTotal,
   };
 
   createNode({
-    id: createNodeId("statistics"),
-    ...statsData,
+    id: createNodeId("UsageData"),
+    ...usageData,
     internal: {
-      type: "Statistics",
-      contentDigest: createContentDigest(statsData),
+      type: "UsageData",
+      contentDigest: createContentDigest(usageData),
     },
   });
 
