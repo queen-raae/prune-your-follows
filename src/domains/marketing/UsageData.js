@@ -24,7 +24,9 @@ export function UsageData() {
                     Users
                   </dt>
                   <dd className="order-1 text-5xl font-bold tracking-tight text-green-600">
-                    {data.usageData.userCount}
+                    {new Intl.NumberFormat("en-IN").format(
+                      data.usageData.userCount
+                    )}
                   </dd>
                 </div>
                 <div className="flex flex-col border-t border-stone-100 p-6 text-center sm:border-0 sm:border-l">
@@ -32,7 +34,9 @@ export function UsageData() {
                     Unfollows
                   </dt>
                   <dd className="order-1 text-5xl font-bold tracking-tight text-green-600">
-                    {data.usageData.unfollowedCount}
+                    {new Intl.NumberFormat("en-IN").format(
+                      data.usageData.unfollowedCount
+                    )}
                   </dd>
                 </div>
               </dl>
