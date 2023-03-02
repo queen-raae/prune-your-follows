@@ -2,7 +2,7 @@ import React from "react";
 import { useStaticQuery, graphql } from "gatsby";
 
 const formatNumber = (number) => {
-  return number.toLocaleString("en-IN").replace(",", " ");
+  return number.toLocaleString("en");
 };
 
 export function UsageData() {
@@ -14,6 +14,8 @@ export function UsageData() {
       }
     }
   `);
+
+  const { unfollowedCount, userCount } = data.usageData;
 
   return (
     <section className="bg-green-100 pt-1">
@@ -28,7 +30,7 @@ export function UsageData() {
                     Users
                   </dt>
                   <dd className="order-1 text-5xl font-bold tracking-tight text-green-600">
-                    {formatNumber(data.usageData.userCount)}
+                    <data val={userCount}>{formatNumber(userCount)}</data>
                   </dd>
                 </div>
                 <div className="flex flex-col border-t border-stone-100 p-6 text-center sm:border-0 sm:border-l">
@@ -36,7 +38,9 @@ export function UsageData() {
                     Unfollows
                   </dt>
                   <dd className="order-1 text-5xl font-bold tracking-tight text-green-600">
-                    {formatNumber(data.usageData.unfollowedCount)}
+                    <data val={unfollowedCount}>
+                      {formatNumber(unfollowedCount)}
+                    </data>
                   </dd>
                 </div>
               </dl>
