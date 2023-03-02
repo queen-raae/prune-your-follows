@@ -1,6 +1,10 @@
 import React from "react";
 import { useStaticQuery, graphql } from "gatsby";
 
+const formatNumber = (number) => {
+  return number.toLocaleString("en-IN").replace(",", " ");
+};
+
 export function UsageData() {
   const data = useStaticQuery(graphql`
     query {
@@ -24,7 +28,7 @@ export function UsageData() {
                     Users
                   </dt>
                   <dd className="order-1 text-5xl font-bold tracking-tight text-green-600">
-                    {data.usageData.userCount}
+                    {formatNumber(data.usageData.userCount)}
                   </dd>
                 </div>
                 <div className="flex flex-col border-t border-stone-100 p-6 text-center sm:border-0 sm:border-l">
@@ -32,7 +36,7 @@ export function UsageData() {
                     Unfollows
                   </dt>
                   <dd className="order-1 text-5xl font-bold tracking-tight text-green-600">
-                    {data.usageData.unfollowedCount}
+                    {formatNumber(data.usageData.unfollowedCount)}
                   </dd>
                 </div>
               </dl>
