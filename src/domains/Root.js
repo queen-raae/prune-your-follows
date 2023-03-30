@@ -9,16 +9,35 @@ import { SessionProvider } from "next-auth/react";
 
 import "focus-visible";
 import "./global.css";
-import { RateLimitOverlay } from "./app/RateLimitOverlay";
+import { RateLimitUnkownOverlay } from "./app/RateLimitUnkownOverlay";
+import { RateLimitAppOverlay } from "./app/RateLimitAppOverlay";
+import { RateLimitUserOverlay } from "./app/RateLimitUserOverlay";
+
+const RATE_LIMIT_TYPE = {
+  UNKNOWN: "Unknown rate limit reached",
+  APP: "App rate limit is reached",
+  USER: "User rate limit is reached",
+};
 
 const Root = ({ children }) => {
-  const [isRateLimitted, setIsRateLimitted] = useState(false);
+  const [rateLimitReachedType, setRateLimitReachedType] = useState(null);
 
   const queryClient = new QueryClient({
     mutationCache: new MutationCache({
       onError: (error) => {
         if (error.response?.status === 429) {
-          setIsRateLimitted(true);
+          switch (error.response?.code) {
+            case "RateLimitApp":
+              setRateLimitReachedType(RATE_LIMIT_TYPE.APP);
+              break;
+            case "RateLimitUser":
+              setRateLimitReachedType(RATE_LIMIT_TYPE.USER);
+              break;
+
+            default:
+              setRateLimitReachedType(RATE_LIMIT_TYPE.UNKNOWN);
+              break;
+          }
         }
       },
     }),
@@ -27,7 +46,15 @@ const Root = ({ children }) => {
   return (
     <SessionProvider>
       <QueryClientProvider client={queryClient}>
-        <RateLimitOverlay open={isRateLimitted} />
+        <RateLimitUnkownOverlay
+          open={rateLimitReachedType === RATE_LIMIT_TYPE.UNKNOWN}
+        />
+        <RateLimitAppOverlay
+          open={rateLimitReachedType === RATE_LIMIT_TYPE.APP}
+        />
+        <RateLimitUserOverlay
+          open={rateLimitReachedType === RATE_LIMIT_TYPE.USER}
+        />
         {children}
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
