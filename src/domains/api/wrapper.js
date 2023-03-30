@@ -84,17 +84,22 @@ export async function wrapper(req, res, handlers) {
       message = error.message;
       messageForUser =
         error.error?.errors?.[0]?.message &&
-        `Twitter says "${error.error?.errors?.[0]?.message}"`;
+        `From Twitter: "${error.error?.errors?.[0]?.message}"`;
 
       if (error.status === 429) {
         // Distinguish between app and user rate limiting
         const limitRemaining = error.headers?.["x-rate-limit-remaining"];
         tags["twitter.limitRemaining"] = limitRemaining;
-        code = status + "-TU";
-        if (parseInt(limitRemaining) !== 0) {
-          code = status + "-TA";
+        code = "RateLimitUser";
+
+        if (parseInt(limitRemaining) > 0) {
+          // If use has more than 0 left to rate limit
+          // the limit is on the app
+          code = "RateLimitApp";
           error.message = `${error.message} (App)`;
         }
+
+        error.message = `${error.message} (${code})`;
       }
 
       tags["twitter.statusText"] = error.statusText;
