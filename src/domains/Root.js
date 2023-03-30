@@ -9,7 +9,7 @@ import { SessionProvider } from "next-auth/react";
 
 import "focus-visible";
 import "./global.css";
-import { RateLimitUnkownOverlay } from "./app/RateLimitUnkownOverlay";
+import { RateLimitUnknownOverlay } from "./app/RateLimitUnknownOverlay";
 import { RateLimitAppOverlay } from "./app/RateLimitAppOverlay";
 import { RateLimitUserOverlay } from "./app/RateLimitUserOverlay";
 
@@ -46,7 +46,7 @@ const Root = ({ children }) => {
   return (
     <SessionProvider>
       <QueryClientProvider client={queryClient}>
-        <RateLimitUnkownOverlay
+        <RateLimitUnknownOverlay
           open={rateLimitReachedType === RATE_LIMIT_TYPE.UNKNOWN}
         />
         <RateLimitAppOverlay

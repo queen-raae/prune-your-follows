@@ -5,7 +5,7 @@ import { EmailForm } from "./EmailForm";
 import { Modal } from "./Modal";
 import { LogoutButton, useUser } from "./user";
 
-export function RateLimitUnkownOverlay({ open }) {
+export function RateLimitUnknownOverlay({ open }) {
   const { data: user } = useUser();
   return (
     <Modal open={open} Icon={Icon} title="Twitter needs a break">
@@ -14,11 +14,15 @@ export function RateLimitUnkownOverlay({ open }) {
         back later and try again!
       </p>
 
-      <h4 className="mt-4 mb-2 text-base font-medium leading-loose">
-        Need a reminder to come back?
-      </h4>
+      {!user.email && (
+        <>
+          <h4 className="mt-4 mb-2 text-base font-medium leading-loose">
+            Need a reminder to come back?
+          </h4>
 
-      <EmailForm />
+          <EmailForm />
+        </>
+      )}
 
       {/* {user.email ? (
         <>

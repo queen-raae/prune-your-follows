@@ -14,11 +14,15 @@ export function RateLimitAppOverlay({ open }) {
         unfollows today. <br /> <strong>Come back in 24 hours!</strong>
       </p>
 
-      <h4 className="mt-4 mb-2 text-base font-medium leading-loose">
-        Need a reminder to come back?
-      </h4>
+      {!user.email && (
+        <>
+          <h4 className="mt-4 mb-2 text-base font-medium leading-loose">
+            Need a reminder to come back?
+          </h4>
 
-      <EmailForm />
+          <EmailForm />
+        </>
+      )}
 
       {/* {user.email ? (
         <>
