@@ -3,7 +3,7 @@ import { ExclamationTriangleIcon as Icon } from "@heroicons/react/24/outline";
 import { EmailForm } from "./EmailForm";
 
 import { Modal } from "./Modal";
-import { LogoutButton, useUser } from "./user";
+import { useUser } from "./user";
 
 export function RateLimitAppOverlay({ open }) {
   const { data: user } = useUser();
