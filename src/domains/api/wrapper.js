@@ -74,7 +74,6 @@ export async function wrapper(req, res, handlers) {
     const isHttpError = createError.isHttpError(error);
     let status = isHttpError ? error.statusCode : 500;
     let message = isHttpError && error.expose ? error.message : "";
-    let messageForUser = "";
     let code = `${status}`;
     const tags = {};
 
@@ -82,9 +81,6 @@ export async function wrapper(req, res, handlers) {
       // Pass through Twitter Rate Limiting
       status = error.status;
       message = error.message;
-      messageForUser =
-        error.error?.errors?.[0]?.message &&
-        `From Twitter: "${error.error?.errors?.[0]?.message}"`;
 
       if (error.status === 429) {
         // Distinguish between app and user rate limiting
@@ -130,7 +126,6 @@ export async function wrapper(req, res, handlers) {
     // Respond with error code and message
     res.status(status).json({
       message: message,
-      messageForUser: messageForUser,
       code: code,
     });
   }

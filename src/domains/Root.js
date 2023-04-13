@@ -26,7 +26,7 @@ const Root = ({ children }) => {
     mutationCache: new MutationCache({
       onError: (error) => {
         if (error.response?.status === 429) {
-          switch (error.response?.code) {
+          switch (error.response?.data?.code) {
             case "RateLimitApp":
               setRateLimitReachedType(RATE_LIMIT_TYPE.APP);
               break;
