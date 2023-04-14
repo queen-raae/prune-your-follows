@@ -1,5 +1,6 @@
 import "../domains/api/fetch-polyfill";
 import axios from "axios";
+import { exists } from "@xata.io/client";
 import { getXataClient } from "../domains/xata";
 
 const xata = getXataClient();
@@ -12,7 +13,7 @@ const outsetaApi = axios.create({
 });
 
 export default async function handler(req, res) {
-  let page = await xata.db.meta.getPaginated({
+  let page = await xata.db.meta.filter(exists("email")).getPaginated({
     pagination: {
       size: 3,
     },
