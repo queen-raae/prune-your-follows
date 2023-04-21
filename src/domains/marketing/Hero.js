@@ -2,6 +2,7 @@ import React from "react";
 import { StaticImage } from "gatsby-plugin-image";
 
 import { LoginButton } from "../app/user";
+import { ArrowTopRightOnSquareIcon as ExternalLinkIcon } from "@heroicons/react/20/solid";
 
 export function Hero() {
   return (
@@ -19,7 +20,7 @@ export function Hero() {
             />
             <div className="absolute inset-0 bg-gradient-to-r from-lime-600 to-lime-900 mix-blend-multiply" />
           </div>
-          <div className="relative px-4 py-16 sm:px-6 sm:py-24 lg:py-32 lg:px-8">
+          <div className="relative px-4 py-16 pb-8 sm:px-6 sm:py-24 lg:py-32 lg:py-16 lg:px-8">
             <h1 className="text-center text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
               <span className="block text-orange-50">Let's prune</span>
               <span className="block text-lime-200">your follows!</span>
@@ -33,6 +34,21 @@ export function Hero() {
                 Sign in with Twitter
               </LoginButton>
             </div>
+            <p className="mx-auto mt-6 max-w-xl text-center text-xs text-orange-50">
+              The Twitter API Rate limits make this app useless whenever it goes
+              viral, and the new limits will make its current incarnation almost
+              useless. We are working on a new approach...
+              <br />
+              <a
+                className="group underline transition hover:no-underline"
+                href="https://forms.userlist.com/0e1abbbf-73fe-48cf-b5de-8dc7828b54b0"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <span>Sign up for emails and we'll keep you in the loop</span>
+                <ExternalLinkIcon className="ml-1 inline h-3 opacity-50 transition group-hover:opacity-100" />
+              </a>
+            </p>
           </div>
         </div>
       </div>
