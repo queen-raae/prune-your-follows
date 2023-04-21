@@ -11,7 +11,8 @@ export function RateLimitAppOverlay({ open }) {
     <Modal open={open} Icon={Icon} title="Twitter needs a break">
       <p>
         Twitter does not allow Prune your Follows to facilitate any more
-        unfollows today. <br /> <strong>Come back in 24 hours!</strong>
+        unfollows today. Only 500 unfollows accross all users allowed every 24
+        hours. <br /> <strong>So come back in 24 hours or more 🤪</strong>
       </p>
 
       {!user.email && (
