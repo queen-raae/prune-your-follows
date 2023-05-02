@@ -23,8 +23,8 @@ export function AppSidebarContent({ navigation, filters, user }) {
             The new Twitter API limits has us back at the drawing board.
           </p>
           <p className="text-xs">
-            You may still filter already imported follows, but syncing follow
-            with Twitter has paused and unfollow does not work.
+            You may still filter already imported follows, but syncing your
+            follows on Twitter has paused and unfollow works sometimes...
           </p>
         </aside>
         <nav className="px-2">
