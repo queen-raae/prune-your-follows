@@ -26,57 +26,55 @@ export async function importFollowing({ userId, twitterAccessToken }) {
     next: add(now, { minutes: 5 }),
   });
 
-  // No need to import as Twitter Basic API access does not allow it
+  let nextToken = null;
+  let followingCount = 0;
 
-  // let nextToken = null;
-  // let followingCount = 0;
+  do {
+    const {
+      data: following,
+      meta: twitterMeta,
+      error,
+    } = await fetchTwitterFollowing({
+      userId: userId,
+      accessToken: twitterAccessToken,
+      nextToken: nextToken,
+    });
 
-  // do {
-  //   const {
-  //     data: following,
-  //     meta: twitterMeta,
-  //     error,
-  //   } = await fetchTwitterFollowing({
-  //     userId: userId,
-  //     accessToken: twitterAccessToken,
-  //     nextToken: nextToken,
-  //   });
+    if (error) {
+      const next = error.status === 429 ? add(now, { minutes: 15 }) : now;
+      console.warn(`Twitter ${error.status} for ${userId}: Try again ${next}`);
+      await xata.db.meta.createOrUpdate({
+        id: userId,
+        next: next,
+      });
+      throw error;
+    } else {
+      nextToken = twitterMeta.next_token;
+      followingCount += following.length;
 
-  //   if (error) {
-  //     const next = error.status === 429 ? add(now, { minutes: 15 }) : now;
-  //     console.warn(`Twitter ${error.status} for ${userId}: Try again ${next}`);
-  //     await xata.db.meta.createOrUpdate({
-  //       id: userId,
-  //       next: next,
-  //     });
-  //     throw error;
-  //   } else {
-  //     nextToken = twitterMeta.next_token;
-  //     followingCount += following.length;
+      const records = following.map((account) => {
+        const record = transformTwitterAccountToAccountRecord(account);
+        record.id = `${userId}-${account.id}`;
+        record.followed_by = userId;
+        record.last = now;
+        record.unfollowed = null;
+        return record;
+      });
 
-  //     const records = following.map((account) => {
-  //       const record = transformTwitterAccountToAccountRecord(account);
-  //       record.id = `${userId}-${account.id}`;
-  //       record.followed_by = userId;
-  //       record.last = now;
-  //       record.unfollowed = null;
-  //       return record;
-  //     });
+      const accountsRecords = await xata.db.accounts.createOrUpdate(records);
+      console.log(
+        "PYF Following account records updated:",
+        accountsRecords.length
+      );
+    }
+  } while (nextToken);
 
-  //     const accountsRecords = await xata.db.accounts.createOrUpdate(records);
-  //     console.log(
-  //       "PYF Following account records updated:",
-  //       accountsRecords.length
-  //     );
-  //   }
-  // } while (nextToken);
+  await xata.db.meta.createOrUpdate({
+    id: userId,
+    last: now,
+  });
 
-  // await xata.db.meta.createOrUpdate({
-  //   id: userId,
-  //   last: now,
-  // });
-
-  // console.log("PYF Imported following", followingCount);
+  console.log("PYF Imported following", followingCount);
   return "ok";
 }
 
