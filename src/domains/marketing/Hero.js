@@ -35,9 +35,9 @@ export function Hero() {
               </LoginButton>
             </div>
             <p className="mx-auto mt-6 max-w-xl text-center text-xs text-orange-50">
-              The Twitter API Rate limits make this app useless whenever it goes
-              viral, and the new limits will make its current incarnation almost
-              useless. We are working on a new approach...
+              The new Twitter API Rate limits make this app useless whenever it
+              goes viral, and the new limits will make its current incarnation
+              almost useless. We are working on a new approach...
               <br />
               <a
                 className="group underline transition hover:no-underline"

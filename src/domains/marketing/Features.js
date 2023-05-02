@@ -60,7 +60,7 @@ export function Features({ features = FOLLOWS_FILTERS }) {
               </h2>
               <a
                 className="group mt-1.5 block max-w-xs"
-                href="https://queen.raae.codes"
+                href="https://twitter.com/raae"
                 onClick={() => trackGoal("E5XIJ5CK", 0)}
               >
                 <span className="block text-lg font-light leading-tight tracking-tight text-stone-600 transition group-hover:text-lime-800">

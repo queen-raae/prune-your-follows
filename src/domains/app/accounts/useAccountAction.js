@@ -44,6 +44,7 @@ export default function useAccountAction(props) {
       label: "Unfollow",
       onClick: () => handleAccountAction("unfollow"),
       disabled: disabled,
+      title: "No longer working",
     });
   }
 

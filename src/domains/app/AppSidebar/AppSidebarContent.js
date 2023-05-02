@@ -15,6 +15,18 @@ export function AppSidebarContent({ navigation, filters, user }) {
       </div>
 
       <div className="h-0 flex-1 overflow-y-auto pt-6 pr-3">
+        <aside className="mb-8 ml-2 rounded-sm border-2 border-red-600 p-3">
+          <h2 className="mb-2 text-sm font-semibold tracking-tight text-red-600">
+            Notice
+          </h2>
+          <p className="my-1 text-sm">
+            The new Twitter API limits has us back at the drawing board.
+          </p>
+          <p className="text-xs">
+            You may still filter already imported follows, but syncing follow
+            with Twitter has paused and unfollow does not work.
+          </p>
+        </aside>
         <nav className="px-2">
           <div className="space-y-1">
             {navigation.map((item) => (
@@ -75,10 +87,11 @@ export function AppSidebarContent({ navigation, filters, user }) {
             </div>
           </div>
         </nav>
+
         <aside className="px-2">
           <a
             onClick={() => trackGoal("E5XIJ5CK", 0)}
-            href="https://queen.raae.codes/"
+            href="https://twitter.com/raae"
             className="group mt-8 block rounded-sm px-3 text-sm font-medium text-stone-600"
           >
             Made by Queen{" "}

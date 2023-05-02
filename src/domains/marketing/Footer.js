@@ -14,7 +14,7 @@ export function Footer() {
           Made by{" "}
           <a
             onClick={() => trackGoal("E5XIJ5CK", 0)}
-            href="https://queen.raae.codes/"
+            href="https://twitter.com/raae"
             className="underline"
           >
             Queen Raae
