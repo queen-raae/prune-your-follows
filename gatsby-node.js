@@ -74,7 +74,7 @@ exports.sourceNodes = async (gatsbyUtils) => {
   });
 
   reporter.verbose("Sourcing user avatars - START");
-  await createUserAvatarNodes(gatsbyUtils);
+  // await createUserAvatarNodes(gatsbyUtils);
   reporter.verbose("Sourcing user avatars - DONE");
 };
 
